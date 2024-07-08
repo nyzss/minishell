@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:26:30 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:01:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	handle_loop(t_ctx *ctx)
 		line = readline(PROMPT);
 		if (line == NULL)
 			break ;
+		else if (check_line(line) == 0)
+		{
+			add_history(line);
+		}
 		free(line);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:58:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:00:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void	todo(char *what_to_do);
 t_ctx	*init_ctx(char **envp);
 
 void	free_all(t_ctx *ctx);
+
+int		check_line(char *line);
 
 #endif

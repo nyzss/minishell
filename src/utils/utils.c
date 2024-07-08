@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:49:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:01:51 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_ctx	*init_ctx(char **envp)
 
 void	free_all(t_ctx *ctx)
 {
+	rl_clear_history();
 	if (ctx)
 	{
 		if (ctx->exec)
@@ -42,4 +43,11 @@ void	free_all(t_ctx *ctx)
 		}
 		free(ctx);
 	}
+}
+
+int	check_line(char *line)
+{
+	if (line[0] == '\0')
+		return (1);
+	return (0);
 }
