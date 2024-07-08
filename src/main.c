@@ -6,17 +6,25 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 15:01:48 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:28:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	handle_pipeline(t_ctx *ctx, char *line)
+{
+	t_token	*token;
+
+	(void)ctx;
+	token = lexer(line);
+	return (0);
+}
+
 int	handle_loop(t_ctx *ctx)
 {
 	char	*line;
 
-	(void)ctx;
 	line = NULL;
 	while (1)
 	{
@@ -26,6 +34,7 @@ int	handle_loop(t_ctx *ctx)
 		else if (check_line(line) == 0)
 		{
 			add_history(line);
+			handle_pipeline(ctx, line);
 		}
 		free(line);
 	}

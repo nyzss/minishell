@@ -6,13 +6,14 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:32 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 13:48:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:29:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lexer(void)
+t_token	*lexer(char *line)
 {
-	printf("lexer\n");
+	printf("lexer, %s\n", line);
+	return (NULL);
 }
