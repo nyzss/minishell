@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/08 11:44:42 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/08 13:44:17 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,22 @@ SRCS_LEX = lexer.c
 
 SRCS_PAR = parser.c
 
+SRCS_UTI = utils.c
+
 SRC = src/
 
 BUILTINS_PATH	= src/builtins/
 EXEC_PATH	= src/exec/
 LEXER_PATH	= src/lexer/
 PARSER_PATH	= src/parser/
+UTILS_PATH	= src/utils/
 
 SRCS		= ${addprefix ${SRC}, ${SRCS_M}}\
 		  $(addprefix $(BUILTINS_PATH), $(SRCS_BT)) \
 		  $(addprefix $(EXEC_PATH), $(SRCS_EX)) \
 		  $(addprefix $(LEXER_PATH), $(SRCS_LEX)) \
 		  $(addprefix $(PARSER_PATH), $(SRCS_PAR)) \
+		  $(addprefix $(UTILS_PATH), $(SRCS_UTI)) \
 
 # F_PATH		= src/
 

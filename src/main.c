@@ -6,18 +6,19 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 13:19:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 13:51:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
-	builtins();
-	exec();
-	lexer();
-	parser();
-	printf("main\n");
+	t_ctx	*ctx;
+
+	(void)ac;
+	(void)av;
+	ctx = init_ctx(envp);
+	free_all(ctx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 13:16:05 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 13:54:37 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,11 @@ void	builtins(void);
 void	exec(void);
 void	lexer(void);
 void	parser(void);
+
+void	todo(char *what_to_do);
+
+t_ctx	*init_ctx(char **envp);
+
+void	free_all(t_ctx *ctx);
 
 #endif
