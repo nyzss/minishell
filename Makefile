@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/08 15:39:05 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/08 17:35:18 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS_BT	=	builtins.c
 SRCS_EX =	exec.c
 
 SRCS_LEX =	lexer.c \
-			tokens.c
+			tokens.c \
+			lex_helper.c
 
 SRCS_PAR =	parser.c
 
