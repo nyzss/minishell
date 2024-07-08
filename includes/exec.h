@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:03:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 19:40:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int		handle_outfile(t_filenames *redirs);
 int		init_here_doc(char *file, char *eof);
 void    set_init_input(int *fd_in, t_filenames *redirs);
 void    set_init_output(int *fd_out, t_filenames *redirs);
+void    do_child(t_exec *exec, char **env, unsigned int *exit_code);
 
 #endif
