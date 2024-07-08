@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 15:00:33 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:29:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,6 @@
 # define C_RESET "\033[0m"
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
-
-// ----------------------- LEXER -----------------------
-
-typedef enum e_token_type
-{
-	INFILE,
-	OUTFILE,
-	HEREDOC,
-	APPEND,
-	PIPE,
-	STRING,
-	COMMAND,
-	FILENAME,
-	ARGUMENT
-}	t_token_type;
-
-typedef struct s_token
-{
-	char			*value;
-	t_token_type	type;
-	struct s_token	*next;
-}	t_token;
-
-// ----------------------- EXEC -----------------------
 
 typedef struct s_args
 {
