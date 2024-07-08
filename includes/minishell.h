@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:49:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:00:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <signal.h>
 # include <fcntl.h>
 
-# include "libft.h"
+#  include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line_bonus.h"
 
@@ -44,7 +44,7 @@
 # define ESC_S "\002"
 # define C_RESET "\033[0m"
 
-# define PROMPT ESC_F BLUE_A ESC_S "minishell >$ " ESC_F C_RESET ESC_S
+# define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
 
 // ----------------------- LEXER -----------------------
 
@@ -105,5 +105,7 @@ void	todo(char *what_to_do);
 t_ctx	*init_ctx(char **envp);
 
 void	free_all(t_ctx *ctx);
+
+int		check_line(char *line);
 
 #endif
