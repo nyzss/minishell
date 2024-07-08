@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:03:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 14:23:14 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,22 @@
 # include <signal.h>
 # include <fcntl.h>
 
+#include "libft.h"
+
 # include "exec.h"
 # include "lexer.h"
 # include "parser.h"
 # include "builtins.h"
+
+# define BLUE_A    "\033[1;34m"
+# define MAGENTA_A "\033[1;35m"
+# define CYAN_A    "\033[1;36m"
+
+# define ESC_F "\001"
+# define ESC_S "\002"
+# define C_RESET "\033[0m"
+
+# define PROMPT ESC_F BLUE_A ESC_S "minishell >$ " ESC_F C_RESET ESC_S
 
 // ----------------------- LEXER -----------------------
 
