@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:04:09 by okoca            ###   ########.fr       */
+/*   Created: 2024/07/08 14:01:38 by okoca             #+#    #+#             */
+/*   Updated: 2024/07/08 14:03:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-int	main(int ac, char **av, char **envp)
-{
-	t_ctx	*ctx;
+void	parser(void);
 
-	(void)ac;
-	(void)av;
-	ctx = init_ctx(envp);
-	free_all(ctx);
-	return (0);
-}
+#endif

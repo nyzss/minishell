@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 13:54:37 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 14:03:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <fcntl.h>
+
+# include "exec.h"
+# include "lexer.h"
+# include "parser.h"
+# include "builtins.h"
 
 // ----------------------- LEXER -----------------------
 
@@ -79,11 +84,6 @@ typedef struct s_ctx
 	t_exec		*exec;
 	char		**env;
 }	t_ctx;
-
-void	builtins(void);
-void	exec(void);
-void	lexer(void);
-void	parser(void);
 
 void	todo(char *what_to_do);
 

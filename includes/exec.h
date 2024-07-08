@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:04:09 by okoca            ###   ########.fr       */
+/*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
+/*   Updated: 2024/07/08 14:03:32 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXEC_H
+# define EXEC_H
 
-int	main(int ac, char **av, char **envp)
-{
-	t_ctx	*ctx;
+void	exec(void);
 
-	(void)ac;
-	(void)av;
-	ctx = init_ctx(envp);
-	free_all(ctx);
-	return (0);
-}
+#endif
