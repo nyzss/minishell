@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 13:52:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 14:49:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_ctx	*init_ctx(char **envp)
 	ctx->def_in = STDOUT_FILENO;
 	ctx->env = envp;
 	ctx->exec = NULL;
+	ctx->exit_code = 0;
 	return (ctx);
 }
 

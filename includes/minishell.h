@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 14:23:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 14:49:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,11 @@ typedef struct s_exec
 
 typedef struct s_ctx
 {
-	int			def_in;
-	int			def_out;
-	t_exec		*exec;
-	char		**env;
+	int				def_in;
+	int				def_out;
+	t_exec			*exec;
+	char			**env;
+	unsigned int	exit_code;
 }	t_ctx;
 
 void	todo(char *what_to_do);
