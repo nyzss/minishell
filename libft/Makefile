@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
+#    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/15 10:05:55 by tsuchen           #+#    #+#              #
-#    Updated: 2024/07/05 10:20:15 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/07/08 12:40:04 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,18 +62,18 @@ CC		= cc
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(ARC) $(NAME) $(OBJS)
+	@$(ARC) $(NAME) $(OBJS)
 
 bonus: $(NAME)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
