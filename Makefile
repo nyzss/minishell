@@ -6,23 +6,24 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/08 14:24:50 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/08 15:39:05 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= minishell
 
-SRCS_M	= main.c
+SRCS_M	=	main.c
 
-SRCS_BT	= builtins.c
+SRCS_BT	=	builtins.c
 
-SRCS_EX = exec.c
+SRCS_EX =	exec.c
 
-SRCS_LEX = lexer.c
+SRCS_LEX =	lexer.c \
+			tokens.c
 
-SRCS_PAR = parser.c
+SRCS_PAR =	parser.c
 
-SRCS_UTI = utils.c
+SRCS_UTI =	utils.c
 
 SRC = src/
 

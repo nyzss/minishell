@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:32 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 15:29:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:34:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 t_token	*lexer(char *line)
 {
-	printf("lexer, %s\n", line);
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		printf("%c\n", line[i]);
+		i++;
+	}
 	return (NULL);
 }
