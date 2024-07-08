@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 11:24:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 11:45:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <fcntl.h>
+
+void	builtins(void);
+void	exec(void);
+void	lexer(void);
+void	parser(void);
 
 #endif

@@ -6,17 +6,38 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/08 11:23:41 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/08 11:44:42 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= minishell
 
-SRCS_F		= main.c
+SRCS_M	= main.c
 
-F_PATH		= src/
+SRCS_BT	= builtins.c
 
-SRCS		= $(addprefix $(F_PATH), $(SRCS_F))
+SRCS_EX = exec.c
+
+SRCS_LEX = lexer.c
+
+SRCS_PAR = parser.c
+
+SRC = src/
+
+BUILTINS_PATH	= src/builtins/
+EXEC_PATH	= src/exec/
+LEXER_PATH	= src/lexer/
+PARSER_PATH	= src/parser/
+
+SRCS		= ${addprefix ${SRC}, ${SRCS_M}}\
+		  $(addprefix $(BUILTINS_PATH), $(SRCS_BT)) \
+		  $(addprefix $(EXEC_PATH), $(SRCS_EX)) \
+		  $(addprefix $(LEXER_PATH), $(SRCS_LEX)) \
+		  $(addprefix $(PARSER_PATH), $(SRCS_PAR)) \
+
+# F_PATH		= src/
+
+# SRCS		= $(addprefix $(F_PATH), $(SRCS_F))
 
 OBJS		= $(SRCS:.c=.o)
 
