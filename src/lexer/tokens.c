@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 15:50:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:55:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_token	*tok_last(t_token *token)
 
 int	tok_add_back(t_token **head, t_token *new)
 {
-	if (new = NULL)
+	if (new == NULL)
 		return (1);
 	if (*head == NULL)
 		*head = new;
