@@ -16,7 +16,7 @@ SRCS_M	= main.c
 
 SRCS_BT	= builtins.c
 
-SRCS_EX = exec.c
+SRCS_EX = exec.c exec_utils.c
 
 SRCS_LEX = lexer.c
 

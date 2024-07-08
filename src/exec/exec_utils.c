@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 13:48:35 by okoca            ###   ########.fr       */
+/*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/07/08 19:01:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		init_here_doc(char *file, char *eof)
 	char	*limiter;
 	char	*line;
 
-	fd_in = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_in == -1)
-		return (-1);
+	fd_in = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0643);
+	if (fd_in == -2)
+		return (-2);
 	limiter = ft_strjoin(eof, "\n");
 	line = get_next_line(STDIN_FILENO);
 	while (line)
@@ -65,6 +65,32 @@ int		handle_infile(t_filenames *redirs)
 	return (fd_in);
 }
 
+int		handle_outfile(t_filenames *redirs)
+{
+	int		fd_out;
+	int		fd_tmp;
+
+	while (redirs)
+	{
+		if (redirs->type == OUTFILE)
+		{
+			fd_tmp = open(redirs->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			dup2(fd_tmp, fd_out);
+			close(fd_tmp);
+		}
+		else if (redirs->type == APPEND)
+		{
+			fd_tmp = open(redirs->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			dup2(fd_tmp, fd_out);
+			close(fd_tmp);
+		}
+		if (fd_out == -1)
+			return (-1);
+		redirs = redirs->next;
+	}
+	return (fd_out);
+}
+
 void	set_init_input(int *fd_in, t_filenames *redirs)
 {
 	int			i;
@@ -78,65 +104,36 @@ void	set_init_input(int *fd_in, t_filenames *redirs)
 			i++;
 		tmp = tmp->next;
 	}
-	if (!i)
-		return ;
-	else
+	if (i)
 	{
 		close(*fd_in);
 		*fd_in = handle_infile(redirs);
 	}
-	return (fd_in);
 }
 
-int	exec(t_ctx *ctx)
+void	set_init_output(int *fd_out, t_filenames *redirs)
 {
-	int		tmpin;
-	int		tmpout;
-	int		fd_in; //fd_in for each pipe
-	int		fd_out; //fd_out for each pipe
-	int		fd_pipe[2];
-	int		exec_no;
-	int		i;
+	int			i;
+	t_filenames	*tmp;
 
-	// create tmp i/o for iterations
-	tmpin = dup(ctx->def_in);
-	tmpout = dup(ctx->def_out);
-	fd_in = dup(tmpin); // initiate infile
-	fd_out = dup(tmpout); // initiate outfile
-	exec_no = ft_lstsize(ctx->exec);
 	i = 0;
-	// iterate through executables
-	while (ctx->exec)
+	tmp = redirs;
+	while (tmp)
 	{
-		// set initial input
-		set_init_input(&fd_in, ctx->exec->redirs);
-		// redirect input
-		dup2(fd_in, ctx->def_in);
-		close(fd_in);
-		//set output
-		if (ctx->exec->next)
-		{
-			if (pipe(fd_pipe) == -1)
-				//ft_err2_pipe(errno);
-			dup2(fd_pipe[1], fd_out);  // redirect fd_out to pipe_w
-			close(fd_pipe[1]);
-			fd_in = fd_pipe[0]; //set fd_in for the next exec
-		}
-		set_init_output(&fd_out, ctx->exec->redirs);
-		// redirect output
-		dup2(fd_out, ctx->def_out);
-		close(fd_out);
-		do_child(ctx->exec, ctx->env, &ctx->exit_code);
-		ctx->exec = ctx->exec->next;
+		if (tmp->type == OUTFILE || tmp->type == APPEND)
+			i++;
+		tmp = tmp->next;
 	}
-	// wait all child process
-	while (i++ < exec_no)
-		wait(NULL);
-	// restore fdin and fdout to default
-	dup2(tmpin, ctx->def_in);
-	dup2(tmpout, ctx->def_out);
-	close(tmpin);
-	close(tmpout);
-	// printf("exec\n");
-	return (0);
+	if (i)
+	{
+		close(*fd_out);
+		*fd_out = handle_infile(redirs);
+	}
+}
+
+void    do_child(t_exec *exec, char **env, unsigned int *exit_code)
+{
+    (void)exec;
+    (void)env;
+    (void)exit_code;
 }
