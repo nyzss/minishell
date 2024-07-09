@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 19:39:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/09 08:46:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	exec(t_ctx *ctx)
 	tmpout = dup(ctx->def_out);
 	fd_in = dup(tmpin); // initiate infile
 	fd_out = dup(tmpout); // initiate outfile
-	exec_no = ft_lstsize(ctx->exec);
+	// cast to void pointer just for compilation
+	exec_no = ft_lstsize((void *)ctx->exec);
 	i = 0;
 	// iterate through executables
 	while (ctx->exec)

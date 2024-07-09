@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/08 19:01:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/09 08:47:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		handle_infile(t_filenames *redirs)
 	int		fd_in;
 	int		fd_tmp;
 
+	// init at -1 for compilation
+	fd_in = -1;
 	while (redirs)
 	{
 		if (redirs->type == INFILE)
@@ -70,6 +72,8 @@ int		handle_outfile(t_filenames *redirs)
 	int		fd_out;
 	int		fd_tmp;
 
+	// init at -1 for compilation
+	fd_out = -1;
 	while (redirs)
 	{
 		if (redirs->type == OUTFILE)
