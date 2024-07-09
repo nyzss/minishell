@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:46:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 13:36:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	ctx = init_ctx(envp);
+	if (!ctx)
+		return (EXIT_FAILURE);
 	handle_loop(ctx);
 	free_all(ctx);
-	return (0);
+	return (EXIT_SUCCESS);
 }
