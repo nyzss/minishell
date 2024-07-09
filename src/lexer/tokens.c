@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:46:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:55:05 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*tok_create(char *value, int n, t_token_type type)
 	t_token	*token;
 	char	*new;
 
-	token = malloc(sizeof(token));
+	token = malloc(sizeof(t_token));
 	if (token == NULL)
 		return (NULL);
 	new = ft_strndup(value, n);
