@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 11:12:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 13:44:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,20 @@ int	tok_add_back(t_token **head, t_token *new)
 
 void	tok_debug(t_token *token)
 {
-	const char * const token_str[] =
-	{
-		[INFILE] = "INFILE",
-		[OUTFILE] = "OUTFILE",
-		[HEREDOC] = "HEREDOC",
-		[APPEND] = "APPEND",
-		[PIPE] = "PIPE",
-		[STRING] = "STRING",
-		[SINGLEQUOTE] = "SINGLEQUOTE",
-		[DOUBLEQUOTE] = "DOUBLEQUOTE",
-		[QUOTE] = "QUOTE",
-		[COMMAND] = "COMMAND",
-		[FILENAME] = "FILENAME",
-		[ARGUMENT] = "ARGUMENT",
-	};
+	char	token_str[12][30];
 
+	ft_strlcpy(token_str[INFILE], "INFILE", 30);
+	ft_strlcpy(token_str[OUTFILE], "OUTFILE", 30);
+	ft_strlcpy(token_str[HEREDOC], "HEREDOC", 30);
+	ft_strlcpy(token_str[APPEND], "APPEND", 30);
+	ft_strlcpy(token_str[PIPE], "PIPE", 30);
+	ft_strlcpy(token_str[STRING], "STRING", 30);
+	ft_strlcpy(token_str[SINGLEQUOTE], "SINGLEQUOTE", 30);
+	ft_strlcpy(token_str[DOUBLEQUOTE], "DOUBLEQUOTE", 30);
+	ft_strlcpy(token_str[QUOTE], "QUOTE", 30);
+	ft_strlcpy(token_str[COMMAND], "COMMAND", 30);
+	ft_strlcpy(token_str[FILENAME], "FILENAME", 30);
+	ft_strlcpy(token_str[ARGUMENT], "ARGUMENT", 30);
 	while (token != NULL)
 	{
 		printf("type: %s\n", token_str[token->type]);
