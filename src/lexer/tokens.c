@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 13:46:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 14:40:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	tok_debug(t_token *token)
 	ft_strlcpy(token_str[STRING], "STRING", 30);
 	ft_strlcpy(token_str[SINGLEQUOTE], "SINGLEQUOTE", 30);
 	ft_strlcpy(token_str[DOUBLEQUOTE], "DOUBLEQUOTE", 30);
-	ft_strlcpy(token_str[QUOTE], "QUOTE", 30);
 	ft_strlcpy(token_str[COMMAND], "COMMAND", 30);
 	ft_strlcpy(token_str[FILENAME], "FILENAME", 30);
 	ft_strlcpy(token_str[ARGUMENT], "ARGUMENT", 30);
