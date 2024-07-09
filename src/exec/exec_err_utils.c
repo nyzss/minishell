@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/09 12:17:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/09 19:49:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_err1_open(int err_no, char *file, t_exec *exec)
 {
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("%s: %s: %s\n", exec->cmd, strerror(err_no), file);
+	ft_printf("%s: %s: %s\n", exec->cmd, file, strerror(err_no));
 }
 
 void	ft_err2_pipe(int err_no, t_exec *exec)

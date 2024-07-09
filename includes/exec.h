@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 14:18:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/09 19:49:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,21 @@ typedef struct s_exec
 	t_args			*args;
 	t_filenames		*redirs;
 	struct s_exec	*next;
+	int				here_doc;
 }	t_exec;
 
 int     exec(t_ctx *ctx);
-int		handle_infile(t_filenames *redirs, int fd_stdin);
-int		handle_outfile(t_filenames *redirs);
-int		init_here_doc(char *file, char *eof, int fd_stdin);
-void    set_init_input(int *fd_in, t_filenames *redirs, int fd_stdin);
-void    set_init_output(int *fd_out, t_filenames *redirs);
-void    do_child(t_exec *exec, char **env, unsigned int *exit_code);
 void	get_stdfds(t_ctx *ctx);
 void	reset_stdfds(t_ctx *ctx);
-void	ft_dup2_close(int fd1, int fd2);
-void	create_pipe(int *fd_in, int *fd_out, int fd_pipe[2], t_exec *exec);
-void	wait_all(int exec_no);
+void	create_pipe(int *fd_out, int fd_pipe[2], t_exec *exec);
+int		init_fdio(int *fd_in, int *fd_out, t_exec *exec, int fd_stdin);
+int		is_here_doc(t_exec *exec, int fd_stdin);
+void	init_here_doc(char *file, char *eof, int fd_stdin);
+int		handle_files(int *fd_in, int *fd_out, t_exec *exec);
+int		check_fdio(int *fd_in, int *fd_out, char *file, t_exec *exec);
+int		redirect_fdio(int *fd_in, int *fd_out, int fd_pipe[2], t_exec *exec);
+void    do_child(t_exec *exec, char **env, unsigned int *exit_code);
+void	dup2_close(int fd1, int fd2);
 
 /* err_utils*/
 void	ft_err1_open(int err_no, char *file, t_exec *exec);

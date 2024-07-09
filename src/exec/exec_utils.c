@@ -6,141 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/09 14:18:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/09 19:49:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		init_here_doc(char *file, char *eof, int fd_stdin)
-{
-	int		fd_in;
-	char	*limiter;
-	char	*line;
-
-	fd_in = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_in == -1)
-		return (-1);
-	limiter = ft_strjoin(eof, "\n");
-	line = get_next_line(fd_stdin);
-	while (line)
-	{
-		if (!ft_strcmp(line, limiter))
-		{
-			free(line);
-			break ;
-		}
-		write(fd_in, line, ft_strlen(line));
-		free(line);
-		line = get_next_line(fd_stdin);
-	}
-	free(limiter);
-	close(fd_in);
-	return (open(file, O_RDONLY));
-}
-
-int		handle_infile(t_filenames *redirs, int fd_stdin)
-{
-	int		fd_in;
-	int		fd_tmp;
-
-	// init at -1 for compilation
-	fd_in = -1;
-	while (redirs)
-	{
-		if (redirs->type == INFILE)
-		{
-			fd_tmp = open(redirs->path, O_RDONLY);
-			dup2(fd_tmp, fd_in);
-			close(fd_tmp);
-		}
-		else if (redirs->type == HEREDOC)
-		{
-			fd_tmp = init_here_doc("here_doc", redirs->path, fd_stdin);
-			dup2(fd_tmp, fd_in);
-			close(fd_tmp);
-		}
-		if (fd_in == -1)
-			return (-1);
-		redirs = redirs->next;
-	}
-	return (fd_in);
-}
-
-int		handle_outfile(t_filenames *redirs)
-{
-	int		fd_out;
-	int		fd_tmp;
-
-	// init at -1 for compilation
-	fd_out = -1;
-	while (redirs)
-	{
-		if (redirs->type == OUTFILE)
-		{
-			fd_tmp = open(redirs->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			dup2(fd_tmp, fd_out);
-			close(fd_tmp);
-		}
-		else if (redirs->type == APPEND)
-		{
-			fd_tmp = open(redirs->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-			dup2(fd_tmp, fd_out);
-			close(fd_tmp);
-		}
-		if (fd_out == -1)
-			return (-1);
-		redirs = redirs->next;
-	}
-	return (fd_out);
-}
-
-void	set_init_input(int *fd_in, t_filenames *redirs, int fd_stdin)
-{
-	int			i;
-	t_filenames	*tmp;
-
-	i = 0;
-	tmp = redirs;
-	while (tmp)
-	{
-		if (tmp->type == INFILE || tmp->type == HEREDOC)
-			i++;
-		tmp = tmp->next;
-	}
-	if (i)
-	{
-		close(*fd_in);
-		*fd_in = handle_infile(redirs, fd_stdin);
-	}
-}
-
-void	set_init_output(int *fd_out, t_filenames *redirs)
-{
-	int			i;
-	t_filenames	*tmp;
-
-	i = 0;
-	tmp = redirs;
-	while (tmp)
-	{
-		if (tmp->type == OUTFILE || tmp->type == APPEND)
-			i++;
-		tmp = tmp->next;
-	}
-	if (i)
-	{
-		close(*fd_out);
-		*fd_out = handle_outfile(redirs);
-	}
-}
-
-void    do_child(t_exec *exec, char **env, unsigned int *exit_code)
-{
-    (void)exec;
-    (void)env;
-    (void)exit_code;
-}
 
 void	get_stdfds(t_ctx *ctx)
 {
@@ -156,26 +26,146 @@ void	reset_stdfds(t_ctx *ctx)
 	close(ctx->def_out);
 }
 
-void	ft_dup2_close(int fd1, int fd2)
-{
-	dup2(fd1, fd2);
-	close(fd1);
-}
-
-void	create_pipe(int	*fd_in, int *fd_out, int fd_pipe[2], t_exec *exec)
+void	create_pipe(int *fd_out, int fd_pipe[2], t_exec *exec)
 {
 	if (pipe(fd_pipe) == -1)
 		ft_err2_pipe(errno, exec);
 	close(*fd_out);
-	*fd_out = fd_pipe[1];	// redirect fd_out to pipe_w
-	*fd_in = fd_pipe[0];	// set fd_in to pipe_r
+	*fd_out = fd_pipe[1];	// redirect fd_out to pipe_w, pipe_r will be set after redirection
 }
 
-void	wait_all(int exec_no)
+int		init_fdio(int *fd_in, int *fd_out, t_exec *exec, int fd_stdin)
 {
-	int		i;
+	//check here_doc first
+	if (is_here_doc(exec, fd_stdin))
+		exec->here_doc = 1;
+	if (handle_files(fd_in, fd_out, exec))
+		return (1);
+	return (0);
+}
+
+int		is_here_doc(t_exec *exec, int fd_stdin)
+{
+	t_filenames	*tmp;
+	int			i;
 
 	i = 0;
-	while (i++ < exec_no)
-		wait(NULL);
+	tmp = exec->redirs;
+	while (tmp)
+	{
+		if (tmp->type == HEREDOC)
+		{
+			init_here_doc("here_doc", tmp->path, fd_stdin);
+			free(tmp->path);
+			tmp->path = ft_strdup("here_doc");
+			tmp->type = INFILE;
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+void	init_here_doc(char *file, char *eof, int fd_stdin)
+{
+	int		fd;
+	char	*limiter;
+	char	*line;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+		return ;
+	limiter = ft_strjoin(eof, "\n");
+	line = get_next_line(fd_stdin);
+	while (line)
+	{
+		if (!ft_strcmp(line, limiter))
+		{
+			free(line);
+			break ;
+		}
+		write(fd, line, ft_strlen(line));
+		free(line);
+		line = get_next_line(fd_stdin);
+	}
+	free(limiter);
+	close(fd);
+}
+
+int		handle_files(int *fd_in, int *fd_out, t_exec *exec)
+{
+	t_filenames	*tmp;
+
+	tmp = exec->redirs;
+	while (tmp)
+	{
+		if (tmp->type == INFILE)
+		{
+			close(*fd_in);
+			*fd_in = open(tmp->path, O_RDONLY);
+		}
+		else if (tmp->type == OUTFILE)
+		{
+			close(*fd_out);
+			*fd_out = open(tmp->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		}
+		else if (tmp->type == APPEND)
+		{
+			close(*fd_out);
+			*fd_out = open(tmp->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		}
+		if (check_fdio(fd_in, fd_out, tmp->path, exec))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int		check_fdio(int *fd_in, int *fd_out, char *file, t_exec *exec)
+{
+	if (*fd_in == -1)
+	{
+		ft_err1_open(errno, file, exec);
+		return (1);
+	}
+	if (*fd_out == -1)
+	{
+		ft_err1_open(errno, file, exec);
+		return (1);
+	}
+	return (0);
+}
+
+int		redirect_fdio(int *fd_in, int *fd_out, int fd_pipe[2], t_exec *exec)
+{
+	if (*fd_in == -1 || *fd_out == -1)
+	{
+		if (exec->next)
+		{
+			dup2_close(fd_pipe[0], STDIN_FILENO);
+			*fd_in = fd_pipe[0];
+		}
+		return (1);
+	}
+	else
+	{
+		dup2_close(*fd_in, STDIN_FILENO);
+		dup2_close(*fd_out, STDOUT_FILENO);
+		if (exec->next)
+			*fd_in = fd_pipe[0];
+	}
+	return (0);
+}
+
+void    do_child(t_exec *exec, char **env, unsigned int *exit_code)
+{
+    (void)exec;
+    (void)env;
+    (void)exit_code;
+}
+
+void	dup2_close(int fd1, int fd2)
+{
+	dup2(fd1, fd2);
+	close(fd1);
 }
