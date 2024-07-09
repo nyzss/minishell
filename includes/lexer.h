@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:00:41 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 17:13:31 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 08:29:05 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef enum e_token_type
 	APPEND,
 	PIPE,
 	STRING,
+	SINGLEQUOTE,
+	DOUBLEQUOTE,
+	QUOTE,
 	COMMAND,
 	FILENAME,
 	ARGUMENT
@@ -35,7 +38,7 @@ typedef struct s_token
 
 t_token	*lexer(char *line);
 
-t_token	*tok_create(char *value, t_token_type type);
+t_token	*tok_create(char *value, int n, t_token_type type);
 
 t_token	*tok_last(t_token *token);
 

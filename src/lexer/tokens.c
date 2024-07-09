@@ -6,20 +6,34 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 15:55:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 08:34:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*tok_create(char *value, t_token_type type)
+/*
+* takes a value, and a token_type
+* then strndup's the value for 'n' characters.
+* for ex:
+* tok_create("hello", 3, STRING)
+* -> value: hel, type: STRING
+*/
+t_token	*tok_create(char *value, int n, t_token_type type)
 {
 	t_token	*token;
+	char	*new;
 
 	token = malloc(sizeof(token));
 	if (token == NULL)
 		return (NULL);
-	token->value = value;
+	new = ft_strndup(value, n);
+	if (!new)
+	{
+		free(token);
+		return (NULL);
+	}
+	token->value = new;
 	token->type = type;
 	token->next = NULL;
 	return (token);
