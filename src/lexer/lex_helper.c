@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:05:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 11:15:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 11:45:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,32 @@ int	lex_get_quote_len(char *str)
 	return (i);
 }
 
+int	lex_get_str_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+		{
+			i++;
+			while (str[i] != '\'')
+				i++;
+		}
+		else if (str[i] == '\"')
+		{
+			i++;
+			while (str[i] != '\"')
+				i++;
+		}
+		else if (lex_is_meta_char(str[i]) || str[i] == ' ')
+			break ;
+		i++;
+	}
+	return (i);
+}
+
 int	lex_get_string_len(char *str)
 {
 	int	i;
@@ -60,10 +86,8 @@ int	lex_get_len(char *str, t_token_type type)
 		len = 2;
 	else if (type == INFILE || type == OUTFILE || type == PIPE)
 		len = 1;
-	else if (type == QUOTE)
-		len = lex_get_quote_len(str);
-	else if (type == STRING)
-		len = lex_get_string_len(str);
+	else if (type == QUOTE || type == STRING)
+		len = lex_get_str_len(str);
 	return (len);
 }
 
