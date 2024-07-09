@@ -6,12 +6,14 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:05:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:37:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 11:15:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// the i++ before the break is needed in case of: [""grep"" something]
+// otherwise it won't include the last quote
 int	lex_get_quote_len(char *str)
 {
 	int	i;
@@ -24,7 +26,10 @@ int	lex_get_quote_len(char *str)
 			if (str[i + 1] != '\'' && str[i + 1] != '\"')
 			{
 				if (lex_is_meta_char(str[i + 1]) || str[i + 1] == ' ')
+				{
+					i++;
 					break ;
+				}
 			}
 		}
 		i++;

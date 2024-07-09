@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:32 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:43:20 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:57:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,3 @@ t_token	*lexer(char *line)
 	}
 	return (token);
 }
-
-// while (line[i])
-// {
-// 	// tmp = handle_in_redir();
-// 	else if (line[i] == '>')
-// 	{
-// 		if (line[i + 1] == '>')
-// 		{
-// 			value = ft_strndup(&(line[i]), 2);
-// 			tmp = tok_create(value, APPEND);
-// 		}
-// 		else
-// 		{
-// 			value = ft_strndup(&(line[i]), 1);
-// 			tmp = tok_create(value, OUTFILE);
-// 		}
-// 		i += ft_strlen(value);
-// 	}
-// 	i++;
-// }
