@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:05:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 13:32:08 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 13:38:44 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ int	lex_quote_len(char *str, char quote)
 int	lex_get_str_len(char *str)
 {
 	int	i;
+	int	len;
 
 	i = 0;
-	while (str[i])
+	len = ft_strlen(str);
+	while (i < len)
 	{
 		if (str[i] == '\'')
 			i += lex_quote_len(&(str[i]), '\'');
