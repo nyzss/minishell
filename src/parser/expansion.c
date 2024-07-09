@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 16:01:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 17:46:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,71 +26,69 @@ int	ps_get_raw_len(char *str)
 	return (i);
 }
 
-char	*ps_parse_quotes(char *str)
+t_token	*ps_get_quoted_str(char *str, char c)
 {
-	t_token	*list;
-	t_token	*tmp;
-	int		i;
-	int		len;
-	int		str_len;
+	t_token			*new;
+	int				i;
+	int				len;
+	t_token_type	type;
 
 	i = 0;
 	len = 0;
-	tmp = NULL;
-	list = NULL;
-	str_len = ft_strlen(str);
-	while (i < str_len)
+	new = NULL;
+	len = lex_quote_len(str, str[i]) - 1;
+	type = DOUBLEQUOTE;
+	if (c == '\'')
+		type = SINGLEQUOTE;
+	if (len > 0)
+		new = tok_create(str + 1, len, type);
+	else
+		new = tok_create("\0", 1, STRING);
+	return (new);
+}
+
+t_token	*ps_parse_quotes(char *str)
+{
+	int		i;
+	t_token	*token;
+	t_token	*tmp;
+
+	i = 0;
+	token = NULL;
+	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
-			len = lex_quote_len(&(str[i]), str[i]) - 1;
-			if (len > 0)
-			{
-				if (str[i] == '\'')
-					tmp = tok_create(&(str[i + 1]), len, SINGLEQUOTE);
-				else
-					tmp = tok_create(&(str[i + 1]), len, DOUBLEQUOTE);
-				tok_add_back(&(list), tmp);
-				i += ft_strlen(tmp->value);
-			}
-			else
-			{
-				tmp = tok_create("\0", 1, STRING);
-				tok_add_back(&(list), tmp);
-				i++;
-			}
+			tmp = ps_get_quoted_str(&(str[i]), str[i]);
+			if (!tmp)
+				return (NULL);
+			tok_add_back(&(token), tmp);
+			i += ft_strlen(tmp->value);
 		}
 		else
 		{
 			tmp = tok_create(&(str[i]), ps_get_raw_len(&(str[i])), STRING);
-			tok_add_back(&(list), tmp);
-			i += ft_strlen(tmp->value);
+			tok_add_back(&(token), tmp);
+			i += ft_strlen(tmp->value) - 1;
 		}
 		i++;
 	}
-	printf(" ------------------- ps_parse_quote:\n");
-	tok_debug(list);
-	printf(" -------------------\n");
-	tok_free(list);
-	return (NULL);
+	return (token);
 }
 
 int	ps_expand_and_quotes(t_token *token)
 {
-	char	*tmp;
+	t_token	*str;
 
-	(void)tmp;
 	while (token != NULL)
 	{
 		if (token->type == STRING)
-		{
-			// tmp = ps_parse_quotes(token->value);
-			// if (tmp == NULL)
-			// 	return (1);
-			// token->value = tmp;
-		}
+			str = ps_parse_quotes(token->value);
 		token = token->next;
 	}
+	tok_debug(str);
+	printf("----------\n");
+	tok_free(str);
 	return (0);
 }
 
