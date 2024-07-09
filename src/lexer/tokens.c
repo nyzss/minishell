@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 08:34:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 09:44:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,31 @@ int	tok_add_back(t_token **head, t_token *new)
 	else
 		tok_last(*head)->next = new;
 	return (0);
+}
+
+void	tok_debug(t_token *token)
+{
+	const char * const token_str[] =
+	{
+		[INFILE] = "INFILE",
+		[OUTFILE] = "OUTFILE",
+		[HEREDOC] = "HEREDOC",
+		[APPEND] = "APPEND",
+		[PIPE] = "PIPE",
+		[STRING] = "STRING",
+		[SINGLEQUOTE] = "SINGLEQUOTE",
+		[DOUBLEQUOTE] = "DOUBLEQUOTE",
+		[QUOTE] = "QUOTE",
+		[COMMAND] = "COMMAND",
+		[FILENAME] = "FILENAME",
+		[ARGUMENT] = "ARGUMENT",
+	};
+
+	while (token != NULL)
+	{
+		printf("type: %s\n", token_str[token->type]);
+		printf("value: %s\n", token->value);
+		token = token->next;
+	}
+	printf("------------\n");
 }

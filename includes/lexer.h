@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:00:41 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 09:02:20 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 09:44:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int				lex_is_meta_char(char c);
 t_token_type	lex_get_type(char *str);
 
 int				lex_get_len(char *str, t_token_type type);
+
+void			tok_debug(t_token *token);
 
 #endif
