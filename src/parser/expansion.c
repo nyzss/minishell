@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 17:46:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 18:24:23 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ int	ps_get_raw_len(char *str)
 t_token	*ps_get_quoted_str(char *str, char c)
 {
 	t_token			*new;
-	int				i;
 	int				len;
 	t_token_type	type;
 
-	i = 0;
 	len = 0;
 	new = NULL;
-	len = lex_quote_len(str, str[i]) - 1;
+	len = lex_quote_len(str, c) - 1;
 	type = DOUBLEQUOTE;
 	if (c == '\'')
 		type = SINGLEQUOTE;
@@ -63,7 +61,7 @@ t_token	*ps_parse_quotes(char *str)
 			if (!tmp)
 				return (NULL);
 			tok_add_back(&(token), tmp);
-			i += ft_strlen(tmp->value);
+			i += ft_strlen(tmp->value) + 1;
 		}
 		else
 		{
