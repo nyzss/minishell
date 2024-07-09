@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 09:44:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:38:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	tok_debug(t_token *token)
 	{
 		printf("type: %s\n", token_str[token->type]);
 		printf("value: %s\n", token->value);
+		printf("------------\n");
 		token = token->next;
 	}
-	printf("------------\n");
 }
