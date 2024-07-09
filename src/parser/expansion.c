@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 22:20:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 22:47:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ char	*ps_convert_to_env(char *str, char *found)
 	char	*path;
 
 	tmp = ft_strndup(str, found - str);
-	if (!tmp)
+	if (found - str > 0 && !tmp)
 		return (NULL);
-	path = ps_getenv(found);
+	path = ps_getenv(found + 1);
 	tmp = ps_strjoin(tmp, getenv(path));
 	if (!tmp)
 	{
 		free(path);
 		return (NULL);
 	}
-	tmp = ps_strjoin(tmp, str + ft_strlen(path));
-	free(path);
+	if (str + ft_strlen(path) < str)
+		tmp = ps_strjoin(tmp, str + ft_strlen(path));
+	if (path != NULL)
+		free(path);
 	return (tmp);
 }
 
