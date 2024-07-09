@@ -6,12 +6,14 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 08:41:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 08:44:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+typedef struct s_ctx	t_ctx;
 
 typedef struct s_args
 {
@@ -33,15 +35,6 @@ typedef struct s_exec
 	t_filenames		*redirs;
 	struct s_exec	*next;
 }	t_exec;
-
-typedef struct s_ctx
-{
-	int				def_in;
-	int				def_out;
-	t_exec			*exec;
-	char			**env;
-	unsigned int	exit_code;
-}	t_ctx;
 
 int     exec(t_ctx *ctx);
 int		handle_infile(t_filenames *redirs);

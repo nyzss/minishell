@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 08:42:07 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 08:44:30 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@
 # define C_RESET "\033[0m"
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
+
+typedef struct s_ctx
+{
+	int				def_in;
+	int				def_out;
+	t_exec			*exec;
+	char			**env;
+	unsigned int	exit_code;
+}	t_ctx;
 
 void	todo(char *what_to_do);
 
