@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 18:24:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 21:26:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ t_token	*ps_parse_quotes(char *str)
 	return (token);
 }
 
+int	ps_expand_env(char *str)
+{
+	todo("expand env");
+}
+
 int	ps_expand_and_quotes(t_token *token)
 {
 	t_token	*str;
@@ -81,15 +86,14 @@ int	ps_expand_and_quotes(t_token *token)
 	while (token != NULL)
 	{
 		if (token->type == STRING)
+		{
 			str = ps_parse_quotes(token->value);
+			ps_expand_env(str);
+			tok_debug(str);
+			printf("----------\n");
+			tok_free(str);
+		}
 		token = token->next;
 	}
-	tok_debug(str);
-	printf("----------\n");
-	tok_free(str);
 	return (0);
 }
-
-// ps_parse_quotes(token);
-// ps_expand_path(str);
-// tmp = ps_expand_path(tmp);
