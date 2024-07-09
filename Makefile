@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
+#    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/09 09:45:42 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/09 14:18:47 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS_M		= main.c
 
 SRCS_BT		= builtins.c
 
-SRCS_EX 	= exec.c exec_utils.c
+SRCS_EX 	= exec.c exec_utils.c exec_err_utils.c
 
 SRCS_LEX 	= lexer.c tokens.c lex_helper.c
 

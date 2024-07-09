@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/09 08:47:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 14:18:50 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		init_here_doc(char *file, char *eof)
+int		init_here_doc(char *file, char *eof, int fd_stdin)
 {
 	int		fd_in;
 	char	*limiter;
@@ -22,7 +22,7 @@ int		init_here_doc(char *file, char *eof)
 	if (fd_in == -1)
 		return (-1);
 	limiter = ft_strjoin(eof, "\n");
-	line = get_next_line(STDIN_FILENO);
+	line = get_next_line(fd_stdin);
 	while (line)
 	{
 		if (!ft_strcmp(line, limiter))
@@ -32,14 +32,14 @@ int		init_here_doc(char *file, char *eof)
 		}
 		write(fd_in, line, ft_strlen(line));
 		free(line);
-		line = get_next_line(STDIN_FILENO);
+		line = get_next_line(fd_stdin);
 	}
 	free(limiter);
 	close(fd_in);
 	return (open(file, O_RDONLY));
 }
 
-int		handle_infile(t_filenames *redirs)
+int		handle_infile(t_filenames *redirs, int fd_stdin)
 {
 	int		fd_in;
 	int		fd_tmp;
@@ -56,7 +56,7 @@ int		handle_infile(t_filenames *redirs)
 		}
 		else if (redirs->type == HEREDOC)
 		{
-			fd_tmp = init_here_doc("here_doc", redirs->path);
+			fd_tmp = init_here_doc("here_doc", redirs->path, fd_stdin);
 			dup2(fd_tmp, fd_in);
 			close(fd_tmp);
 		}
@@ -95,7 +95,7 @@ int		handle_outfile(t_filenames *redirs)
 	return (fd_out);
 }
 
-void	set_init_input(int *fd_in, t_filenames *redirs)
+void	set_init_input(int *fd_in, t_filenames *redirs, int fd_stdin)
 {
 	int			i;
 	t_filenames	*tmp;
@@ -111,7 +111,7 @@ void	set_init_input(int *fd_in, t_filenames *redirs)
 	if (i)
 	{
 		close(*fd_in);
-		*fd_in = handle_infile(redirs);
+		*fd_in = handle_infile(redirs, fd_stdin);
 	}
 }
 
@@ -131,7 +131,7 @@ void	set_init_output(int *fd_out, t_filenames *redirs)
 	if (i)
 	{
 		close(*fd_out);
-		*fd_out = handle_infile(redirs);
+		*fd_out = handle_outfile(redirs);
 	}
 }
 
@@ -162,10 +162,10 @@ void	ft_dup2_close(int fd1, int fd2)
 	close(fd1);
 }
 
-void	create_pipe(int	*fd_in, int *fd_out, int fd_pipe[2])
+void	create_pipe(int	*fd_in, int *fd_out, int fd_pipe[2], t_exec *exec)
 {
 	if (pipe(fd_pipe) == -1)
-		//ft_err2_pipe(errno);
+		ft_err2_pipe(errno, exec);
 	close(*fd_out);
 	*fd_out = fd_pipe[1];	// redirect fd_out to pipe_w
 	*fd_in = fd_pipe[0];	// set fd_in to pipe_r
