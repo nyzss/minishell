@@ -6,11 +6,80 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:05:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 17:13:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 09:36:34 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	lex_get_quote_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\'' || str[i] == '\"')
+			&& ((str[i + 1] != '\'' || str[i + 1] != '\"')
+				&& lex_is_meta_char(str[i + 1])))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+int	lex_get_string_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i + 1] == ' ' || lex_is_meta_char(str[i + 1]))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+int	lex_get_len(char *str, t_token_type type)
+{
+	int	len;
+
+	len = 0;
+	if (type == HEREDOC || type == APPEND)
+		len = 2;
+	else if (type == INFILE || type == OUTFILE || type == PIPE)
+		len = 1;
+	else if (type == QUOTE)
+		len = lex_get_quote_len(str);
+	else if (type == STRING)
+		len = lex_get_string_len(str);
+	return (len);
+}
+
+t_token_type	lex_get_type(char *str)
+{
+	if (str[0] == '<')
+	{
+		if (str[1] == '<')
+			return (HEREDOC);
+		else
+			return (INFILE);
+	}
+	else if (str[0] == '>')
+	{
+		if (str[1] == '>')
+			return (APPEND);
+		else
+			return (OUTFILE);
+	}
+	else if (str[0] == '|')
+		return (PIPE);
+	else if (str[0] == '\'' || str[0] == '\"')
+		return (QUOTE);
+	return (STRING);
+}
 
 int	lex_is_meta_char(char c)
 {
