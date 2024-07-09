@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:32 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 09:47:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:57:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,43 +38,21 @@ t_token	*lexer(char *line)
 
 	i = 0;
 	token = NULL;
-	tmp = NULL;
 	while (line[i])
 	{
-		if (line[i] == ' ')
+		if (line[i] != ' ')
 		{
+			tmp = lex_strtok(&(line[i]));
+			if (tmp == NULL)
+			{
+				tok_free(token);
+				return (NULL);
+			}
+			tok_add_back(&(token), tmp);
+			i += ft_strlen(tmp->value);
+		}
+		else
 			i++;
-			continue ;
-		}
-		tmp = lex_strtok(&(line[i]));
-		if (tmp == NULL)
-		{
-			todo("Free all the tokens in the array and return NULL");
-			return (NULL);
-		}
-		tok_add_back(&(token), tmp);
-		i += ft_strlen(tmp->value);
 	}
-	tok_debug(token);
 	return (token);
 }
-
-// while (line[i])
-// {
-// 	// tmp = handle_in_redir();
-// 	else if (line[i] == '>')
-// 	{
-// 		if (line[i + 1] == '>')
-// 		{
-// 			value = ft_strndup(&(line[i]), 2);
-// 			tmp = tok_create(value, APPEND);
-// 		}
-// 		else
-// 		{
-// 			value = ft_strndup(&(line[i]), 1);
-// 			tmp = tok_create(value, OUTFILE);
-// 		}
-// 		i += ft_strlen(value);
-// 	}
-// 	i++;
-// }

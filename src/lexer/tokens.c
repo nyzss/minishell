@@ -6,11 +6,28 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 09:44:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 11:12:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	tok_free(t_token *token)
+{
+	t_token	*tmp;
+
+	while (token != NULL)
+	{
+		tmp = token;
+		if (token->value)
+		{
+			free(token->value);
+			token->value = NULL;
+		}
+		token = token->next;
+		free(tmp);
+	}
+}
 
 /*
 * takes a value, and a token_type
@@ -24,7 +41,7 @@ t_token	*tok_create(char *value, int n, t_token_type type)
 	t_token	*token;
 	char	*new;
 
-	token = malloc(sizeof(token));
+	token = malloc(sizeof(t_token));
 	if (token == NULL)
 		return (NULL);
 	new = ft_strndup(value, n);
@@ -78,8 +95,8 @@ void	tok_debug(t_token *token)
 	while (token != NULL)
 	{
 		printf("type: %s\n", token_str[token->type]);
-		printf("value: %s\n", token->value);
+		printf("value: [%s]\n", token->value);
+		printf("------------\n");
 		token = token->next;
 	}
-	printf("------------\n");
 }
