@@ -6,12 +6,42 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/08 19:40:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/09 08:41:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+typedef struct s_args
+{
+	char			*value;
+	struct s_args	*next;
+}	t_args;
+
+typedef struct s_filenames
+{
+	char				*path;
+	t_token_type		type;
+	struct s_filenames	*next;
+}	t_filenames;
+
+typedef struct s_exec
+{
+	char			*cmd;
+	t_args			*args;
+	t_filenames		*redirs;
+	struct s_exec	*next;
+}	t_exec;
+
+typedef struct s_ctx
+{
+	int				def_in;
+	int				def_out;
+	t_exec			*exec;
+	char			**env;
+	unsigned int	exit_code;
+}	t_ctx;
 
 int     exec(t_ctx *ctx);
 int		handle_infile(t_filenames *redirs);
