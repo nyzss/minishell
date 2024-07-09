@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:05:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 13:38:44 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 14:40:50 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	lex_get_len(char *str, t_token_type type)
 		len = 2;
 	else if (type == INFILE || type == OUTFILE || type == PIPE)
 		len = 1;
-	else if (type == QUOTE || type == STRING)
+	else if (type == STRING)
 		len = lex_get_str_len(str);
 	return (len);
 }
@@ -74,8 +74,6 @@ t_token_type	lex_get_type(char *str)
 	}
 	else if (str[0] == '|')
 		return (PIPE);
-	else if (str[0] == '\'' || str[0] == '\"')
-		return (QUOTE);
 	return (STRING);
 }
 

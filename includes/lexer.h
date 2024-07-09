@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:00:41 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:42:11 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 14:40:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef enum e_token_type
 	STRING,
 	SINGLEQUOTE,
 	DOUBLEQUOTE,
-	QUOTE,
 	COMMAND,
 	FILENAME,
 	ARGUMENT
@@ -49,6 +48,8 @@ int				lex_is_meta_char(char c);
 t_token_type	lex_get_type(char *str);
 
 int				lex_get_len(char *str, t_token_type type);
+
+int				lex_quote_len(char *str, char quote);
 
 void			tok_debug(t_token *token);
 
