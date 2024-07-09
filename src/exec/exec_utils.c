@@ -18,9 +18,9 @@ int		init_here_doc(char *file, char *eof)
 	char	*limiter;
 	char	*line;
 
-	fd_in = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0643);
-	if (fd_in == -2)
-		return (-2);
+	fd_in = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd_in == -1)
+		return (-1);
 	limiter = ft_strjoin(eof, "\n");
 	line = get_next_line(STDIN_FILENO);
 	while (line)
@@ -140,4 +140,42 @@ void    do_child(t_exec *exec, char **env, unsigned int *exit_code)
     (void)exec;
     (void)env;
     (void)exit_code;
+}
+
+void	get_stdfds(t_ctx *ctx)
+{
+	ctx->def_in = dup(STDIN_FILENO);
+	ctx->def_out = dup(STDOUT_FILENO);
+}
+
+void	reset_stdfds(t_ctx *ctx)
+{
+	dup2(ctx->def_in, STDIN_FILENO);
+	dup2(ctx->def_out, STDOUT_FILENO);
+	close(ctx->def_in);
+	close(ctx->def_out);
+}
+
+void	ft_dup2_close(int fd1, int fd2)
+{
+	dup2(fd1, fd2);
+	close(fd1);
+}
+
+void	create_pipe(int	*fd_in, int *fd_out, int fd_pipe[2])
+{
+	if (pipe(fd_pipe) == -1)
+		//ft_err2_pipe(errno);
+	close(*fd_out);
+	*fd_out = fd_pipe[1];	// redirect fd_out to pipe_w
+	*fd_in = fd_pipe[0];	// set fd_in to pipe_r
+}
+
+void	wait_all(int exec_no)
+{
+	int		i;
+
+	i = 0;
+	while (i++ < exec_no)
+		wait(NULL);
 }

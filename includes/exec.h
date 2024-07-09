@@ -43,5 +43,10 @@ int		init_here_doc(char *file, char *eof);
 void    set_init_input(int *fd_in, t_filenames *redirs);
 void    set_init_output(int *fd_out, t_filenames *redirs);
 void    do_child(t_exec *exec, char **env, unsigned int *exit_code);
+void	get_stdfds(t_ctx *ctx);
+void	reset_stdfds(t_ctx *ctx);
+void	ft_dup2_close(int fd1, int fd2);
+void	create_pipe(int *fd_in, int *fd_out, int fd_pipe[2]);
+void	wait_all(int exec_no);
 
 #endif
