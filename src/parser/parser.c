@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 14:52:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 15:41:57 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,13 @@ int	parser(t_token *token)
 	int	err;
 
 	err = 0;
-	if (ps_handle_quotes(token) != 0)
+	if (err == 0 && ps_handle_quotes(token) != 0)
 		err = 1;
-	if (ps_handle_redir(token) != 0)
+	if (err == 0 && ps_expand_and_quotes(token) != 0)
 		err = 1;
-	if (ps_handle_cmd(token) != 0)
+	if (err == 0 && ps_handle_redir(token) != 0)
+		err = 1;
+	if (err == 0 && ps_handle_cmd(token) != 0)
 		err = 1;
 	return (err);
 }
