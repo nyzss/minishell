@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 14:39:30 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 14:52:34 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ps_handle_redir(t_token *token)
 				return (1);
 			token->next->type = FILENAME;
 		}
+		else if (token->type == PIPE && token->next == NULL)
+			return (1);
 		token = token->next;
 	}
 	return (0);
@@ -86,5 +88,5 @@ int	parser(t_token *token)
 		err = 1;
 	if (ps_handle_cmd(token) != 0)
 		err = 1;
-	return (0);
+	return (err);
 }
