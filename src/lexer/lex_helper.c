@@ -6,34 +6,19 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:05:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 11:45:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 12:12:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// the i++ before the break is needed in case of: [""grep"" something]
-// otherwise it won't include the last quote
-int	lex_get_quote_len(char *str)
+int	lex_quote_len(char *str, char quote)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			if (str[i + 1] != '\'' && str[i + 1] != '\"')
-			{
-				if (lex_is_meta_char(str[i + 1]) || str[i + 1] == ' ')
-				{
-					i++;
-					break ;
-				}
-			}
-		}
+	i = 1;
+	while (str[i] && str[i] != quote)
 		i++;
-	}
 	return (i);
 }
 
@@ -45,32 +30,10 @@ int	lex_get_str_len(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'')
-		{
-			i++;
-			while (str[i] != '\'')
-				i++;
-		}
+			i += lex_quote_len(str, '\'');
 		else if (str[i] == '\"')
-		{
-			i++;
-			while (str[i] != '\"')
-				i++;
-		}
+			i += lex_quote_len(str, '\"');
 		else if (lex_is_meta_char(str[i]) || str[i] == ' ')
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-int	lex_get_string_len(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ' || lex_is_meta_char(str[i]))
 			break ;
 		i++;
 	}
