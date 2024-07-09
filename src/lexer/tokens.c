@@ -6,11 +6,28 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:38:08 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:46:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	tok_free(t_token *token)
+{
+	t_token	*tmp;
+
+	while (token != NULL)
+	{
+		tmp = token;
+		if (token->value)
+		{
+			free(token->value);
+			token->value = NULL;
+		}
+		token = token->next;
+		free(tmp);
+	}
+}
 
 /*
 * takes a value, and a token_type

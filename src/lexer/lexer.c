@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:32 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 10:18:01 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:43:20 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_token	*lexer(char *line)
 
 	i = 0;
 	token = NULL;
-	tmp = NULL;
 	while (line[i])
 	{
 		if (line[i] != ' ')
@@ -46,7 +45,7 @@ t_token	*lexer(char *line)
 			tmp = lex_strtok(&(line[i]));
 			if (tmp == NULL)
 			{
-				todo("Free all the tokens in the array and return NULL");
+				tok_free(token);
 				return (NULL);
 			}
 			tok_add_back(&(token), tmp);
@@ -55,7 +54,6 @@ t_token	*lexer(char *line)
 		else
 			i++;
 	}
-	tok_debug(token);
 	return (token);
 }
 
