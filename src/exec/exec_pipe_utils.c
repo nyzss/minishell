@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 14:22:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 16:38:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	exe_do_child(t_exec *exec, char **env, int fd_in)
 	pid_t	pid;
 	int		status;
 
-	// if (!exec->next && exec_no == 1 && bi_is_buildin(exec->cmd) == 1)
-	// 	exe_do_exec(exec->cmd, exec->args, env);
 	pid = fork();
 	if (pid == -1)
 		exe_err3_fork(errno);

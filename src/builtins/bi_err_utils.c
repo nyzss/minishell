@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   bi_err_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:25:50 by tsuchen          ###   ########.fr       */
+/*   Created: 2024/07/10 17:12:57 by tsuchen           #+#    #+#             */
+/*   Updated: 2024/07/10 17:23:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-typedef struct s_bi
+void    bi_err_cd(int err_no, char *file)
 {
-    char    *cmd;
-    int     (*func)(t_args *);
-}   t_bi;
+    int     fd_tmp;
 
-void	builtins(void);
-int bi_do_exec(char *cmd, t_args *args, char **env);
-int bi_is_builtin(char *cmd);
-
-/* Built-in Functions */
-int bi_echo(t_args *args);
-int bi_cd(t_args *args);
-
-/* error utils*/
-void    bi_err_cd(int err_no, char *file);
-
-
-#endif
+    fd_tmp = dup(STDOUT_FILENO);
+    dup2(STDERR_FILENO, STDOUT_FILENO);
+    ft_printf("%s: cd: %s: %s\n", P_NAME, file, strerror(err_no));
+    exe_dup2_close(fd_tmp, STDOUT_FILENO);
+}
