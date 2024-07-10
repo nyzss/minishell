@@ -6,19 +6,25 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 09:36:12 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 15:00:44 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+* Check if the line is: `$ sdkjf`
+*/
 char	*ps_convert_to_env(char *str, char *found)
 {
 	char	*tmp;
 	char	*path;
 
-	tmp = ft_strndup(str, found - str);
-	if (found - str > 0 && !tmp)
+	if (found - str == 0)
+		tmp = ft_strdup("");
+	else
+		tmp = ft_strndup(str, found - str);
+	if (!tmp)
 		return (NULL);
 	path = ps_getenv(found + 1);
 	tmp = ps_strjoin(tmp, getenv(path));
@@ -30,6 +36,11 @@ char	*ps_convert_to_env(char *str, char *found)
 	tmp = ps_strjoin(tmp, found + (ft_strlen(path) + 1));
 	if (path != NULL)
 		free(path);
+	if (ft_strlen(tmp) == 0)
+	{
+		free(tmp);
+		return (NULL);
+	}
 	return (tmp);
 }
 
@@ -42,21 +53,20 @@ char	*ps_convert_to_env(char *str, char *found)
 */
 int	ps_handle_env(t_token *token)
 {
-	char	*str;
 	char	*tmp;
 	char	*found;
 
-	str = token->value;
-	while (str != NULL)
+	while (token->value != NULL)
 	{
-		found = ft_strchr(str, '$');
+		found = ft_strchr(token->value, '$');
 		if (found == NULL)
 			break ;
-		tmp = str;
-		str = ps_convert_to_env(str, found);
+		if (ft_strlen(found) == 1)
+			break ;
+		tmp = token->value;
+		token->value = ps_convert_to_env(token->value, found);
 		free(tmp);
 	}
-	token->value = str;
 	return (0);
 }
 
