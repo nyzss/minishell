@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:09:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 22:32:05 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 09:30:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ char	*ps_strjoin(char *s1, char *s2)
 {
 	char	*new;
 
-	if (s2 == NULL)
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	else if (s2 == NULL)
 		return (s1);
 	else if (s1 == NULL)
-		return (s2);
+		return (ft_strdup(s2));
 	new = ft_strjoin(s1, s2);
 	free(s1);
 	return (new);

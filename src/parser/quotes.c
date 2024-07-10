@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 21:38:50 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 09:58:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,44 @@ t_token	*ps_parse_quotes(char *str)
 	return (token);
 }
 
+
+// len = 0;
+// tmp = token;
+// while (token != NULL)
+// {
+// 	if (token->value != NULL)
+// 		len += ft_strlen(token->value);
+// }
+// if (len == 0)
+// 	return (NULL);
+// value = ft_calloc(sizeof(char), (len + 1));
+// if (!value)
+// 	return (NULL);
+// while (tmp != NULL)
+// {
+// 	ft_strlcat(value, tmp->value, ft_strlen(value) + ft_strlen(tmp->value));
+// 	tmp = tmp->next;
+// }
+char	*ps_combine_tokens(t_token *token)
+{
+	char	*value;
+
+	value = NULL;
+	while (token != NULL)
+	{
+		if (token->value != NULL)
+		{
+			value = ps_strjoin(value, token->value);
+			if (value == NULL)
+				break ;
+		}
+		token = token->next;
+	}
+	return (value);
+}
+
+// tok_debug(str);
+// printf("----------\n");
 int	ps_expand_and_quotes(t_token *token)
 {
 	t_token	*str;
@@ -86,8 +124,9 @@ int	ps_expand_and_quotes(t_token *token)
 		{
 			str = ps_parse_quotes(token->value);
 			ps_expand_env(str);
-			tok_debug(str);
-			printf("----------\n");
+			if (token->value)
+				free(token->value);
+			token->value = ps_combine_tokens(str);
 			tok_free(str);
 		}
 		token = token->next;
