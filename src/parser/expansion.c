@@ -5,91 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 18:24:23 by okoca            ###   ########.fr       */
+/*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
+/*   Updated: 2024/07/09 22:47:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ps_get_raw_len(char *str)
+char	*ps_convert_to_env(char *str, char *found)
 {
-	int	i;
+	char	*tmp;
+	char	*path;
 
-	i = 0;
-	while (str[i])
+	tmp = ft_strndup(str, found - str);
+	if (found - str > 0 && !tmp)
+		return (NULL);
+	path = ps_getenv(found + 1);
+	tmp = ps_strjoin(tmp, getenv(path));
+	if (!tmp)
 	{
-		if (str[i] == '\'' || str[i] == '\"')
+		free(path);
+		return (NULL);
+	}
+	if (str + ft_strlen(path) < str)
+		tmp = ps_strjoin(tmp, str + ft_strlen(path));
+	if (path != NULL)
+		free(path);
+	return (tmp);
+}
+
+int	ps_handle_env(t_token *token)
+{
+	char	*str;
+	char	*tmp;
+	char	*found;
+
+	str = token->value;
+	while (1)
+	{
+		found = ft_strrchr(str, '$');
+		if (found == NULL)
 			break ;
-		i++;
+		tmp = str;
+		str = ps_convert_to_env(str, found);
+		free(tmp);
+		if (!str)
+			return (-1);
 	}
-	return (i);
-}
-
-t_token	*ps_get_quoted_str(char *str, char c)
-{
-	t_token			*new;
-	int				len;
-	t_token_type	type;
-
-	len = 0;
-	new = NULL;
-	len = lex_quote_len(str, c) - 1;
-	type = DOUBLEQUOTE;
-	if (c == '\'')
-		type = SINGLEQUOTE;
-	if (len > 0)
-		new = tok_create(str + 1, len, type);
-	else
-		new = tok_create("\0", 1, STRING);
-	return (new);
-}
-
-t_token	*ps_parse_quotes(char *str)
-{
-	int		i;
-	t_token	*token;
-	t_token	*tmp;
-
-	i = 0;
-	token = NULL;
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			tmp = ps_get_quoted_str(&(str[i]), str[i]);
-			if (!tmp)
-				return (NULL);
-			tok_add_back(&(token), tmp);
-			i += ft_strlen(tmp->value) + 1;
-		}
-		else
-		{
-			tmp = tok_create(&(str[i]), ps_get_raw_len(&(str[i])), STRING);
-			tok_add_back(&(token), tmp);
-			i += ft_strlen(tmp->value) - 1;
-		}
-		i++;
-	}
-	return (token);
-}
-
-int	ps_expand_and_quotes(t_token *token)
-{
-	t_token	*str;
-
-	while (token != NULL)
-	{
-		if (token->type == STRING)
-			str = ps_parse_quotes(token->value);
-		token = token->next;
-	}
-	tok_debug(str);
-	printf("----------\n");
-	tok_free(str);
+	token->value = str;
 	return (0);
 }
 
-// ps_parse_quotes(token);
-// ps_expand_path(str);
-// tmp = ps_expand_path(tmp);
+int	ps_expand_env(t_token *token)
+{
+	while (token != NULL)
+	{
+		if (token->type == STRING || token->type == DOUBLEQUOTE)
+			ps_handle_env(token);
+		token = token->next;
+	}
+	return (0);
+}
