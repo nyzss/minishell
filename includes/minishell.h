@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 16:23:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 17:29:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include "parser.h"
 # include "exec.h"
 # include "builtins.h"
+# include "builder.h"
 
 # define P_NAME "minishell"
 # define BLUE_A    "\033[1;34m"
