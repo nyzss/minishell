@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 09:58:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 16:22:28 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,47 +53,27 @@ t_token	*ps_parse_quotes(char *str)
 
 	i = 0;
 	token = NULL;
+	tmp = NULL;
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			tmp = ps_get_quoted_str(&(str[i]), str[i]);
-			if (!tmp)
-				return (NULL);
-			tok_add_back(&(token), tmp);
 			i += ft_strlen(tmp->value) + 1;
 		}
 		else
 		{
 			tmp = tok_create(&(str[i]), ps_get_raw_len(&(str[i])), STRING);
-			if (!tmp)
-				return (NULL);
-			tok_add_back(&(token), tmp);
 			i += ft_strlen(tmp->value) - 1;
 		}
+		if (!tmp)
+			return (NULL);
+		tok_add_back(&(token), tmp);
 		i++;
 	}
 	return (token);
 }
 
-
-// len = 0;
-// tmp = token;
-// while (token != NULL)
-// {
-// 	if (token->value != NULL)
-// 		len += ft_strlen(token->value);
-// }
-// if (len == 0)
-// 	return (NULL);
-// value = ft_calloc(sizeof(char), (len + 1));
-// if (!value)
-// 	return (NULL);
-// while (tmp != NULL)
-// {
-// 	ft_strlcat(value, tmp->value, ft_strlen(value) + ft_strlen(tmp->value));
-// 	tmp = tmp->next;
-// }
 char	*ps_combine_tokens(t_token *token)
 {
 	char	*value;

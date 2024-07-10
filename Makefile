@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
+#    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/10 13:13:49 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/07/10 17:47:25 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCS_PAR 	= parser.c expansion.c quotes.c parser_helper.c
 
 SRCS_UTI 	= utils.c
 
+SRCS_BLD 	= builder.c builder_helper.c filenames.c args.c
+
 SRC 		= src/
 
 BUILTINS_PATH	= src/builtins/
@@ -31,6 +33,7 @@ EXEC_PATH	= src/exec/
 LEXER_PATH	= src/lexer/
 PARSER_PATH	= src/parser/
 UTILS_PATH	= src/utils/
+BUILDER_PATH	= src/builder/
 
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(BUILTINS_PATH), $(SRCS_BT)) \
@@ -38,6 +41,7 @@ SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(LEXER_PATH), $(SRCS_LEX)) \
 		  $(addprefix $(PARSER_PATH), $(SRCS_PAR)) \
 		  $(addprefix $(UTILS_PATH), $(SRCS_UTI)) \
+		  $(addprefix $(BUILDER_PATH), $(SRCS_BLD)) \
 
 # F_PATH		= src/
 

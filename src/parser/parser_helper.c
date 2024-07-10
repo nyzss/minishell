@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:09:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 09:30:15 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 16:06:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ps_getenv(char *str)
 	char	*name;
 
 	i = 0;
-	while (str[i] && ft_isalnum(str[i]))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	name = ft_strndup(str, i);
 	return (name);
