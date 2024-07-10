@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 10:28:07 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 13:08:30 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exe_free_all(char **arr)
 void	exe_err1_open(int err_no, char *file)
 {
 	int		fd_tmp;
-	
+
 	fd_tmp = dup(STDOUT_FILENO);
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	ft_printf("%s: %s: %s\n", P_NAME, file, strerror(err_no));
