@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 15:41:57 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 11:52:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,46 @@ int	ps_handle_quotes(t_token *token)
 	return (0);
 }
 
-int	parser(t_token *token)
+int	ps_remove_null(t_token **head)
+{
+	t_token	*tmp;
+	t_token	*token;
+
+	token = (*head);
+	while (token != NULL && token->value == NULL)
+	{
+		tmp = token;
+		token = token->next;
+		free(tmp);
+	}
+	*head = token;
+	while (token != NULL && token->next != NULL)
+	{
+		if (token->next->value == NULL)
+		{
+			tmp = token->next;
+			token->next = token->next->next;
+			free(tmp);
+		}
+		token = token->next;
+	}
+	return (0);
+}
+
+int	parser(t_token **token)
 {
 	int	err;
 
 	err = 0;
-	if (err == 0 && ps_handle_quotes(token) != 0)
+	if (err == 0 && ps_handle_quotes(*token) != 0)
 		err = 1;
-	if (err == 0 && ps_expand_and_quotes(token) != 0)
+	if (err == 0 && ps_expand_and_quotes(*token) != 0)
 		err = 1;
-	if (err == 0 && ps_handle_redir(token) != 0)
+	if (err == 0 && ps_remove_null(token) != 0)
 		err = 1;
-	if (err == 0 && ps_handle_cmd(token) != 0)
+	if (err == 0 && ps_handle_redir(*token) != 0)
+		err = 1;
+	if (err == 0 && ps_handle_cmd(*token) != 0)
 		err = 1;
 	return (err);
 }
