@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 09:43:01 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 13:26:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ void	tok_debug(t_token *token)
 	ft_strlcpy(token_str[ARGUMENT], "ARGUMENT", 30);
 	while (token != NULL)
 	{
-		if (token->value != NULL)
-			printf("(%s) [%s]\n", token_str[token->type], token->value);
+		printf("(%s) [%s]\n", token_str[token->type], token->value);
 		token = token->next;
 	}
 }
