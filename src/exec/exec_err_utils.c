@@ -6,28 +6,63 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 08:26:27 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 10:28:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_err1_open(int err_no, char *file, t_exec *exec)
+void	exe_free_all(char **arr)
 {
-	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("%s: %s: %s\n", exec->cmd, file, strerror(err_no));
+	int		i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }
 
-void	ft_err2_pipe(int err_no, t_exec *exec)
+void	exe_err1_open(int err_no, char *file)
 {
+	int		fd_tmp;
+	
+	fd_tmp = dup(STDOUT_FILENO);
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("%s: %s\n", exec->cmd, strerror(err_no));
+	ft_printf("%s: %s: %s\n", P_NAME, file, strerror(err_no));
+	exe_dup2_close(fd_tmp, STDOUT_FILENO);
+}
+
+void	exe_err2_pipe(int err_no)
+{
+	int		fd_tmp;
+
+	fd_tmp = dup(STDOUT_FILENO);
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	ft_printf("%s: %s\n", P_NAME, strerror(err_no));
+	exe_dup2_close(fd_tmp, STDOUT_FILENO);
 	exit(2);
 }
 
-void	ft_err3_fork(int err_no, t_exec *exec)
+void	exe_err3_fork(int err_no)
 {
+	int		fd_tmp;
+
+	fd_tmp = dup(STDOUT_FILENO);
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("%s: %s\n", exec->cmd, strerror(err_no));
+	ft_printf("%s: %s\n", P_NAME, strerror(err_no));
+	exe_dup2_close(fd_tmp, STDOUT_FILENO);
 	exit(3);
+}
+
+void	exe_err4_exec(char *path, int err_no)
+{
+	int		fd_tmp;
+
+	fd_tmp = dup(STDOUT_FILENO);
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	if (exe_is_abs_path(path) == 1)
+		ft_printf("%s: %s: %s\n", P_NAME, path, strerror(err_no));
+	else
+		ft_printf("%s: %s: command not found\n", P_NAME, path);
+	exe_dup2_close(fd_tmp, STDOUT_FILENO);
 }

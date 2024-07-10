@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 08:44:30 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 10:21:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # include "builtins.h"
 # include "exec.h"
 
+# define P_NAME "minishell"
 # define BLUE_A    "\033[1;34m"
 # define MAGENTA_A "\033[1;35m"
 # define CYAN_A    "\033[1;36m"
