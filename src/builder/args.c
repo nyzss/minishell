@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:44:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:46:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 17:48:50 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_args	*arg_create(char *value)
 		free(args);
 		return (NULL);
 	}
-	args->value;
+	args->value = new;
 	args->next = NULL;
 	return (args);
 }
