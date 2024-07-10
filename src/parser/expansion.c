@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 22:47:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 09:14:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ char	*ps_convert_to_env(char *str, char *found)
 		free(path);
 		return (NULL);
 	}
-	if (str + ft_strlen(path) < str)
-		tmp = ps_strjoin(tmp, str + ft_strlen(path));
+	tmp = ps_strjoin(tmp, found + (ft_strlen(path) + 1));
 	if (path != NULL)
 		free(path);
 	return (tmp);
