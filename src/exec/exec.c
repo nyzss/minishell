@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 08:26:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 09:43:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exec(t_ctx *ctx)
 	int		exec_no;
 	int		fd_pipe[2];
 
-	get_stdfds(ctx);	// create dup stdio
+	exe_get_stdfds(ctx);	// create dup stdio
 	fd_in = dup(ctx->def_in); // initiate infile
 	exec_no = ft_lstsize((void *)ctx->exec);
 	while (ctx->exec)
@@ -64,19 +64,18 @@ int	exec(t_ctx *ctx)
 		fd_out = dup(ctx->def_out); // initiate outfile
 		// create pipe first if needed
 		if (ctx->exec->next)
-			create_pipe(&fd_out, fd_pipe, ctx->exec);
+			exe_create_pipe(&fd_out, fd_pipe, ctx->exec);
 		// go through files and set input and output, stop whenever fd == -1
-		if (init_fdio(&fd_in, &fd_out, ctx->exec, ctx->def_in))
+		if (exe_init_fdio(&fd_in, &fd_out, ctx->exec, ctx->def_in))
 			exec_no--;
 		// check fdio and redirect to STDIN & OUT; if all good then exec child
-		if (!redirect_fdio(&fd_in, &fd_out, fd_pipe, ctx->exec))
-			do_child(ctx->exec, ctx->env, &ctx->exit_code);
+		if (!exe_redirect_fdio(&fd_in, &fd_out, fd_pipe, ctx->exec))
+			exe_do_child(ctx->exec, ctx->env, fd_in);
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 		ctx->exec = ctx->exec->next;
 	}
-	while (exec_no--)	// wait all child process
-		wait(NULL);
-	reset_stdfds(ctx);	// restore stdin and stdout to default
+	exe_wait_all(exec_no, &ctx->exit_code);
+	exe_reset_stdfds(ctx);	// restore stdin and stdout to default
 	return (0);
 }
