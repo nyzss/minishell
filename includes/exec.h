@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 13:11:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 16:03:35 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_exec
 
 /* exec main */
 int		exec(t_ctx *ctx);
+int		exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out);
+int		exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out);
 void	exe_get_stdfds(t_ctx *ctx);
 void	exe_reset_stdfds(t_ctx *ctx);
 void	exe_wait_all(int rep, unsigned int *exit_code);

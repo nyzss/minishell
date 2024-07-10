@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 13:11:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 16:12:17 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,61 @@ int	exec(t_ctx *ctx)
 	int		fd_in;
 	int		fd_out;
 	int		exec_no;
+
+	exe_get_stdfds(ctx);
+	exec_no = ft_lstsize((void *)ctx->exec);
+	if (exec_no == 1)
+		exec_1(ctx, exec_no, &fd_in, &fd_out);
+	else 
+		exec_2(ctx, exec_no, &fd_in, &fd_out);
+	exe_reset_stdfds(ctx);
+	return (0);
+}
+
+int	exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
+{
+	*fd_in = dup(ctx->def_in);
+	*fd_out = dup(ctx->def_out);
+	if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
+		exec_no--;
+	if (!exec_no)
+		return (1);
+	exe_dup2_close(*fd_in, STDIN_FILENO);
+	exe_dup2_close(*fd_out, STDOUT_FILENO);
+	if (bi_is_builtin(ctx->exec->cmd) == 1)
+	{
+		if (ctx->exec->here_doc == 1)
+			unlink("here_doc");
+		ctx->exit_code = bi_do_exec(ctx->exec->cmd, ctx->exec->args, ctx->env);
+	}
+	else
+		exe_do_child(ctx->exec, ctx->env, *fd_in);
+	exe_wait_all(exec_no, &ctx->exit_code);
+	return (0);
+}
+
+int	exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
+{
 	int		fd_pipe[2];
 
-	exe_get_stdfds(ctx);// create dup stdio
-	fd_in = dup(ctx->def_in);// initiate infile
-	exec_no = ft_lstsize((void *)ctx->exec);
+	*fd_in = dup(ctx->def_in);// initiate infile
 	while (ctx->exec)
 	{
-		fd_out = dup(ctx->def_out);// initiate outfile
+		*fd_out = dup(ctx->def_out);// initiate outfile
 		// create pipe first if needed
 		if (ctx->exec->next)
-			exe_create_pipe(&fd_out, fd_pipe);
+			exe_create_pipe(fd_out, fd_pipe);
 		// go through files and set input and output, stop whenever fd == -1
-		if (exe_init_fdio(&fd_in, &fd_out, ctx->exec, ctx->def_in))
+		if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
 			exec_no--;
 		// check fdio and redirect to STDIN & OUT; if all good then exec child
-		if (!exe_redir_fdio(&fd_in, &fd_out, fd_pipe, ctx->exec))
+		if (!exe_redir_fdio(fd_in, fd_out, fd_pipe, ctx->exec))
 			exe_do_child(ctx->exec, ctx->env, fd_in);
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 		ctx->exec = ctx->exec->next;
 	}
 	exe_wait_all(exec_no, &ctx->exit_code);
-	exe_reset_stdfds(ctx);// restore stdin and stdout to default
 	return (0);
 }
 
