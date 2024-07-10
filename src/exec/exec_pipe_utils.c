@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 13:10:54 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 13:21:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	exe_create_pipe(int *fd_out, int fd_pipe[2])
 	if (pipe(fd_pipe) == -1)
 		exe_err2_pipe(errno);
 	close(*fd_out);
-	*fd_out = fd_pipe[1];// redirect fd_out to pipe_w, pipe_r will be set after redirection
+	/* redirect fd_out to pipe_w, pipe_r will be set after redirection*/
+	*fd_out = fd_pipe[1];
 }
 
 int	exe_redir_fdio(int *fd_in, int *fd_out, int pipe[2], t_exec *exec)

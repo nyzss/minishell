@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 13:07:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/10 13:20:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	exe_handle_files(int *fd_in, int *fd_out, t_exec *exec)
 	return (0);
 }
 
-int exe_check_fdio(int *fd_in, int *fd_out, char *file)
+int	exe_check_fdio(int *fd_in, int *fd_out, char *file)
 {
 	if (*fd_in == -1)
 	{
