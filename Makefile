@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/10 17:42:14 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/10 17:47:25 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS_PAR 	= parser.c expansion.c quotes.c parser_helper.c
 
 SRCS_UTI 	= utils.c
 
-SRCS_BLD 	= builder.c builder_helper.c filenames.c
+SRCS_BLD 	= builder.c builder_helper.c filenames.c args.c
 
 SRC 		= src/
 
