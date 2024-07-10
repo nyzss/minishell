@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 14:49:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 10:22:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 	token = lexer(line);
 	if (token == NULL)
 		return (1);
-	if (parser(token) != 0)
+	if (parser(&token) != 0)
 	{
 		tok_free(token);
 		return (1);
