@@ -6,14 +6,14 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 14:54:31 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/10 15:00:44 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-* OLD ENV EXPANDER
+* Check if the line is: `$ sdkjf`
 */
 char	*ps_convert_to_env(char *str, char *found)
 {
@@ -60,6 +60,8 @@ int	ps_handle_env(t_token *token)
 	{
 		found = ft_strchr(token->value, '$');
 		if (found == NULL)
+			break ;
+		if (ft_strlen(found) == 1)
 			break ;
 		tmp = token->value;
 		token->value = ps_convert_to_env(token->value, found);
