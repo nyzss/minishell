@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 18:15:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 19:08:33 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	bi_do_builtin(char *cmd, t_args *args, char ***env)
 	if (!ft_strcmp(cmd, "echo"))
 		return (bi_echo(args));
 	else if (!ft_strcmp(cmd, "cd"))
-		return (bi_cd(args));
+		return (bi_cd(args, *env));
 	else if (!ft_strcmp(cmd, "pwd"))
 		return (bi_pwd(args));
 	else if (!ft_strcmp(cmd, "export"))

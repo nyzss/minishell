@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:39:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 19:07:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	bi_echo(t_args *args)
 	return (0);
 }
 
-int	bi_cd(t_args *args)
+int	bi_cd(t_args *args, char **env)
 {
 	int	size_args;
 
 	size_args = ft_lstsize((void *)args);
 	if (!size_args)
-		chdir(getenv("HOME"));
+		chdir(ms_getenv("HOME", env));
 	else if (size_args > 1)
 	{
 		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 35);

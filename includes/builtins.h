@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 18:33:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 19:07:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		bi_is_builtin(char *cmd);
 
 /* Built-in Functions */
 int		bi_echo(t_args *args);
-int		bi_cd(t_args *args);
+int		bi_cd(t_args *args, char **env);
 int		bi_pwd(t_args *args);
 int		bi_exit(t_args *args);
 int		bi_env(t_args *args, char **env);
