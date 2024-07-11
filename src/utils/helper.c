@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 15:24:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 16:58:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	*ms_free_double(char **value)
 	return (NULL);
 }
 
+/*
+* pass in a env name for ex: `PATH` to get the `$PATH` or `HOME` for `$HOME`...
+* returns a `char *` that doesn't need to be freed
+*/
 char	*ms_getenv(char *path, char **envp)
 {
 	int	i;
