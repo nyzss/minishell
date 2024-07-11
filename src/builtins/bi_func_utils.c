@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 10:20:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 17:58:44 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,23 @@ int	bi_pwd(t_args *args)
 int	bi_exit(t_args *args)
 {
 	int		exit_code;
+	char	*tmp;
 
 	exit_code = 0;
 	if (args)
+	{
 		exit_code = ft_atoi(args->value);
+		tmp = args->value;
+		while (*tmp)
+		{
+			if (!ft_isdigit(*tmp++))
+			{
+				bi_err_exit(args->value);
+				exit_code = 2;
+				break ;
+			}
+		}
+	}
 	exit(exit_code);
 }
 
