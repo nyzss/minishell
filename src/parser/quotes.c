@@ -6,13 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 16:22:28 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 16:32:29 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ps_get_raw_len(char *str)
+int	ps_raw_len(char *str)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	ps_get_raw_len(char *str)
 	return (i);
 }
 
-t_token	*ps_get_quoted_str(char *str, char c)
+t_token	*ps_get_quoted_str(char *str, char c, t_ctx *ctx)
 {
 	t_token			*new;
 	int				len;
@@ -39,13 +39,13 @@ t_token	*ps_get_quoted_str(char *str, char c)
 	if (c == '\'')
 		type = SINGLEQUOTE;
 	if (len > 0)
-		new = tok_create(str + 1, len, type);
+		new = tok_create(str + 1, len, type, ctx);
 	else
-		new = tok_create("\0", 1, STRING);
+		new = tok_create("\0", 1, STRING, ctx);
 	return (new);
 }
 
-t_token	*ps_parse_quotes(char *str)
+t_token	*ps_parse_quotes(char *str, t_ctx *ctx)
 {
 	int		i;
 	t_token	*token;
@@ -58,12 +58,12 @@ t_token	*ps_parse_quotes(char *str)
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 		{
-			tmp = ps_get_quoted_str(&(str[i]), str[i]);
+			tmp = ps_get_quoted_str(&(str[i]), str[i], ctx);
 			i += ft_strlen(tmp->value) + 1;
 		}
 		else
 		{
-			tmp = tok_create(&(str[i]), ps_get_raw_len(&(str[i])), STRING);
+			tmp = tok_create(&(str[i]), ps_raw_len(&(str[i])), STRING, ctx);
 			i += ft_strlen(tmp->value) - 1;
 		}
 		if (!tmp)
@@ -102,7 +102,7 @@ int	ps_expand_and_quotes(t_token *token)
 	{
 		if (token->type == STRING)
 		{
-			str = ps_parse_quotes(token->value);
+			str = ps_parse_quotes(token->value, token->ctx);
 			ps_expand_env(str);
 			if (token->value)
 				free(token->value);
