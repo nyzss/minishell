@@ -6,14 +6,14 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 18:53:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 09:10:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-void	builtins(void);
+/* Built-in handler */
 int bi_do_builtin(char *cmd, t_args *args, char **env);
 int bi_is_builtin(char *cmd);
 
@@ -23,6 +23,8 @@ int bi_cd(t_args *args);
 int bi_pwd(t_args *args);
 int bi_exit(t_args *args);
 int	bi_env(t_args *args, char **env);
+int bi_export(t_args *args, char **env);
+int bi_unset(t_args *args, char **env);
 
 /* error utils */
 void    bi_err_cd(int err_no, char *file);
