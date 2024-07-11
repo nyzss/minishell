@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 16:26:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 21:02:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	handle_pipeline(t_ctx *ctx, char *line)
 {
 	t_token	*token;
-	t_exec	*exec;
+	t_exec	*exec_var;
 
 	(void)ctx;
 	token = lexer(ctx, line);
@@ -26,11 +26,12 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 		tok_free(token);
 		return (1);
 	}
-	printf("env in handle_pipeline: %s\n", ms_getenv("HELLO", ctx->env));
-	exec = builder(token);
-	br_debug(exec);
-	tok_debug(token);
-	ms_clear(exec, token);
+	exec_var = builder(token);
+	ctx->exec = exec_var;
+	exec(ctx);
+	// br_debug(exec_var);
+	// tok_debug(token);
+	ms_clear(ctx, token);
 	return (0);
 }
 
