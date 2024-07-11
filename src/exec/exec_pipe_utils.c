@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:51:23 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 19:31:54 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,15 @@ void	exe_do_child(t_exec *exec, char **env, int fd_in)
 	{
 		if (exec->next)
 			close(fd_in);
-		if (exe_do_exec(exec->cmd, exec->args, env) < 0)
+		if (bi_is_builtin(exec->cmd) == 1)
+		{
+			if (exec->here_doc == 1)
+				unlink("here_doc");
+			exit(bi_do_builtin(exec->cmd, exec->args, &env));
+		}
+		else if (exe_do_exec(exec->cmd, exec->args, env) < 0)
 			exit(1);
+		exit(0);
 	}
 }
 

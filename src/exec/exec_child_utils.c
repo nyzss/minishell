@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:58:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 19:19:50 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	exe_do_exec(char *cmd, t_args *args, char **env)
 	char	*path;
 	char	**cmds;
 
+	if (!cmd)
+		return (0);
 	path = exe_get_path(cmd, env);
 	if (!path)
 		return (-1);

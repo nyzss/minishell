@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 19:08:33 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 19:22:52 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	bi_is_builtin(char *cmd)
 {
-	if (!ft_strcmp(cmd, "echo"))
+	if (!cmd)
+		return (0);
+	else if (!ft_strcmp(cmd, "echo"))
 		return (1);
 	else if (!ft_strcmp(cmd, "cd"))
 		return (1);
