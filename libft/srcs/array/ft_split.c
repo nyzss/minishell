@@ -6,21 +6,11 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:13:36 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/24 10:54:04 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 13:58:51 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void	ft_free_all(char **arr, int j)
-{
-	int	i;
-
-	i = 0;
-	while (i < j)
-		free(arr[i++]);
-	free(arr);
-}
 
 static char	*ft_strchop(char const *s, int start, int end)
 {
@@ -51,7 +41,7 @@ static int	ft_assign_arr(char **arr, char const *s, char c, int s_len)
 				arr[j] = ft_strchop(s, anchor, i);
 				if (!arr[j++])
 				{
-					ft_free_all(arr, j - 1);
+					ft_free_all(arr);
 					return (0);
 				}
 			}

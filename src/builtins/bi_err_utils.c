@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 10:22:11 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 14:36:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void    bi_err_pwd(char *option)
     fd_tmp = dup(STDOUT_FILENO);
     dup2(STDERR_FILENO, STDOUT_FILENO);
     ft_printf("%s: pwd: %s: invalid option\n", P_NAME, option);
+    exe_dup2_close(fd_tmp, STDOUT_FILENO);
+}
+
+void    bi_err_export(char *var)
+{
+    int     fd_tmp;
+
+    fd_tmp = dup(STDOUT_FILENO);
+    dup2(STDERR_FILENO, STDOUT_FILENO);
+    ft_printf("%s: export: %s: not a valid identifier\n", P_NAME, var);
     exe_dup2_close(fd_tmp, STDOUT_FILENO);
 }
 
