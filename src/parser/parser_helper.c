@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:09:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 16:06:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 15:58:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ps_strjoin(char *s1, char *s2)
 	return (new);
 }
 
-char	*ps_getenv(char *str)
+char	*ps_getenv_name(char *str)
 {
 	int		i;
 	char	*name;

@@ -6,12 +6,14 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:00:41 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/09 14:40:59 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 16:23:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+typedef struct s_ctx	t_ctx;
 
 typedef enum e_token_type
 {
@@ -31,13 +33,14 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char			*value;
+	t_ctx			*ctx;
 	t_token_type	type;
 	struct s_token	*next;
 }	t_token;
 
-t_token			*lexer(char *line);
+t_token			*lexer(t_ctx *ctx, char *line);
 
-t_token			*tok_create(char *value, int n, t_token_type type);
+t_token			*tok_create(char *value, int n, t_token_type type, t_ctx *ctx);
 
 t_token			*tok_last(t_token *token);
 

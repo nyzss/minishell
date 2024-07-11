@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 13:26:33 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 16:19:00 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	tok_free(t_token *token)
 * tok_create("hello", 3, STRING)
 * -> value: hel, type: STRING
 */
-t_token	*tok_create(char *value, int n, t_token_type type)
+t_token	*tok_create(char *value, int n, t_token_type type, t_ctx *ctx)
 {
 	t_token	*token;
 	char	*new;
@@ -52,6 +52,7 @@ t_token	*tok_create(char *value, int n, t_token_type type)
 	}
 	token->value = new;
 	token->type = type;
+	token->ctx = ctx;
 	token->next = NULL;
 	return (token);
 }
