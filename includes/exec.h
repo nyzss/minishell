@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 16:03:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:55:09 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	**exe_get_allpaths(char **env);
 char	**exe_get_cmd(char *cmd, t_args *args);
 
 /* err_utils */
-void	exe_free_all(char **arr);
 void	exe_err1_open(int err_no, char *file);
 void	exe_err2_pipe(int err_no);
 void	exe_err3_fork(int err_no);

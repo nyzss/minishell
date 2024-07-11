@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 13:09:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:58:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int	exe_do_exec(char *cmd, t_args *args, char **env)
 {
 	char	*path;
-	char	**cmd;
+	char	**cmds;
 
 	path = exe_get_path(cmd, env);
 	if (!path)
 		return (-1);
-	cmd = exe_get_cmd(cmd, args);
-	if (!cmd)
+	cmds = exe_get_cmd(cmd, args);
+	if (!cmds)
 	{
 		free(path);
 		return (-1);
 	}
-	if (execve(path, cmd, env) == -1)
+	if (execve(path, cmds, env) == -1)
 	{
 		exe_err4_exec(path, errno);
-		exe_free_all(cmd);
+		ft_free_all(cmds);
 		free(path);
 		return (-1);
 	}
-	exe_free_all(cmd);
+	ft_free_all(cmds);
 	free(path);
 	return (0);
 }
@@ -49,7 +49,7 @@ char	*exe_get_path(char *file, char **env)
 	if (!paths)
 		return (ft_strdup(file));
 	exec = exe_get_exec(paths, file);
-	exe_free_all(paths);
+	ft_free_all(paths);
 	return (exec);
 }
 
@@ -62,7 +62,7 @@ char	*exe_get_exec(char **paths, char *file)
 	i = -1;
 	while (paths[++i])
 	{
-		path = ft_strjoin(path[i], "/");
+		path = ft_strjoin(paths[i], "/");
 		if (!path)
 			return (NULL);
 		exec = ft_strjoin(path, file);
@@ -106,7 +106,7 @@ char	**exe_get_cmd(char *cmd, t_args *args)
 	int		i;
 
 	i = -1;
-	arg_size = ft_lstsize(args);
+	arg_size = ft_lstsize((void *)args);
 	cmds = (char **)malloc((arg_size + 2) * sizeof(char *));
 	if (!cmds)
 		return (NULL);
@@ -118,7 +118,7 @@ char	**exe_get_cmd(char *cmd, t_args *args)
 			cmds[i] = ft_strdup(args->value);
 		if (!cmds[i])
 		{
-			exe_free_all(cmds);
+			ft_free_all(cmds);
 			return (NULL);
 		}
 	}

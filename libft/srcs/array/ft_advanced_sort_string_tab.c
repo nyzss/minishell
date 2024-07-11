@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 11:08:30 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 10:07:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:46:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_swap_pointer(char **a1, char **a2)
 	*a2 = temp;
 }
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
+void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(const char *, const char *))
 {
 	int	i;
 	int	j;

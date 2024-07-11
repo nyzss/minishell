@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 16:38:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:51:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	exe_redir_fdio(int *fd_in, int *fd_out, int pipe[2], t_exec *exec)
 void	exe_do_child(t_exec *exec, char **env, int fd_in)
 {
 	pid_t	pid;
-	int		status;
 
 	pid = fork();
 	if (pid == -1)

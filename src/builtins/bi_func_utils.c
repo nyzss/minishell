@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:16:38 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:39:41 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	bi_cd(t_args *args)
 {
 	int	size_args;
 
-	size_args = ft_lstsize(args);
+	size_args = ft_lstsize((void *)args);
 	if (!size_args)
 		chdir(getenv("HOME"));
 	else if (size_args > 1)

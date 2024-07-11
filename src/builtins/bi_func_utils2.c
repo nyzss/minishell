@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:29:18 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:49:02 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	bi_get_var_unset(char *var, char **env)
 		if (bi_is_equal(env[i]))
 		{
 			if (!ft_strncmp(var, env[i], ft_strlen(var))
-				&& ft_strchr(env[i], '=') - env[i] == ft_strlen(var))
+				&& ft_strchr(env[i], '=') - env[i] == (long)ft_strlen(var))
 				return (i);
 		}
 		else
@@ -145,4 +145,5 @@ int	bi_del_var(t_args *args, char ***env)
 	free((*env)[i]);
 	free(*env);
 	*env = new_env;
+    return (0);
 }
