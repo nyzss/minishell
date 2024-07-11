@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:38:12 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/05/28 18:14:53 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 14:00:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ static int	ft_with_pre(char *s)
 		s++;
 	}
 	return (0);
-}
-
-static int	ft_arr_size(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
 }
 
 static void	ft_assign_wid_pre(char *cpy, char **arr, char **wid_pre)
@@ -58,16 +48,6 @@ static void	ft_assign_wid_pre(char *cpy, char **arr, char **wid_pre)
 		wid_pre[0] = ft_strdup(arr[0]);
 		wid_pre[1] = ft_strdup(arr[1]);
 	}
-}
-
-static void	ft_free_all(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
 }
 
 void	ft_gen_wid_pre(const char *fmt, size_t len, char **wid_pre)

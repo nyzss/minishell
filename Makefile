@@ -6,7 +6,7 @@
 #    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/10 18:57:57 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/07/11 13:28:04 by tsuchen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 		= minishell
 
 SRCS_M		= main.c
 
-SRCS_BT		= builtins.c bi_err_utils.c
+SRCS_BT		= builtins.c bi_err_utils.c bi_func_utils.c
 
 SRCS_EX 	= exec.c exec_fdio_utils.c exec_pipe_utils.c exec_child_utils.c exec_err_utils.c
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   bi_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 12:04:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 13:43:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,44 +75,6 @@ char	**bi_get_new_vars(int cnt, t_args *args)
 	return (new_vars);
 }
 
-int	bi_export(t_args *args, char ***env)
-{
-	int		cnt;
-	int		size_env;
-	char	**new_env;
-	char	**new_vars;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	cnt = ft_lstsize(args);
-	if (!cnt)
-		if (bi_print_export(*env))
-			return (1);
-	else
-	{
-		new_vars = bi_get_new_vars(cnt, args);
-		if (!new_vars)
-			return (1);
-		size_env = ft_arr_size(*env);
-		new_env = (char **)malloc((size_env + cnt + 1) * sizeof(char *));
-		if (!new_env)
-		{
-			ft_free_all(new_vars);
-			return (1);
-		}
-		while (++i < size_env)
-			new_env[i] = (*env)[i];
-		while (j < cnt)
-			new_env[i++] = new_vars[j++];
-		new_env[i] = NULL;
-		free(*env);
-		*env = new_env;
-	}
-	return (0);
-}
-
 int	bi_print_export(char **env)
 {
 	int		size;
@@ -130,6 +92,52 @@ int	bi_print_export(char **env)
 	while (*env_sort)
 		printf("export %s\n", *env_sort++);
 	free(env_sort);
+	return (0);
+}
+
+int	bi_add_var(int cnt, t_args *args, char ***env)
+{
+	char	**new_env;
+	char	**new_vars;
+	int		size_env;
+	int		i;
+	int		j;
+	
+	i = -1;
+	j = 0;
+	new_vars = bi_get_new_vars(cnt, args);
+	if (!new_vars)
+		return (1);
+	size_env = ft_arr_size(*env);
+	new_env = (char **)malloc((size_env + cnt + 1) * sizeof(char *));
+	if (!new_env)
+		return (ft_free_all(new_vars), 1);
+	while (++i < size_env)
+		new_env[i] = (*env)[i];
+	while (j < cnt)
+		new_env[i++] = new_vars[j++];
+	new_env[i] = NULL;
+	free(*env);
+	free(new_vars);
+	*env = new_env;
+	return (0);
+}
+
+int	bi_export(t_args *args, char ***env)
+{
+	int		cnt;
+
+	cnt = ft_lstsize(args);
+	if (!cnt)
+	{
+		if (bi_print_export(*env))
+			return (1);
+	}
+	else
+	{
+		if (bi_add_var(cnt, args, env))
+			return (1);
+	}
 	return (0);
 }
 
