@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 17:58:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:16:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	bi_pwd(t_args *args)
 	char	*cwd;
 
 	if (args && *(args->value) == '-' && (ft_strcmp(args->value, "-L")
-		&& ft_strcmp(args->value, "-P")))
+			&& ft_strcmp(args->value, "-P")))
 	{
 		bi_err_pwd(args->value);
 		return (1);
@@ -110,8 +110,8 @@ int	bi_env(t_args *args, char **env)
 	}
 	while (*env)
 	{
-        if (bi_is_equal(*env))
-            printf("%s\n", *env);
+		if (bi_is_equal(*env))
+			printf("%s\n", *env);
 		env++;
 	}
 	return (0);

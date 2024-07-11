@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:04:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:29:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	bi_print_export(char **env)
 			printf("%s\n", *env_sort++);
 		else
 		{
-			write(STDOUT_FILENO, *env_sort, ft_strchr(*env_sort, '=') - *env_sort + 1);
+			write(STDOUT_FILENO, *env_sort,
+				ft_strchr(*env_sort, '=') - *env_sort + 1);
 			printf("\"%s\"\n", ft_strchr(*env_sort, '=') + 1);
 		}
 	}
-	free(env_sort);
-	return (0);
+	return (free(env_sort), 0);
 }
 
 int	bi_add_var(t_args *args, char ***env)
@@ -47,7 +47,7 @@ int	bi_add_var(t_args *args, char ***env)
 	char	*new_var;
 	int		i;
 
-	if (!*(args->value)	|| *(args->value) == '=')
+	if (!*(args->value) || *(args->value) == '=')
 	{
 		bi_err_export(args->value);
 		return (0);
