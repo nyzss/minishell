@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 10:22:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 10:44:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	handle_pipeline(t_ctx *ctx, char *line)
 {
 	t_token	*token;
+	t_exec	*exec;
 
 	(void)ctx;
 	token = lexer(line);
@@ -25,9 +26,10 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 		tok_free(token);
 		return (1);
 	}
+	exec = builder(token);
+	br_debug(exec);
 	tok_debug(token);
-	tok_free(token);
-	token = NULL;
+	ms_clear(exec, token);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:29:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 10:43:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ t_ctx	*init_ctx(char **envp);
 void	free_all(t_ctx *ctx);
 
 int		check_line(char *line);
+
+void	ms_clear(t_exec *exec, t_token *token);
 
 #endif

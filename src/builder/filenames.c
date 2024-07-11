@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:00:13 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:41:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 10:40:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	fn_free(t_filenames *filenames)
 	{
 		tmp = filenames;
 		if (filenames->path)
-		{
 			free(filenames->path);
-			filenames->path = NULL;
-		}
 		filenames = filenames->next;
 		free(tmp);
 	}
 }
 
+/*
+* will do the strdup on the path, just pass in a string
+*/
 t_filenames	*fn_create(char *path, t_token_type type)
 {
 	t_filenames	*filename;
@@ -43,6 +43,7 @@ t_filenames	*fn_create(char *path, t_token_type type)
 		free(filename);
 		return (NULL);
 	}
+	filename->path = new;
 	filename->type = type;
 	filename->next = NULL;
 	return (filename);
