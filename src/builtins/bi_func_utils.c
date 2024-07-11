@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 09:10:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 10:20:23 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	bi_env(t_args *args, char **env)
 	}
 	while (*env)
 	{
-		printf("%s\n", *env);
+        if (bi_is_equal(*env))
+            printf("%s\n", *env);
 		env++;
 	}
 	return (0);

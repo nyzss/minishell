@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 09:10:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 10:24:35 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ int	bi_do_builtin(char *cmd, t_args *args, char **env)
 
 int	bi_export(t_args *args, char **env)
 {
+	if (!args)
+	{
+		// print entire env in ascending order
+	}
+	else
+	{
+		// append each args in the env	
+	}
 	return (0);
 }
 
