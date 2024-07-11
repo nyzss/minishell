@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:41:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:02:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 10:27:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ t_exec	*br_init(void)
 	return (new);
 }
 
+void	br_free(t_exec *exec)
+{
+	t_exec	*tmp;
+
+	while (exec != NULL)
+	{
+		tmp = exec;
+		if (exec->cmd)
+			free(exec->cmd);
+		if (exec->args)
+			arg_free(exec->args);
+		if (exec->redirs)
+			fn_free(exec->redirs);
+		exec = exec->next;
+		free(tmp);
+	}
+}
+
 void	br_debug(t_exec *exec)
 {
 	t_args		*args;
@@ -34,24 +52,36 @@ void	br_debug(t_exec *exec)
 
 	while (exec != NULL)
 	{
+		printf(MAGENTA_A "----------- EXEC ----------\n");
+		printf(BLUE_A);
 		args = exec->args;
 		filenames = exec->redirs;
 		printf("CMD: [%s]\n", exec->cmd);
-		printf("--ARGS--\n");
+		printf("HEREDOC: [%d]\n", exec->here_doc);
+		printf("ARGS: [%p]\n", exec->args);
+		printf("FILENAMES: [%p]\n", exec->redirs);
+		if (args != NULL)
+			printf("#ARGS\n");
+		printf(C_RESET);
 		while (args != NULL)
 		{
-			printf("\t[%s]\n", args->value);
+			printf("---->[%s]\n", args->value);
 			args = args->next;
 		}
-		printf("--REDIRS--\n");
+		printf(BLUE_A);
+		if (filenames != NULL)
+			printf("#REDIRS\n");
+		printf(C_RESET);
 		while (filenames != NULL)
 		{
-			printf("\t[%s]\n", filenames->path);
-			printf("\t[%d]\n", filenames->type);
+			printf("---->[%s]\n", filenames->path);
+			printf("---->[%d]\n", filenames->type);
 			filenames = filenames->next;
 		}
-		printf("HEREDOC: [%d]\n", exec->here_doc);
+		printf(BLUE_A);
 		printf("NEXT: [%p]\n", exec->next);
+		if (exec->next == NULL)
+			printf(MAGENTA_A "-------------------\n" C_RESET);
 		exec = exec->next;
 	}
 }

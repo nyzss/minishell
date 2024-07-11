@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:44:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:48:50 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 10:08:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	arg_free(t_args *args)
 	{
 		tmp = args;
 		if (args->value)
-		{
 			free(args->value);
-			args->value = NULL;
-		}
 		args = args->next;
 		free(tmp);
 	}
 }
 
+/*
+* will do the strdup on the path, just pass in a string
+*/
 t_args	*arg_create(char *value)
 {
 	t_args	*args;

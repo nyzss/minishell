@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:43:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 17:47:05 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/11 10:09:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_exec		*builder(t_token *token);
 t_exec		*br_init(void);
 
 void		br_debug(t_exec *exec);
+
+void		br_free(t_exec *exec);
 
 int			fn_add_back(t_filenames **head, t_filenames *new);
 
