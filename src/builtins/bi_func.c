@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 19:22:52 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 22:50:11 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,24 @@ int	bi_do_builtin(char *cmd, t_args *args, char ***env)
 
 int	bi_export(t_args *args, char ***env)
 {
+	int	exit_code;
+
+	exit_code = 0;
 	if (!args)
 	{
 		if (bi_print_export(*env))
-			return (1);
+			exit_code = 1;
 	}
 	else
 	{
 		while (args)
 		{
 			if (bi_add_var(args, env))
-				return (1);
+				exit_code = 1;
 			args = args->next;
 		}
 	}
-	return (0);
+	return (exit_code);
 }
 
 int	bi_unset(t_args *args, char ***env)

@@ -18,3 +18,4 @@ tester
 # src/main.o
 vgcore*
 minishell
+.DS_Store

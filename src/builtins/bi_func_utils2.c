@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:49:02 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 22:34:05 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,5 @@ int	bi_del_var(t_args *args, char ***env)
 	free((*env)[i]);
 	free(*env);
 	*env = new_env;
-    return (0);
+	return (0);
 }

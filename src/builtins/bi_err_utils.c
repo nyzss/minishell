@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:14:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 23:06:40 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ void	bi_err_exit(char *val)
 	fd_tmp = dup(STDOUT_FILENO);
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	ft_printf("%s: exit: %s: numeric argument required\n", P_NAME, val);
+	exe_dup2_close(fd_tmp, STDOUT_FILENO);
+}
+
+void	bi_err_env(char *file)
+{
+	int	fd_tmp;
+
+	fd_tmp = dup(STDOUT_FILENO);
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	ft_printf("env: %s: No such file or directory\n", file);
 	exe_dup2_close(fd_tmp, STDOUT_FILENO);
 }
 

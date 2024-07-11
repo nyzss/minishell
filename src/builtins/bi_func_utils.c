@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 19:07:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 23:09:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	bi_pwd(t_args *args)
 			&& ft_strcmp(args->value, "-P")))
 	{
 		bi_err_pwd(args->value);
-		return (1);
+		return (2);
 	}
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
@@ -105,14 +105,14 @@ int	bi_env(t_args *args, char **env)
 {
 	if (args)
 	{
-		write(STDERR_FILENO, "minishell: env: too many arguments\n", 36);
-		return (1);
+		bi_err_env(args->value);
+		return (127);
 	}
 	while (*env)
 	{
 		if (bi_is_equal(*env))
 			printf("%s\n", *env);
-		env++;
+		*env++;
 	}
 	return (0);
 }
