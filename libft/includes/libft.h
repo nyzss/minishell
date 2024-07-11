@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:42:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 10:08:28 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 11:48:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *));
+int		ft_arr_size(char **arr);
+void	ft_free_all(char *arr);
 
 /* linked list functions */
 typedef struct s_list

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 18:54:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 11:09:00 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 			unlink("here_doc");
 		exec_no--;
 		ctx->exit_code = bi_do_builtin(ctx->exec->cmd,
-			ctx->exec->args, ctx->env);
+			ctx->exec->args, &ctx->env);
 	}
 	else
 	{
