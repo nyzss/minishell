@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 13:43:40 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/11 14:47:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,6 @@ int	bi_do_builtin(char *cmd, t_args *args, char ***env)
 		return (0);
 }
 
-char	**bi_get_new_vars(int cnt, t_args *args)
-{
-	char	**new_vars;
-	int		i;
-
-	i = 0;
-	new_vars = (char **)malloc((cnt + 1) * sizeof(char *));
-	if (!new_vars)
-		return (NULL);
-	while (i < cnt)
-	{
-		new_vars[i] = ft_strdup(args->value);
-		if (!new_vars[i++])
-		{
-			ft_free_all(new_vars);
-			return (NULL);
-		}
-		args = args->next;
-	}
-	new_vars[i] = NULL;
-	return (new_vars);
-}
-
 int	bi_print_export(char **env)
 {
 	int		size;
@@ -95,48 +72,48 @@ int	bi_print_export(char **env)
 	return (0);
 }
 
-int	bi_add_var(int cnt, t_args *args, char ***env)
+int	bi_add_var(t_args *args, char ***env)
 {
 	char	**new_env;
-	char	**new_vars;
-	int		size_env;
+	char	*new_var;
 	int		i;
-	int		j;
-	
+
 	i = -1;
-	j = 0;
-	new_vars = bi_get_new_vars(cnt, args);
-	if (!new_vars)
+	if (!*(args->value)	|| *(args->value) == '=')
+	{
+		bi_err_export(args->value);
 		return (1);
-	size_env = ft_arr_size(*env);
-	new_env = (char **)malloc((size_env + cnt + 1) * sizeof(char *));
+	}
+	new_var = ft_strdup(args->value);
+	if (!new_var)
+		return (1);
+	new_env = (char **)malloc((ft_arr_size(*env) + 2) * sizeof(char *));
 	if (!new_env)
-		return (ft_free_all(new_vars), 1);
-	while (++i < size_env)
+		return (free(new_var), 1);
+	while ((*env)[++i])
 		new_env[i] = (*env)[i];
-	while (j < cnt)
-		new_env[i++] = new_vars[j++];
+	new_env[i++] = new_var;
 	new_env[i] = NULL;
 	free(*env);
-	free(new_vars);
 	*env = new_env;
 	return (0);
 }
 
 int	bi_export(t_args *args, char ***env)
 {
-	int		cnt;
-
-	cnt = ft_lstsize(args);
-	if (!cnt)
+	if (!args)
 	{
 		if (bi_print_export(*env))
 			return (1);
 	}
 	else
 	{
-		if (bi_add_var(cnt, args, env))
-			return (1);
+		while (args)
+		{
+			if (bi_add_var(args, env))
+				return (1);
+			args = args->next;
+		}		
 	}
 	return (0);
 }
