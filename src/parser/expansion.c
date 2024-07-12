@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:30:33 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 21:08:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ char	*ps_convert_to_env(char *str, char *found, t_env *envp)
 {
 	char	*tmp;
 	char	*path;
+	char	*found_env_str;
 
+	found_env_str = NULL;
 	if (found - str == 0)
 		tmp = ft_strdup("");
 	else
@@ -27,20 +29,16 @@ char	*ps_convert_to_env(char *str, char *found, t_env *envp)
 	if (!tmp)
 		return (NULL);
 	path = ps_getenv_name(found + 1);
-	tmp = ps_strjoin(tmp, ms_getenv(path, envp)->value);
+	if (ms_getenv(path, envp) != NULL)
+		found_env_str = ms_getenv(path, envp)->value;
+	tmp = ps_strjoin(tmp, found_env_str);
 	if (!tmp)
-	{
-		free(path);
-		return (NULL);
-	}
+		return (free(path), NULL);
 	tmp = ps_strjoin(tmp, found + (ft_strlen(path) + 1));
 	if (path != NULL)
 		free(path);
 	if (ft_strlen(tmp) == 0)
-	{
-		free(tmp);
-		return (NULL);
-	}
+		return (free(tmp), NULL);
 	return (tmp);
 }
 

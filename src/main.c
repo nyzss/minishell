@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 17:55:40 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 21:09:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 	ctx->exec = builder(token);
 	ctx->exec_count = br_lstsize(ctx->exec);
 	exec(ctx);
-	// br_debug(exec_var);
+	// br_debug(ctx->exec);
 	// tok_debug(token);
 	ms_clear(ctx, token);
 	ctx->exec_count = 0;
