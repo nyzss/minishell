@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:26:03 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 15:45:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*ms_env_dup(char **envp)
 	{
 		id = env_get_id(envp[i]);
 		value = env_get_value(envp[i]);
-		tmp = env_create(id, value, envp[i]);
+		tmp = env_create(id, value, ft_strdup(envp[i]));
 		if (!tmp)
 			return (NULL);
 		env_add_back(&new_env, tmp);

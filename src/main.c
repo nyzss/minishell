@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:37:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 15:38:12 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	main(int ac, char **av, char **envp)
 	return (EXIT_SUCCESS);
 }
 
+// char *e = "ABCD";
+// env_add_back(&(ctx->envp), env_create(env_get_id(e), env_get_value(e), e));
 //	for (t_env *env = ctx->envp; env != NULL; env = env->next)
 //	{
 //		printf("--------------\n");
