@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 20:48:11 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 21:12:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void	*ms_free_double(char **value)
 /*
 * pass in a env name for ex: `PATH` to get the `$PATH` or `HOME` for `$HOME`...
 * returns a `char *` that doesn't need to be freed
+*
+*
+* I could add an if to check if the 'path' is == $? then I can just return the error code
+* since this works: printf "$?\n"
 */
 t_env	*ms_getenv(char *path, t_env *envp)
 {
