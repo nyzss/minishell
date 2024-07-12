@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:56:19 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 14:08:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ int		bi_unset(t_args *args, t_env **env);
 /* helper functions for export and unset */
 int		bi_print_export(t_env *env);
 int		bi_add_var(t_args *args, t_env **env);
-int		bi_get_var_export(char *var, t_env *env);
+t_env	*bi_get_var(char *var, t_env *env);
 int		bi_del_var(t_args *args, t_env **env);
-int		bi_get_var_unset(char *var, t_env *env);
 
 /* error utils */
 void	bi_err_cd(int err_no, char *file);
