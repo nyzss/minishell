@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:29:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 11:44:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	exec(t_ctx *ctx)
 	int		fd_out;
 	int		exec_no;
 
-	exe_get_stdfds(ctx);
 	exec_no = br_lstsize(ctx->exec);
+	if (!exec_no)
+		return (0);
+	exe_get_stdfds(ctx);
 	if (exec_no == 1)
 		exec_1(ctx, exec_no, &fd_in, &fd_out);
 	else
