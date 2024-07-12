@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 13:58:48 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:07:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*ms_env_dup(char **envp)
 	{
 		id = env_get_id(envp[i]);
 		value = env_get_value(envp[i]);
-		tmp = env_create(id, value);
+		tmp = env_create(id, value, envp[i]);
 		if (!tmp)
 			return (NULL);
 		env_add_back(&new_env, tmp);
@@ -37,7 +37,7 @@ t_env	*ms_env_dup(char **envp)
 	return (new_env);
 }
 
-t_env	*env_create(char *id, char *value)
+t_env	*env_create(char *id, char *value, char *raw)
 {
 	t_env	*new;
 
@@ -50,6 +50,7 @@ t_env	*env_create(char *id, char *value)
 	}
 	new->id = id;
 	new->value = value;
+	new->raw = raw;
 	new->next = NULL;
 	return (new);
 }
