@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fdio_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/10 13:20:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 18:02:23 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	exe_is_here_doc(t_exec *exec, int fd_stdin)
 	{
 		if (tmp->type == HEREDOC)
 		{
+			signal(SIGINT, sig_handle_heredoc);
 			exe_init_here_doc("here_doc", tmp->path, fd_stdin);
 			free(tmp->path);
 			tmp->path = ft_strdup("here_doc");
