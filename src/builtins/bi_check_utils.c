@@ -17,6 +17,8 @@ int	bi_check_id(char *id)
 	int	i;
 
 	i = 0;
+	if (!*id)
+		return (0);
 	while (id[i])
 	{
 		if (i == 0 && ft_isalpha(id[i]) == 0 && id[i] != '_')

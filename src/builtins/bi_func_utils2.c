@@ -64,6 +64,8 @@ static void	bi_update_var(t_env *node, char *arg_raw)
 	char	*arg_value;
 
 	arg_value = env_get_value(arg_raw);
+	if (!arg_value)
+		return ;
 	if (node->value)
 		free(node->value);
 	if (node->raw)
