@@ -6,41 +6,40 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 11:29:06 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 16:00:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exe_do_exec(char *cmd, t_args *args, char **env)
+int	exe_do_exec(char *cmd, t_args *args, t_env *env)
 {
 	char	*path;
 	char	**cmds;
+	char	**envs;
 
 	if (!cmd)
 		return (0);
 	path = exe_get_path(cmd, env);
 	if (!path)
 		return (-1);
-	cmds = exe_get_cmd(cmd, args);
+	envs = exe_get_envs(env);
+	if (!envs)
+		return (free(path), -1);
+	cmds = exe_get_cmds(cmd, args);
 	if (!cmds)
-	{
-		free(path);
-		return (-1);
-	}
-	if (execve(path, cmds, env) == -1)
+		return (free(path), free(envs), -1);
+	if (execve(path, cmds, envs) == -1)
 	{
 		exe_err4_exec(path, errno);
 		ft_free_all(cmds);
-		free(path);
-		return (-1);
+		return (free(path), free(envs), -1);
 	}
 	ft_free_all(cmds);
-	free(path);
-	return (0);
+	return (free(path), free(envs), 0);
 }
 
-char	*exe_get_path(char *file, char **env)
+char	*exe_get_path(char *file, t_env *env)
 {
 	char	**paths;
 	char	*exec;
@@ -78,30 +77,27 @@ char	*exe_get_exec(char **paths, char *file)
 	return (NULL);
 }
 
-char	**exe_get_allpaths(char **env)
+char	**exe_get_allpaths(t_env *env)
 {
 	int		i;
-	char	*path_all;
 	char	**paths;
 
 	i = 0;
-	while (env[i])
+	while (env)
 	{
-		if (!ft_strncmp(env[i], "PATH=", 5))
+		if (!ft_strcmp(env->id, "PATH"))
 		{
-			path_all = ft_strtrim(env[i], "PATH=");
-			if (!path_all)
+			paths = ft_split(env->value, ':');
+			if (!paths)
 				return (NULL);
-			paths = ft_split(path_all, ':');
-			free(path_all);
 			return (paths);
 		}
-		i++;
+		env = env->next;
 	}
 	return (NULL);
 }
 
-char	**exe_get_cmd(char *cmd, t_args *args)
+char	**exe_get_cmds(char *cmd, t_args *args)
 {
 	char	**cmds;
 	int		arg_size;
@@ -126,4 +122,24 @@ char	**exe_get_cmd(char *cmd, t_args *args)
 	}
 	cmds[i] = NULL;
 	return (cmds);
+}
+/* Only create a tab that holds the add of env->raw. No strdup on raw*/
+char	**exe_get_envs(t_env *env)
+{
+	char	**envs;
+	int		env_size;
+	int		i;
+
+	i = -1;
+	env_size = env_lstsize(env);
+	envs = (char **)malloc((env_size + 1) * sizeof(char *));
+	if (!envs)
+		return (NULL);
+	while (++i < env_size)
+	{
+		envs[i] = env->raw;
+		env = env->next;
+	}
+	envs[i] = NULL;
+	return (envs);
 }

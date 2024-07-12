@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:23:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 15:43:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,13 @@ void	*ms_free_double(char **value);
 
 t_env	*ms_getenv(char *path, t_env *envp);
 
+/* helper functions of t_env */
 t_env	*env_create(char *id, char *value, char *raw);
-
 void	env_free(t_env *env);
-
 int		env_add_back(t_env **head, t_env *new);
-
 t_env	*env_last(t_env *env);
-
 char	*env_get_id(char *raw);
-
 char	*env_get_value(char	*raw);
+int		env_lstsize(t_env *env);
 
 #endif
