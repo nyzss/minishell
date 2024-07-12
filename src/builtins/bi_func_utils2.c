@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 13:02:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 14:03:07 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,30 @@ int	bi_print_export(t_env *env)
 
 int	bi_add_var(t_args *args, t_env **env)
 {
-	char	*id;
-	char	*value;
-	int		i;
+	char	*arg_id;
+	char	*arg_value;
 	t_env	*tmp;
 
-	if (!*(args->value) || *(args->value) == '=')
+	arg_id = env_get_id(args->value);
+	if (!arg_id)
 		return (bi_err_export(args->value));
-	i = 0;
-	while (args->value)
+	arg_value = env_get_value(args->value);
 	tmp = bi_get_var_export(args->value, *env);
 	if (tmp)
 	{
 		if (tmp->value)
 			free(tmp->value);
-		tmp->value = new_var[1];
+		tmp->value = arg_value;
+		return (free(arg_id), 0);
 	}
-	new_env = (char **)malloc((ft_arr_size(*env) + 2) * sizeof(char *));
-	if (!new_env)
-		return (free(new_var), 1);
-	while ((*env)[++i])
-		new_env[i] = (*env)[i];
-	new_env[i++] = new_var;
-	new_env[i] = NULL;
-	free(*env);
-	*env = new_env;
+	tmp = env_create(arg_id, arg_value);
+	if (!tmp)
+	{
+		if (arg_value)
+			free(arg_value);
+		return (free(arg_id), 1);
+	}
+	env_add_back(env, tmp);
 	return (0);
 }
 
