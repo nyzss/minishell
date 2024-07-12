@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 21:08:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 22:31:57 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 * Check if the line is: `$ sdkjf`
 */
-char	*ps_convert_to_env(char *str, char *found, t_env *envp)
+char	*ps_convert_to_env(char *str, char *found, t_ctx *ctx)
 {
 	char	*tmp;
 	char	*path;
@@ -29,8 +29,10 @@ char	*ps_convert_to_env(char *str, char *found, t_env *envp)
 	if (!tmp)
 		return (NULL);
 	path = ps_getenv_name(found + 1);
-	if (ms_getenv(path, envp) != NULL)
-		found_env_str = ms_getenv(path, envp)->value;
+	if (path && path[0] == '?')
+		found_env_str = ft_itoa(ctx->exit_code);
+	else if (ms_getenv(path, ctx->envp) != NULL)
+		found_env_str = ms_getenv(path, ctx->envp)->value;
 	tmp = ps_strjoin(tmp, found_env_str);
 	if (!tmp)
 		return (free(path), NULL);
@@ -62,7 +64,7 @@ int	ps_handle_env(t_token *token)
 		if (ft_strlen(found) == 1)
 			break ;
 		tmp = token->value;
-		token->value = ps_convert_to_env(token->value, found, token->ctx->envp);
+		token->value = ps_convert_to_env(token->value, found, token->ctx);
 		free(tmp);
 	}
 	return (0);

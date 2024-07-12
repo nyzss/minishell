@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 19:50:45 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 22:28:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,13 @@ typedef struct s_ctx
 	t_env			*envp;
 }	t_ctx;
 
+/* main minishell functions */
 t_ctx	*ms_init_ctx(char **envp);
-
 void	ms_free_all(t_ctx *ctx);
-
 int		ms_check_line(char *line);
-
 void	ms_clear(t_ctx *ctx, t_token *token);
-
 t_env	*ms_env_dup(char **envp);
-
 void	*ms_free_double(char **value);
-
 t_env	*ms_getenv(char *path, t_env *envp);
 
 /* helper functions of t_env */
