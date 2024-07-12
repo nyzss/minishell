@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_func_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 19:55:13 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 22:41:32 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	bi_add_var(char *value, t_env **env)
 	t_env	*tmp;
 
 	arg_id = env_get_id(value);
-	if (!arg_id)
-		return (bi_err_export(value));
+	if (!arg_id || !bi_check_id(arg_id))
+		return (free(arg_id), bi_err_export(value));
 	arg_raw = ft_strdup(value);
 	if (!arg_raw)
 		return (free(arg_id), 1);

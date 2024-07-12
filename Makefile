@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/12 10:29:12 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/12 22:44:49 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 		= minishell
 
 SRCS_M		= main.c
 
-SRCS_BT		= bi_func.c bi_func_utils.c bi_func_utils2.c bi_err_utils.c
+SRCS_BT		= bi_func.c bi_func_utils.c bi_func_utils2.c bi_err_utils.c bi_check_utils.c
 
 SRCS_EX 	= exec.c exec_fdio_utils.c exec_pipe_utils.c exec_child_utils.c exec_err_utils.c
 
