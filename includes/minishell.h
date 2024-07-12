@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:06:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:23:19 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	*ms_free_double(char **value);
 
 t_env	*ms_getenv(char *path, t_env *envp);
 
-t_env	*env_create(char *id, char *value);
+t_env	*env_create(char *id, char *value, char *raw);
 
 void	env_free(t_env *env);
 

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:17:06 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:37:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	handle_pipeline(t_ctx *ctx, char *line)
 {
 	t_token	*token;
-	t_exec	*exec_var;
 
 	(void)ctx;
 	token = lexer(ctx, line);
@@ -27,11 +26,12 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 		return (1);
 	}
 	ctx->exec = builder(token);
-	ctx->exec_count = br_lstsize(exec);
-	exec(ctx);
+	ctx->exec_count = br_lstsize(ctx->exec);
+	// exec(ctx);
 	// br_debug(exec_var);
 	// tok_debug(token);
 	ms_clear(ctx, token);
+	ctx->exec_count = 0;
 	return (0);
 }
 
@@ -71,8 +71,10 @@ int	main(int ac, char **av, char **envp)
 	return (EXIT_SUCCESS);
 }
 
-// for (t_env *env = ctx->envp; env != NULL; env = env->next)
-// {
-// 	printf("ID:    %s\n", env->id);
-// 	printf("VALUE: %s\n", env->value);
-// }
+//	for (t_env *env = ctx->envp; env != NULL; env = env->next)
+//	{
+//		printf("--------------\n");
+//		printf("ID:    [%s]\n", env->id);
+//		printf("VALUE: [%s]\n", env->value);
+//		printf("RAW:   [%s]\n", env->raw);
+// 	}

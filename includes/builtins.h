@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:56:19 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 14:23:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+
+typedef struct s_env	t_env;
 
 /* Built-in handler */
 int		bi_do_builtin(char *cmd, t_args *args, t_env **env);
