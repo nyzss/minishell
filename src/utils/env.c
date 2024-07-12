@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 10:28:15 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:50:24 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ t_env	*env_last(t_env *env)
 
 int	env_add_back(t_env **head, t_env *new)
 {
-	if (new == NULL)
-		return (1);
 	if (*head == NULL)
 		*head = new;
 	else

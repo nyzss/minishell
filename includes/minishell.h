@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 10:28:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:42:27 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef struct s_ctx
 	int				def_in;
 	int				def_out;
 	unsigned int	exit_code;
+	char			**env;
 	t_exec			*exec;
-	t_env			*env;
+	t_env			*envp;
 }	t_ctx;
 
 t_ctx	*ms_init_ctx(char **envp);
@@ -73,7 +74,7 @@ int		ms_check_line(char *line);
 
 void	ms_clear(t_ctx *ctx, t_token *token);
 
-char	**ms_env_dup(char **envp);
+t_env	*ms_env_dup(char **envp);
 
 void	*ms_free_double(char **value);
 
