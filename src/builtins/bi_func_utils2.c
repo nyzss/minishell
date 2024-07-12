@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 17:29:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 17:30:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,6 @@ int	bi_print_export(t_env *env)
 		}
 	}
 	free(envs);
-	return (0);
-}
-
-int	bi_print_export(t_env *env)
-{
-	t_env	*env_sort;
-
-	env_sort = bi_dup_list(env); // create duplicate list function
-	ft_list_sort(&env_sort, &ft_strcmp); //added list sort function
-	while (env_sort)
-	{
-		printf("export %s", env_sort->id);
-		if (env_sort->value)
-			printf("=\"%s\"", env_sort->value);
-		printf("\n");
-		env_sort = env_sort->next;
-	}
-	ft_lstclear(env_sort, &free); // create lstclear and free function
 	return (0);
 }
 
