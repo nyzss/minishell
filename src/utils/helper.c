@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 10:23:09 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:05:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,30 @@ char	*ms_getenv(char *path, char **envp)
 t_env	*ms_env_dup(char **envp)
 {
 	int		i;
-	int		len;
+	int		j;
+	char	*id;
+	char	*value;
+	t_env	*new_env;
+	t_env	*tmp;
 
 	i = 0;
 	if (!envp)
 		return (NULL);
-	// while (envp[i])
-	// {
-	// 	new_env[i] = ft_strdup(envp[i]);
-	// 	if (!new_env[i])
-	// 		return (ms_free_double(new_env));
-	// 	i++;
-	// }
-	// new_env[i] = NULL;
-	return (NULL);
+	while (envp[i])
+	{
+		j = 0;
+		while (envp[i][j] && envp[i][j] != '=')
+			j++;
+		id = ft_strndup(envp[i], j);
+		if (j < ft_strlen(envp[i]))
+			value = ft_strdup(envp[i] + j);
+		else
+			value = NULL;
+		tmp = env_create(id, value);
+		if (!tmp)
+			retur (NULL);
+		env_add_back(&new_env, tmp);
+		i++;
+	}
+	return (new_env);
 }
