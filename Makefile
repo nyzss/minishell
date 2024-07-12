@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/12 09:52:19 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/12 10:29:12 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS_LEX 	= lexer.c tokens.c lex_helper.c
 
 SRCS_PAR 	= parser.c expansion.c quotes.c parser_helper.c
 
-SRCS_UTI 	= utils.c helper.c
+SRCS_UTI 	= utils.c helper.c env.c
 
 SRCS_BLD 	= builder.c builder_helper.c filenames.c args.c
 

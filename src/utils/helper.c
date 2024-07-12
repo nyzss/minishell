@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 09:13:22 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 10:23:09 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,21 @@ char	*ms_getenv(char *path, char **envp)
 	return (NULL);
 }
 
-char	**ms_env_dup(char **envp)
+t_env	*ms_env_dup(char **envp)
 {
 	int		i;
 	int		len;
-	char	**new_env;
 
 	i = 0;
-	len = 0;
-	while (envp[len] != NULL)
-		len++;
-	new_env = malloc(sizeof(char *) * (len + 1));
-	if (!new_env)
+	if (!envp)
 		return (NULL);
-	while (envp[i])
-	{
-		new_env[i] = ft_strdup(envp[i]);
-		if (!new_env[i])
-			return (ms_free_double(new_env));
-		i++;
-	}
-	new_env[i] = NULL;
-	return (new_env);
+	// while (envp[i])
+	// {
+	// 	new_env[i] = ft_strdup(envp[i]);
+	// 	if (!new_env[i])
+	// 		return (ms_free_double(new_env));
+	// 	i++;
+	// }
+	// new_env[i] = NULL;
+	return (NULL);
 }
