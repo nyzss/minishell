@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 17:51:16 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 17:55:40 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	handle_loop(t_ctx *ctx)
 	char	*line;
 
 	line = NULL;
-	signal(SIGINT, sig_main_sigint);
+	sig_init_signals();
 	while (1)
 	{
 		line = readline(PROMPT);
