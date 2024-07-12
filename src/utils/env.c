@@ -6,11 +6,36 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:50:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 13:58:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_env	*ms_env_dup(char **envp)
+{
+	int		i;
+	char	*id;
+	char	*value;
+	t_env	*new_env;
+	t_env	*tmp;
+
+	i = 0;
+	if (!envp)
+		return (NULL);
+	new_env = NULL;
+	while (envp[i])
+	{
+		id = env_get_id(envp[i]);
+		value = env_get_value(envp[i]);
+		tmp = env_create(id, value);
+		if (!tmp)
+			return (NULL);
+		env_add_back(&new_env, tmp);
+		i++;
+	}
+	return (new_env);
+}
 
 t_env	*env_create(char *id, char *value)
 {
