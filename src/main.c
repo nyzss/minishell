@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:57:12 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:17:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 		tok_free(token);
 		return (1);
 	}
-	exec_var = builder(token);
-	ctx->exec = exec_var;
+	ctx->exec = builder(token);
+	ctx->exec_count = br_lstsize(exec);
 	exec(ctx);
 	// br_debug(exec_var);
 	// tok_debug(token);
