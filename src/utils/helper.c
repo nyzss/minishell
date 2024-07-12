@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:52:31 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 13:53:43 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,53 +30,50 @@ void	*ms_free_double(char **value)
 * pass in a env name for ex: `PATH` to get the `$PATH` or `HOME` for `$HOME`...
 * returns a `char *` that doesn't need to be freed
 */
-char	*ms_getenv(char *path, char **envp)
+t_env	*ms_getenv(char *path, t_env *envp)
 {
 	int	i;
-	int	path_len;
 
 	i = 0;
 	if (envp == NULL || path == NULL)
 		return (NULL);
-	path_len = ft_strlen(path);
-	while (envp[i])
+	while (envp != NULL)
 	{
-		if (ft_strncmp(envp[i], path, path_len) == 0
-			&& envp[i][path_len] == '=')
-			return (&(envp[i][path_len + 1]));
-		i++;
+		if (ft_strcmp(path, envp->id) == 0)
+			return (envp);
+		envp = envp->next;
 	}
 	return (NULL);
 }
 
-t_env	*ms_env_dup(char **envp)
+char	*env_get_id(char *raw)
 {
-	int		i;
-	int		j;
-	char	*id;
-	char	*value;
-	t_env	*new_env;
-	t_env	*tmp;
+	char	*eq;
 
-	i = 0;
-	new_env = NULL;
-	if (!envp)
+	if (!raw)
 		return (NULL);
-	while (envp[i])
-	{
-		j = 0;
-		while (envp[i][j] && envp[i][j] != '=')
-			j++;
-		id = ft_strndup(envp[i], j);
-		if (j == (int)ft_strlen(envp[i]))
-			value = NULL;
-		else
-			value = ft_strdup(envp[i] + j + 1);
-		tmp = env_create(id, value);
-		if (!tmp)
-			return (NULL);
-		env_add_back(&new_env, tmp);
-		i++;
-	}
-	return (new_env);
+	eq = ft_strchr(raw, '=');
+	if (!eq)
+		return (ft_strdup(raw));
+	else if (eq - raw == 0)
+		return (NULL);
+	return (ft_strndup(raw, eq - raw));
 }
+
+char	*env_get_value(char	*raw)
+{
+	char	*eq;
+
+	if (!raw)
+		return (NULL);
+	eq = ft_strchr(raw, '=');
+	if (!eq)
+		return (NULL);
+	else if (eq - raw == 0)
+		return (NULL);
+	return (ft_strdup(raw + (eq - raw + 1)));
+}
+
+// ABC=hello_world
+// ABCD=
+// =abc

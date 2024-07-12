@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:42:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 13:56:11 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_env
 {
 	char			*id;
 	char			*value;
+	char			*raw;
 	struct s_env	*next;
 }	t_env;
 
@@ -78,7 +79,7 @@ t_env	*ms_env_dup(char **envp);
 
 void	*ms_free_double(char **value);
 
-char	*ms_getenv(char *path, char **envp);
+t_env	*ms_getenv(char *path, t_env *envp);
 
 t_env	*env_create(char *id, char *value);
 
@@ -87,5 +88,9 @@ void	env_free(t_env *env);
 int		env_add_back(t_env **head, t_env *new);
 
 t_env	*env_last(t_env *env);
+
+char	*env_get_id(char *raw);
+
+char	*env_get_value(char	*raw);
 
 #endif
