@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 16:58:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 09:13:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ms_env_dup(char **envp)
 	len = 0;
 	while (envp[len] != NULL)
 		len++;
-	new_env = malloc(sizeof(char *) * (len + 2));
+	new_env = malloc(sizeof(char *) * (len + 1));
 	if (!new_env)
 		return (NULL);
 	while (envp[i])
@@ -69,8 +69,6 @@ char	**ms_env_dup(char **envp)
 			return (ms_free_double(new_env));
 		i++;
 	}
-	new_env[i] = ft_strdup("HELLO=HELLOWORLDTEST123456789");
-	i++;
 	new_env[i] = NULL;
 	return (new_env);
 }

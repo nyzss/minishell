@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+         #
+#    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/11 18:36:23 by tsuchen          ###   ########.fr        #
+#    Updated: 2024/07/12 09:52:19 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRCS_UTI 	= utils.c helper.c
 
 SRCS_BLD 	= builder.c builder_helper.c filenames.c args.c
 
+SRCS_SIG 	= signal.c
+
 SRC 		= src/
 
 BUILTINS_PATH	= src/builtins/
@@ -34,6 +36,7 @@ LEXER_PATH	= src/lexer/
 PARSER_PATH	= src/parser/
 UTILS_PATH	= src/utils/
 BUILDER_PATH	= src/builder/
+SIGNAL_PATH	= src/signals/
 
 SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(BUILTINS_PATH), $(SRCS_BT)) \
@@ -42,6 +45,7 @@ SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(PARSER_PATH), $(SRCS_PAR)) \
 		  $(addprefix $(UTILS_PATH), $(SRCS_UTI)) \
 		  $(addprefix $(BUILDER_PATH), $(SRCS_BLD)) \
+		  $(addprefix $(SIGNAL_PATH), $(SRCS_SIG)) \
 
 # F_PATH		= src/
 

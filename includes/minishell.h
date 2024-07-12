@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 20:59:37 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 10:17:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # include "exec.h"
 # include "builtins.h"
 # include "builder.h"
+# include "signals.h"
 
 # define P_NAME "minishell"
 # define BLUE_A    "\033[1;34m"
@@ -48,13 +49,20 @@
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
 
+typedef struct s_env
+{
+	char			*id;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_ctx
 {
 	int				def_in;
 	int				def_out;
-	t_exec			*exec;
-	char			**env;
 	unsigned int	exit_code;
+	t_exec			*exec;
+	t_env			*env;
 }	t_ctx;
 
 t_ctx	*ms_init_ctx(char **envp);

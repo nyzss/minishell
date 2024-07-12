@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 21:02:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 09:59:10 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	handle_loop(t_ctx *ctx)
 	char	*line;
 
 	line = NULL;
+	signal(SIGINT, sig_main_sigint);
 	while (1)
 	{
 		line = readline(PROMPT);
