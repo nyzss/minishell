@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   bi_func_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 16:06:11 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:28:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	bi_print_export(t_env *env)
+{
+	char	**envs;
+	char	*tmp;
+	int		i;
+
+	envs = exe_get_envs(env);
+	if (!envs)
+		return (1);
+	ft_advanced_sort_string_tab(envs, &ft_strcmp);
+	i = -1;
+	while (envs[++i])
+	{
+		printf("export ");
+		tmp = ft_strchr(envs[i], '=');
+		if (!tmp)
+			printf("%s\n", env[i]);
+		else
+		{
+			write(STDOUT_FILENO, envs[i], (size_t)(tmp - envs[i] + 1));
+			printf("\"%s\"\n", tmp + 1);
+		}
+	}
+	free(envs);
+	return (0);
+}
 
 int	bi_print_export(t_env *env)
 {
