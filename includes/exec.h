@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 15:37:05 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 16:02:57 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 
 typedef struct s_ctx	t_ctx;
+typedef struct s_env	t_env;
 
 typedef struct s_args
 {

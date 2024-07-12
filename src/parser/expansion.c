@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 16:23:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:30:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 * Check if the line is: `$ sdkjf`
 */
-char	*ps_convert_to_env(char *str, char *found, char **envp)
+char	*ps_convert_to_env(char *str, char *found, t_env *envp)
 {
 	char	*tmp;
 	char	*path;
@@ -27,7 +27,7 @@ char	*ps_convert_to_env(char *str, char *found, char **envp)
 	if (!tmp)
 		return (NULL);
 	path = ps_getenv_name(found + 1);
-	tmp = ps_strjoin(tmp, ms_getenv(path, envp));
+	tmp = ps_strjoin(tmp, ms_getenv(path, envp)->value);
 	if (!tmp)
 	{
 		free(path);
@@ -64,7 +64,7 @@ int	ps_handle_env(t_token *token)
 		if (ft_strlen(found) == 1)
 			break ;
 		tmp = token->value;
-		token->value = ps_convert_to_env(token->value, found, token->ctx->env);
+		token->value = ps_convert_to_env(token->value, found, token->ctx->envp);
 		free(tmp);
 	}
 	return (0);
