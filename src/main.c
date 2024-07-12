@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 09:59:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:57:12 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,9 @@ int	main(int ac, char **av, char **envp)
 	ms_free_all(ctx);
 	return (EXIT_SUCCESS);
 }
+
+// for (t_env *env = ctx->envp; env != NULL; env = env->next)
+// {
+// 	printf("ID:    %s\n", env->id);
+// 	printf("VALUE: %s\n", env->value);
+// }

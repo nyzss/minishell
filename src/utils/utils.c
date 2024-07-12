@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 20:59:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:58:55 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_ctx	*ms_init_ctx(char **envp)
 	ctx = malloc(sizeof(t_ctx));
 	if (!ctx)
 		return (NULL);
-	ctx->env = ms_env_dup(envp);
+	ctx->envp = ms_env_dup(envp);
+	ctx->env = envp;
 	if (!ctx->env)
 	{
 		free(ctx);
@@ -49,8 +50,10 @@ void	ms_free_all(t_ctx *ctx)
 	{
 		if (ctx->exec)
 			br_free(ctx->exec);
-		if (ctx->env)
-			ms_free_double(ctx->env);
+		if (ctx->envp)
+			env_free(ctx->envp);
+		// if (ctx->env)
+		// 	ms_free_double(ctx->env);
 		free(ctx);
 	}
 	rl_clear_history();
