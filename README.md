@@ -6,4 +6,5 @@
 - signal handling (ctrl-\ | ctrl-c | ctrl-d)
 - check leaks for ctrl-c heredoc
 - change exec file opening in child process
-- fix export print
+- ~~fix export print~~
+- ~~solved unset segfault issue~~
