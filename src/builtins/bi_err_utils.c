@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 23:27:05 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 15:06:55 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,4 @@ void	bi_err_env(char *file)
 	dup2(STDERR_FILENO, STDOUT_FILENO);
 	ft_printf("env: %s: No such file or directory\n", file);
 	exe_dup2_close(fd_tmp, STDOUT_FILENO);
-}
-
-int	bi_is_equal(char *var)
-{
-	while (*var)
-	{
-		if (*var == '=')
-			return (1);
-		var++;
-	}
-	return (0);
 }
