@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_func_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 15:06:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 16:10:40 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	bi_cd(t_args *args, t_env *env)
 
 	size_args = arg_lstsize(args);
 	if (!size_args)
-		chdir(ms_getenv("HOME", env));
+		chdir(ms_getenv("HOME", env)->value);
 	else if (size_args > 1)
 	{
 		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 35);

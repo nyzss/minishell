@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:44:53 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 16:16:14 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ int	exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 			unlink("here_doc");
 		exec_no--;
 		ctx->exit_code = bi_do_builtin(ctx->exec->cmd,
-			ctx->exec->args, &ctx->env);
+			ctx->exec->args, &(ctx->envp));
 	}
 	else
 	{
-		exe_do_child(ctx->exec, ctx->env, *fd_in);
+		exe_do_child(ctx->exec, ctx->envp, *fd_in);
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 	}
-	exe_wait_all(exec_no, &ctx->exit_code);
+	exe_wait_all(exec_no, &(ctx->exit_code));
 	return (0);
 }
 
@@ -74,12 +74,12 @@ int	exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 			exec_no--;
 		// check fdio and redirect to STDIN & OUT; if all good then exec child
 		if (!exe_redir_fdio(fd_in, fd_out, fd_pipe, ctx->exec))
-			exe_do_child(ctx->exec, ctx->env, *fd_in);
+			exe_do_child(ctx->exec, ctx->envp, *fd_in);
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 		ctx->exec = ctx->exec->next;
 	}
-	exe_wait_all(exec_no, &ctx->exit_code);
+	exe_wait_all(exec_no, &(ctx->exit_code));
 	return (0);
 }
 
@@ -97,7 +97,7 @@ void	exe_reset_stdfds(t_ctx *ctx)
 	close(ctx->def_out);
 }
 
-void	exe_wait_all(int rep, unsigned int *exit_code)
+void	exe_wait_all(int rep, unsigned char *exit_code)
 {
 	int		status;
 

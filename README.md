@@ -1,26 +1,9 @@
-hello world
-Hi there
 
+## todo list
 
-// void	get_redir(t_filenames *filenames, int *in_fd, int *out_fd)
-// {
-// 	while (filenames)
-// 	{
-// 		if filename->type == OUTFILE
-// 		{
-// 			*in_fd = open(filenames->filename, ...);
-// 		}
-// 		else if filename->type == INFILE
-// 		{
-// 			*in_fd = open(filenames->filename, ...);
-// 		}
-// 		if filename->type == APPEND
-// 		{
-// 			*in_fd = open(filenames->filename, ...);
-// 		}
-// 		if filename->type == HEREDOC
-// 		{
-// 			*in_fd = open(filenames->filename, ...);
-// 		}
-// 	}
-// }
+- print error on command not found
+- echo $?
+- signal handling (ctrl-\ | ctrl-c | ctrl-d)
+- check leaks for ctrl-c heredoc
+- change exec file opening in child process
+- fix export print
