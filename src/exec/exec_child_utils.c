@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 16:00:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 20:50:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,16 @@ char	*exe_get_exec(char **paths, char *file)
 
 char	**exe_get_allpaths(t_env *env)
 {
-	int		i;
 	char	**paths;
+	t_env	*path_env;
 
-	i = 0;
-	while (env)
-	{
-		if (!ft_strcmp(env->id, "PATH"))
-		{
-			paths = ft_split(env->value, ':');
-			if (!paths)
-				return (NULL);
-			return (paths);
-		}
-		env = env->next;
-	}
-	return (NULL);
+	path_env = ms_getenv("PATH", env);
+	if (!path_env)
+		return (NULL);
+	paths = ft_split(path_env->value, ':');
+	if (!paths)
+		return (NULL);
+	return (paths);
 }
 
 char	**exe_get_cmds(char *cmd, t_args *args)

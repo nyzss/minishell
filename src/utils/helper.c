@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 15:42:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 20:48:11 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void	*ms_free_double(char **value)
 */
 t_env	*ms_getenv(char *path, t_env *envp)
 {
-	int	i;
-
-	i = 0;
 	if (envp == NULL || path == NULL)
 		return (NULL);
 	while (envp != NULL)
