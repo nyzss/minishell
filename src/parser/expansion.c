@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/13 00:05:46 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/13 00:22:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,15 @@ char	*ps_convert_to_env(char *str, char *found, t_ctx *ctx)
 	if (!before_env)
 		return (NULL);
 	env_var = ps_get_env_var(found + 1, ctx);
-	if (!env_var)
-		return (free(before_env), NULL);
 	after_env = ps_get_after_env(found + 1);
 	if (!after_env)
-		return (free(before_env), NULL);
+		return (free(before_env), free(env_var), NULL);
 	new = ps_strjoin(before_env, env_var);
 	if (!new)
-		return (free(before_env), free(after_env), NULL);
+		return (free(after_env), NULL);
 	new = ps_strjoin(new, after_env);
-	if (!new)
-		return (free(before_env), free(after_env), NULL);
+	if (env_var)
+		free(env_var);
 	return (free(after_env), new);
 }
 
