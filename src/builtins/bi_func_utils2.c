@@ -99,17 +99,12 @@ int	bi_add_var(char *value, t_env **env)
 
 int	bi_del_var(char *value, t_env **env)
 {
-	char	*arg_id;
 	t_env	*tmp;
 	t_env	*tmp2;
 
-	arg_id = env_get_id(value);
-	if (!arg_id)
-		return (0);
-	tmp = ms_getenv(arg_id, *env);
+	tmp = ms_getenv(value, *env);
 	if (!tmp)
-		return (free(arg_id), 0);
-	free(arg_id);
+		return (0);
 	if (*env == tmp)
 		*env = tmp->next;
 	else

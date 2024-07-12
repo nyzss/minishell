@@ -84,6 +84,7 @@ int	bi_exit(t_args *args)
 	char	*tmp;
 
 	exit_code = 0;
+	printf("exit\n");
 	if (args)
 	{
 		exit_code = ft_atoi(args->value);
