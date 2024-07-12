@@ -6,42 +6,40 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 22:31:57 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/13 00:05:46 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-* Check if the line is: `$ sdkjf`
+* echo "$12345" -> be careful of this
+* echo "$<abcdef" -> too
+* echo "$/?lol" -> too
 */
 char	*ps_convert_to_env(char *str, char *found, t_ctx *ctx)
 {
-	char	*tmp;
-	char	*path;
-	char	*found_env_str;
+	char	*before_env;
+	char	*env_var;
+	char	*after_env;
+	char	*new;
 
-	found_env_str = NULL;
-	if (found - str == 0)
-		tmp = ft_strdup("");
-	else
-		tmp = ft_strndup(str, found - str);
-	if (!tmp)
+	before_env = ps_get_before_env(str, found);
+	if (!before_env)
 		return (NULL);
-	path = ps_getenv_name(found + 1);
-	if (path && path[0] == '?')
-		found_env_str = ft_itoa(ctx->exit_code);
-	else if (ms_getenv(path, ctx->envp) != NULL)
-		found_env_str = ms_getenv(path, ctx->envp)->value;
-	tmp = ps_strjoin(tmp, found_env_str);
-	if (!tmp)
-		return (free(path), NULL);
-	tmp = ps_strjoin(tmp, found + (ft_strlen(path) + 1));
-	if (path != NULL)
-		free(path);
-	if (ft_strlen(tmp) == 0)
-		return (free(tmp), NULL);
-	return (tmp);
+	env_var = ps_get_env_var(found + 1, ctx);
+	if (!env_var)
+		return (free(before_env), NULL);
+	after_env = ps_get_after_env(found + 1);
+	if (!after_env)
+		return (free(before_env), NULL);
+	new = ps_strjoin(before_env, env_var);
+	if (!new)
+		return (free(before_env), free(after_env), NULL);
+	new = ps_strjoin(new, after_env);
+	if (!new)
+		return (free(before_env), free(after_env), NULL);
+	return (free(after_env), new);
 }
 
 /*

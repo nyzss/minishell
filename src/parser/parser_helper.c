@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 22:09:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 22:32:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 23:15:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,4 @@ char	*ps_strjoin(char *s1, char *s2)
 	new = ft_strjoin(s1, s2);
 	free(s1);
 	return (new);
-}
-
-char	*ps_getenv_name(char *str)
-{
-	int		i;
-	char	*name;
-
-	i = 0;
-	if (str[i] == '?')
-		return (ft_strdup("?"));
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-		i++;
-	name = ft_strndup(str, i);
-	return (name);
 }

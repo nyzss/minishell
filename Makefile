@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/12 22:44:49 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/12 23:58:37 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS_EX 	= exec.c exec_fdio_utils.c exec_pipe_utils.c exec_child_utils.c exec_er
 
 SRCS_LEX 	= lexer.c tokens.c lex_helper.c
 
-SRCS_PAR 	= parser.c expansion.c quotes.c parser_helper.c
+SRCS_PAR 	= parser.c expansion.c quotes.c parser_helper.c expand_helper.c
 
 SRCS_UTI 	= utils.c helper.c env.c
 

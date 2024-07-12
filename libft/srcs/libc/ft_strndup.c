@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:33:59 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/08 17:01:17 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 23:51:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strndup(const char *str, int nb)
 	int		len;
 
 	i = 0;
-	if (!str || nb <= 0)
+	if (!str || nb < 0)
 		return (NULL);
 	if ((int)ft_strlen(str) <= nb)
 		len = ft_strlen(str);
