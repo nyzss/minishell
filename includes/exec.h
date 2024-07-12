@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 16:02:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 16:16:24 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out);
 int		exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out);
 void	exe_get_stdfds(t_ctx *ctx);
 void	exe_reset_stdfds(t_ctx *ctx);
-void	exe_wait_all(int rep, unsigned int *exit_code);
+void	exe_wait_all(int rep, unsigned char *exit_code);
 
 /* fdio utils*/
 int		exe_init_fdio(int *fd_in, int *fd_out, t_exec *exec, int fd_stdin);
