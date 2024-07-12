@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 13:56:11 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:06:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ typedef struct s_ctx
 {
 	int				def_in;
 	int				def_out;
-	unsigned int	exit_code;
+	unsigned char	exit_code;
+	int				exec_count;
 	char			**env;
 	t_exec			*exec;
 	t_env			*envp;
