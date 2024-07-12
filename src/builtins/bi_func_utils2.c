@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_func_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 17:33:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 17:46:50 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	bi_print_export(t_env *env)
 			printf("%s\n", envs[i]);
 		else
 		{
-			write(STDOUT_FILENO, envs[i], (size_t)(tmp - envs[i] + 1));
+			printf("%s=", ms_getenv(env_get_id(envs[i]), env)->value);
+			// write(STDOUT_FILENO, envs[i], (size_t)(tmp - envs[i] + 1));
 			printf("\"%s\"\n", tmp + 1);
 		}
 	}
