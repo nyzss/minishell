@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 14:22:42 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 15:02:05 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,16 @@ int	bi_del_var(t_args *args, t_env **env)
 	tmp = bi_get_var(arg_id, *env);
 	if (!tmp)
 		return (free(arg_id), 0);
+	free(arg_id);
+	if (*env == tmp)
+		*env = tmp->next;
 	tmp2 = *env;
-	while (tmp2)
+	while (tmp2->next)
 	{
-		
-	}	
+		if (tmp2->next == tmp)
+			tmp2->next = tmp->next;
+		tmp2 = tmp2->next;
+	}
+	env_free(tmp);
 	return (0);
 }

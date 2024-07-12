@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:08:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 15:07:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ void	bi_err_pwd(char *option);
 int		bi_err_export(char *var);
 void	bi_err_exit(char *val);
 void	bi_err_env(char *file);
-int		bi_is_equal(char *var);
 
 #endif
