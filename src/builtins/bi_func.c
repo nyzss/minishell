@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:58:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 18:57:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	bi_export(t_args *args, t_env **env)
 	{
 		while (args)
 		{
-			if (bi_add_var(args, env))
+			if (bi_add_var(args->value, env))
 				exit_code = 1;
 			args = args->next;
 		}
@@ -84,7 +84,7 @@ int	bi_unset(t_args *args, t_env **env)
 	{
 		while (args)
 		{
-			if (bi_del_var(args, env))
+			if (bi_del_var(args->value, env))
 				return (1);
 			args = args->next;
 		}

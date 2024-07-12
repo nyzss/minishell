@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 16:11:47 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 18:59:27 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		bi_unset(t_args *args, t_env **env);
 
 /* helper functions for export and unset */
 int		bi_print_export(t_env *env);
-int		bi_add_var(t_args *args, t_env **env);
-int		bi_del_var(t_args *args, t_env **env);
+int		bi_add_var(char *value, t_env **env);
+int		bi_del_var(char *value, t_env **env);
 
 /* error utils */
 void	bi_err_cd(int err_no, char *file);

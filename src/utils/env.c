@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 15:45:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 19:53:20 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,25 @@ int	env_add_back(t_env **head, t_env *new)
 	return (0);
 }
 
+void	env_del_one(t_env *env)
+{
+	if (env->id)
+		free(env->id);
+	if (env->value)
+		free(env->value);
+	if (env->raw)
+		free(env->raw);
+	free(env);
+}
+
 void	env_free(t_env *env)
 {
 	t_env	*tmp;
 
-	while (env != NULL)
+	while (env)
 	{
 		tmp = env;
-		if (env->id)
-			free(env->id);
-		if (env->value)
-			free(env->value);
-		if (env->raw)
-			free(env->raw);
 		env = env->next;
-		free(tmp);
+		env_del_one(tmp);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 16:04:44 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 19:50:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_env	*ms_getenv(char *path, t_env *envp);
 
 /* helper functions of t_env */
 t_env	*env_create(char *id, char *value, char *raw);
+void	env_del_one(t_env *env);
 void	env_free(t_env *env);
 int		env_add_back(t_env **head, t_env *new);
 t_env	*env_last(t_env *env);
