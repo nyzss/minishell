@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 17:30:38 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 17:33:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	bi_print_export(t_env *env)
 		printf("export ");
 		tmp = ft_strchr(envs[i], '=');
 		if (!tmp)
-			printf("%s\n", env[i]);
+			printf("%s\n", envs[i]);
 		else
 		{
 			write(STDOUT_FILENO, envs[i], (size_t)(tmp - envs[i] + 1));
