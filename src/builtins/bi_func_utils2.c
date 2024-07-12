@@ -6,39 +6,58 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 23:26:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:02:50 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	bi_print_export(char **env)
+int	bi_print_export(t_env *env)
 {
-	int		size;
-	int		i;
-	char	**env_sort;
+	t_env	*env_sort;
 
-	size = ft_arr_size(env);
-	i = -1;
-	env_sort = (char **)malloc((size + 1) * sizeof(char *));
-	if (!env_sort)
-		return (1);
-	while (++i < size + 1)
-		env_sort[i] = env[i];
-	ft_advanced_sort_string_tab(env_sort, &ft_strcmp);
-	while (*env_sort)
+	env_sort = bi_dup_list(env); // create duplicate list function
+	ft_list_sort(&env_sort, &ft_strcmp); //added list sort function
+	while (env_sort)
 	{
-		printf("export ");
-		if (!ft_strchr(*env_sort, '='))
-			printf("%s\n", *env_sort++);
-		else
-		{
-			write(STDOUT_FILENO, *env_sort,
-				ft_strchr(*env_sort, '=') - *env_sort + 1);
-			printf("\"%s\"\n", ft_strchr(*env_sort, '=') + 1);
-		}
+		printf("export %s", env_sort->id);
+		if (env_sort->value)
+			printf("=\"%s\"", env_sort->value);
+		printf("\n");
+		env_sort = env_sort->next;
 	}
-	return (free(env_sort), 0);
+	ft_lstclear(env_sort, &free); // create lstclear and free function
+	return (0);
+}
+
+int	bi_add_var(t_args *args, t_env **env)
+{
+	char	*id;
+	char	*value;
+	int		i;
+	t_env	*tmp;
+
+	if (!*(args->value) || *(args->value) == '=')
+		return (bi_err_export(args->value));
+	i = 0;
+	while (args->value)
+	tmp = bi_get_var_export(args->value, *env);
+	if (tmp)
+	{
+		if (tmp->value)
+			free(tmp->value);
+		tmp->value = new_var[1];
+	}
+	new_env = (char **)malloc((ft_arr_size(*env) + 2) * sizeof(char *));
+	if (!new_env)
+		return (free(new_var), 1);
+	while ((*env)[++i])
+		new_env[i] = (*env)[i];
+	new_env[i++] = new_var;
+	new_env[i] = NULL;
+	free(*env);
+	*env = new_env;
+	return (0);
 }
 
 int	bi_add_var(t_args *args, char ***env)
@@ -71,27 +90,15 @@ int	bi_add_var(t_args *args, char ***env)
 	return (0);
 }
 
-int	bi_get_var_export(char *var, char **env)
+t_env	*bi_get_var_export(char *var, t_env *env)
 {
-	int		i;
-
-	i = 0;
-	while (env[i])
+	while (env)
 	{
-		if (bi_is_equal(var))
-		{
-			if (!ft_strncmp(var, env[i], ft_strchr(var, '=') - var)
-				&& ft_strchr(env[i], '=') - env[i] == ft_strchr(var, '=') - var)
-				return (i);
-		}
-		else
-		{
-			if (!ft_strcmp(var, env[i]))
-				return (i);
-		}
-		i++;
+		if (!ft_strcmp(var, env->id))
+			return (env);
+		env = env->next;
 	}
-	return (-1);
+	return (NULL);
 }
 
 int	bi_get_var_unset(char *var, char **env)

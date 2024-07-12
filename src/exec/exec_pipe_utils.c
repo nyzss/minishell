@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 19:31:54 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 11:54:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	exe_redir_fdio(int *fd_in, int *fd_out, int pipe[2], t_exec *exec)
 	return (0);
 }
 
-void	exe_do_child(t_exec *exec, char **env, int fd_in)
+void	exe_do_child(t_exec *exec, t_env *env, int fd_in)
 {
 	pid_t	pid;
 

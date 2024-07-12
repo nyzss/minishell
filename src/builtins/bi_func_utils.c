@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 11:28:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 12:07:44 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	bi_echo(t_args *args)
 	return (0);
 }
 
-int	bi_cd(t_args *args, char **env)
+int	bi_cd(t_args *args, t_env *env)
 {
 	int	size_args;
 
@@ -101,18 +101,18 @@ int	bi_exit(t_args *args)
 	exit(exit_code);
 }
 
-int	bi_env(t_args *args, char **env)
+int	bi_env(t_args *args, t_env *env)
 {
 	if (args)
 	{
 		bi_err_env(args->value);
 		return (127);
 	}
-	while (*env)
+	while (env)
 	{
-		if (bi_is_equal(*env))
-			printf("%s\n", *env);
-		(*env)++;
+		if (bi_is_equal(env))
+			printf("%s=%s\n", env->id, env->value);
+		env = env->next;
 	}
 	return (0);
 }
