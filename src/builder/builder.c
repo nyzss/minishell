@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:37:42 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 10:27:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:25:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	br_handle_redirs(t_exec *exec, t_token *token)
+static int	br_handle_redirs(t_exec *exec, t_token *token)
 {
 	t_filenames	*tmp;
 
@@ -31,7 +31,7 @@ int	br_handle_redirs(t_exec *exec, t_token *token)
 	return (0);
 }
 
-int	br_handle_args(t_exec *exec, t_token *token)
+static int	br_handle_args(t_exec *exec, t_token *token)
 {
 	t_args	*new;
 

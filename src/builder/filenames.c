@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filenames.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:00:13 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 10:40:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:02:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,17 @@ int	fn_add_back(t_filenames **head, t_filenames *new)
 	else
 		fn_last(*head)->next = new;
 	return (0);
+}
+
+int	fn_lstsize(t_filenames *filename)
+{
+	int	i;
+
+	i = 0;
+	while (filename)
+	{
+		i++;
+		filename = filename->next;
+	}
+	return (i);
 }

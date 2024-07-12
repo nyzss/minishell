@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 19:19:50 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 11:29:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	**exe_get_cmd(char *cmd, t_args *args)
 	int		i;
 
 	i = -1;
-	arg_size = ft_lstsize((void *)args);
+	arg_size = arg_lstsize(args);
 	cmds = (char **)malloc((arg_size + 2) * sizeof(char *));
 	if (!cmds)
 		return (NULL);
