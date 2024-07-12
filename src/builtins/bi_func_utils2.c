@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 14:18:43 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 14:22:42 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	bi_add_var(t_args *args, t_env **env)
 		tmp->value = arg_value;
 		return (free(arg_id), 0);
 	}
-	tmp = env_create(arg_id, arg_value);
+	tmp = env_create(arg_id, arg_value, args->value);
 	if (!tmp)
 	{
 		if (arg_value)

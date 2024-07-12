@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:07:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 14:25:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	env_free(t_env *env)
 			free(env->id);
 		if (env->value)
 			free(env->value);
+		if (env->raw)
+			free(env->raw);
 		env = env->next;
 		free(tmp);
 	}
