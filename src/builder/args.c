@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:44:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 10:08:43 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 10:59:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,15 @@ int	arg_add_back(t_args **head, t_args *new)
 	return (0);
 }
 
+int	arg_lstsize(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (args)
+	{
+		i++;
+		args = args->next;
+	}
+	return (i);
+}

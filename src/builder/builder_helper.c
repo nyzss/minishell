@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builder_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:41:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 10:27:06 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/12 11:26:32 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,19 @@ void	br_free(t_exec *exec)
 		exec = exec->next;
 		free(tmp);
 	}
+}
+
+int	br_lstsize(t_exec *exec)
+{
+	int	i;
+
+	i = 0;
+	while (exec)
+	{
+		i++;
+		exec = exec->next;
+	}
+	return (i);
 }
 
 void	br_debug(t_exec *exec)

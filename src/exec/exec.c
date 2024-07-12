@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 18:50:22 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/12 11:29:49 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	exec(t_ctx *ctx)
 	int		exec_no;
 
 	exe_get_stdfds(ctx);
-	exec_no = ft_lstsize((void *)ctx->exec);
+	exec_no = br_lstsize(ctx->exec);
 	if (exec_no == 1)
 		exec_1(ctx, exec_no, &fd_in, &fd_out);
 	else
@@ -124,7 +124,7 @@ void	exe_wait_all(int rep, unsigned int *exit_code)
 // 	fd_in = dup(ctx->def_in); // initiate infile
 // 	fd_out = dup(ctx->def_out); // initiate outfile
 // 	// cast to void pointer just for compilation
-// 	exec_no = ft_lstsize((void *)ctx->exec);
+// 	exec_no = br_lstsize(ctx->exec);
 // 	// iterate through executables
 // 	while (ctx->exec)
 // 	{
