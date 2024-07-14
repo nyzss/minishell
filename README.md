@@ -7,8 +7,8 @@
 - [exec] check leaks for ctrl-c heredoc
 - [exec] change exec file opening in child process
 - [exec] the exit code of ls | exit "asdf" is 0, but should be 2.
-- [builtin] unset $HOME and do 'cd', also if '$HOME' is NULL should error too.
 
+- ~~[builtin] unset $HOME and do 'cd', also if '$HOME' is NULL should error too.~~
 - ~~echo $? -> done~~
 - ~~export ?=hello_world or 123=wow -> should error. first char should be only alphabetical or '\_', and anything that follows should be alphanumerical with '\_' as an exception.~~
 - ~~fix export print~~
