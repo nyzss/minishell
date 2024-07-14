@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filenames.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:00:13 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:02:47 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/14 10:11:30 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	fn_free(t_filenames *filenames)
 t_filenames	*fn_create(char *path, t_token_type type)
 {
 	t_filenames	*filename;
-	char	*new;
+	char		*new;
 
 	filename = malloc(sizeof(t_filenames));
 	if (filename == NULL)

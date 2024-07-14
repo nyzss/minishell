@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 09:35:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 10:09:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 {
 	t_token	*token;
 
-	(void)ctx;
 	token = lexer(ctx, line);
+	free(line);
 	if (token == NULL)
 		return (1);
 	if (parser(&token) != 0)
@@ -30,12 +30,12 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 	tok_free(token);
 	token = NULL;
 	exec(ctx);
-	// br_debug(ctx->exec);
-	// tok_debug(token);
 	ms_clear(ctx, token);
 	ctx->exec_count = 0;
 	return (0);
 }
+// br_debug(ctx->exec);
+// tok_debug(token);
 
 int	handle_loop(t_ctx *ctx)
 {
@@ -53,8 +53,10 @@ int	handle_loop(t_ctx *ctx)
 			add_history(line);
 			if (handle_pipeline(ctx, line) != 0)
 				fprintf(stderr, "Parsing error!\n");
+			line = NULL;
 		}
-		free(line);
+		if (line)
+			free(line);
 	}
 	return (0);
 }
@@ -72,13 +74,3 @@ int	main(int ac, char **av, char **envp)
 	ms_free_all(ctx);
 	return (EXIT_SUCCESS);
 }
-
-// char *e = "ABCD";
-// env_add_back(&(ctx->envp), env_create(env_get_id(e), env_get_value(e), e));
-//	for (t_env *env = ctx->envp; env != NULL; env = env->next)
-//	{
-//		printf("--------------\n");
-//		printf("ID:    [%s]\n", env->id);
-//		printf("VALUE: [%s]\n", env->value);
-//		printf("RAW:   [%s]\n", env->raw);
-// 	}
