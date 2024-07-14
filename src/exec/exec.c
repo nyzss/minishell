@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 16:16:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 08:55:34 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 		exec_no--;
-		ctx->exit_code = bi_do_builtin(ctx->exec->cmd,
-			ctx->exec->args, &(ctx->envp));
+		ctx->exit_code = bi_do_builtin(ctx, ctx->exec->cmd,
+			ctx->exec->args);
 	}
 	else
 	{
-		exe_do_child(ctx->exec, ctx->envp, *fd_in);
+		exe_do_child(ctx, ctx->exec, *fd_in);
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 	}
@@ -74,7 +74,7 @@ int	exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 			exec_no--;
 		// check fdio and redirect to STDIN & OUT; if all good then exec child
 		if (!exe_redir_fdio(fd_in, fd_out, fd_pipe, ctx->exec))
-			exe_do_child(ctx->exec, ctx->envp, *fd_in);
+			exe_do_child(ctx, ctx->exec, *fd_in);
 		if (ctx->exec->here_doc == 1)
 			unlink("here_doc");
 		ctx->exec = ctx->exec->next;

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 22:44:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 08:56:24 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 typedef struct s_env	t_env;
 
 /* Built-in handler */
-int		bi_do_builtin(char *cmd, t_args *args, t_env **env);
+int		bi_do_builtin(t_ctx *ctx, char *cmd, t_args *args);
 int		bi_is_builtin(char *cmd);
 
 /* Built-in Functions */
 int		bi_echo(t_args *args);
-int		bi_cd(t_args *args, t_env *env);
+int		bi_cd(t_ctx *ctx, t_args *args);
 int		bi_pwd(t_args *args);
 int		bi_exit(t_args *args);
-int		bi_env(t_args *args, t_env *env);
-int		bi_export(t_args *args, t_env **env);
-int		bi_unset(t_args *args, t_env **env);
+int		bi_env(t_ctx *ctx, t_args *args);
+int		bi_export(t_ctx *ctx, t_args *args);
+int		bi_unset(t_ctx *ctx, t_args *args);
 
 /* helper functions for export and unset */
 int		bi_print_export(t_env *env);

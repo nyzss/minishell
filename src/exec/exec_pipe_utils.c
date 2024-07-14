@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 11:54:32 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/14 08:54:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	exe_redir_fdio(int *fd_in, int *fd_out, int pipe[2], t_exec *exec)
 	return (0);
 }
 
-void	exe_do_child(t_exec *exec, t_env *env, int fd_in)
+void	exe_do_child(t_ctx *ctx, t_exec *exec, int fd_in)
 {
 	pid_t	pid;
 
@@ -57,9 +57,9 @@ void	exe_do_child(t_exec *exec, t_env *env, int fd_in)
 		{
 			if (exec->here_doc == 1)
 				unlink("here_doc");
-			exit(bi_do_builtin(exec->cmd, exec->args, &env));
+			exit(bi_do_builtin(ctx, exec->cmd, exec->args));
 		}
-		else if (exe_do_exec(exec->cmd, exec->args, env) < 0)
+		else if (exe_do_exec(ctx, exec->cmd, exec->args) < 0)
 			exit(1);
 		exit(0);
 	}

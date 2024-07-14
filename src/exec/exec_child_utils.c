@@ -6,13 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 20:50:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 08:54:07 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exe_do_exec(char *cmd, t_args *args, t_env *env)
+int	exe_do_exec(t_ctx *ctx, char *cmd, t_args *args)
 {
 	char	*path;
 	char	**cmds;
@@ -20,10 +20,10 @@ int	exe_do_exec(char *cmd, t_args *args, t_env *env)
 
 	if (!cmd)
 		return (0);
-	path = exe_get_path(cmd, env);
+	path = exe_get_path(cmd, ctx->envp);
 	if (!path)
 		return (-1);
-	envs = exe_get_envs(env);
+	envs = exe_get_envs(ctx->envp);
 	if (!envs)
 		return (free(path), -1);
 	cmds = exe_get_cmds(cmd, args);

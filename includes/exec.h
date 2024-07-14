@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 16:16:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 08:54:27 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int		exe_check_fdio(int *fd_in, int *fd_out, char *file);
 /* pipe utils */
 void	exe_create_pipe(int *fd_out, int fd_pipe[2]);
 int		exe_redir_fdio(int *fd_in, int *fd_out, int pipe[2], t_exec *exec);
-void	exe_do_child(t_exec *exec, t_env *env, int fd_in);
+void	exe_do_child(t_ctx *ctx, t_exec *exec, int fd_in);
 void	exe_dup2_close(int fd1, int fd2);
 int		exe_is_abs_path(char *file);
 
 /* child_utils */
-int		exe_do_exec(char *cmd, t_args *args, t_env *env);
+int		exe_do_exec(t_ctx *ctx, char *cmd, t_args *args);
 char	*exe_get_path(char *file, t_env *env);
 char	*exe_get_exec(char **paths, char *file);
 char	**exe_get_allpaths(t_env *env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_err_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 15:06:55 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/14 09:25:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	bi_err_cd(int err_no, char *file)
 
 	fd_tmp = dup(STDOUT_FILENO);
 	dup2(STDERR_FILENO, STDOUT_FILENO);
-	ft_printf("%s: cd: %s: %s\n", P_NAME, file, strerror(err_no));
+	if (file && ft_strcmp(file, "HOME"))
+		ft_printf("%s: cd: %s not set\n", P_NAME, file);
+	else
+		ft_printf("%s: cd: %s: %s\n", P_NAME, file, strerror(err_no));
 	exe_dup2_close(fd_tmp, STDOUT_FILENO);
 }
 

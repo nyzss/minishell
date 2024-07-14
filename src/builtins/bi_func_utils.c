@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/14 09:18:58 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:22:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ int	bi_echo(t_args *args)
 	return (0);
 }
 
-int	bi_cd(t_args *args, t_env *env)
+int	bi_cd(t_ctx *ctx, t_args *args)
 {
 	int		size_args;
 	t_env	*home;
 
 	size_args = arg_lstsize(args);
-	home = ms_getenv("HOME", env);
+	home = ms_getenv("HOME", ctx->envp);
 	if (!size_args && home != NULL && home->value != NULL)
-		chdir(ms_getenv("HOME", env)->value);
+		chdir(home->value);
 	else if ((!size_args && home && !home->value) || (!size_args && !home))
 		return (bi_err_cd(errno, "HOME"), 1);
 	else if (size_args > 1)
@@ -106,18 +106,21 @@ int	bi_exit(t_args *args)
 	exit(exit_code);
 }
 
-int	bi_env(t_args *args, t_env *env)
+int	bi_env(t_ctx *ctx, t_args *args)
 {
+	t_env	*tmp;
+
+	tmp = ctx->envp;
 	if (args)
 	{
 		bi_err_env(args->value);
 		return (127);
 	}
-	while (env)
+	while (tmp)
 	{
-		if (env->value)
-			printf("%s=%s\n", env->id, env->value);
-		env = env->next;
+		if (tmp->value)
+			printf("%s=%s\n", tmp->id, tmp->value);
+		tmp = tmp->next;
 	}
 	return (0);
 }
