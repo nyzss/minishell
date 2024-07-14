@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 19:53:20 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/14 10:15:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,19 @@ t_env	*env_create(char *id, char *value, char *raw)
 	return (new);
 }
 
-t_env	*env_last(t_env *env)
-{
-	while (env->next != NULL)
-		env = env->next;
-	return (env);
-}
-
 int	env_add_back(t_env **head, t_env *new)
 {
+	t_env	*tmp;
+
 	if (*head == NULL)
 		*head = new;
 	else
-		env_last(*head)->next = new;
+	{
+		tmp = (*head);
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
 	return (0);
 }
 

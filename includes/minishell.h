@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 22:28:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 10:14:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_env	*env_create(char *id, char *value, char *raw);
 void	env_del_one(t_env *env);
 void	env_free(t_env *env);
 int		env_add_back(t_env **head, t_env *new);
-t_env	*env_last(t_env *env);
 char	*env_get_id(char *raw);
 char	*env_get_value(char	*raw);
 int		env_lstsize(t_env *env);

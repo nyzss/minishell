@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:46:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 18:04:00 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 10:12:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	sig_quit_handler(int status)
 void	sig_handle_heredoc(int status)
 {
 	(void)status;
-	// read(STDIN_FILENO, "\0", 1);
 }
+// read(STDIN_FILENO, "\0", 1);

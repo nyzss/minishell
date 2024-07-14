@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 14:09:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 10:12:49 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	ms_free_all(t_ctx *ctx)
 			br_free(ctx->exec);
 		if (ctx->envp)
 			env_free(ctx->envp);
-		// if (ctx->env)
-		// 	ms_free_double(ctx->env);
 		free(ctx);
 	}
 	rl_clear_history();
