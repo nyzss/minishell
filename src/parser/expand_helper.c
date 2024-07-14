@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:12:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/13 00:15:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 11:48:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,15 @@ char	*ps_get_env_var(char *found, t_ctx *ctx)
 
 	path = ps_getenv_name(found);
 	if (path && ft_strcmp(path, "?") == 0)
-		return (free(path), ft_itoa(ctx->exit_code));
+	{
+		free(path);
+		if (g_signal == 130)
+		{
+			g_signal = 0;
+			return (ft_itoa(130));
+		}
+		return (ft_itoa(ctx->exit_code));
+	}
 	env_var = ms_getenv(path, ctx->envp);
 	if (path)
 		free(path);

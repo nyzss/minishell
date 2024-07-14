@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:46:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:12:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 11:48:02 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ void	sig_init_signals(void)
 void	sig_int_handler(int status)
 {
 	(void)status;
-	write(STDIN_FILENO, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	if (g_signal != 1)
+	{
+		g_signal = 130;
+		write(STDIN_FILENO, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	// printf("g_signal: %d\n", g_signal);
 }
 
 void	sig_quit_handler(int status)
@@ -37,3 +42,5 @@ void	sig_handle_heredoc(int status)
 	(void)status;
 }
 // read(STDIN_FILENO, "\0", 1);
+// write(2, "\n", 1);
+// printf("CALLED HEREDOC: %d\n", status);

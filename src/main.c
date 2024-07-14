@@ -6,11 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:09:36 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 11:12:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_signal = 0;
 
 int	handle_pipeline(t_ctx *ctx, char *line)
 {

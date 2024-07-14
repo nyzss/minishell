@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:14:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 11:11:57 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define C_RESET "\033[0m"
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
+
+extern int	g_signal;
 
 typedef struct s_env
 {
