@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/12 16:10:40 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:18:58 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ int	bi_echo(t_args *args)
 
 int	bi_cd(t_args *args, t_env *env)
 {
-	int	size_args;
+	int		size_args;
+	t_env	*home;
 
 	size_args = arg_lstsize(args);
-	if (!size_args)
+	home = ms_getenv("HOME", env);
+	if (!size_args && home != NULL && home->value != NULL)
 		chdir(ms_getenv("HOME", env)->value);
+	else if ((!size_args && home && !home->value) || (!size_args && !home))
+		return (bi_err_cd(errno, "HOME"), 1);
 	else if (size_args > 1)
 	{
 		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 35);
