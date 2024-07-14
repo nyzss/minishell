@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 08:55:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 10:21:00 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,25 @@ int	exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 int	exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
 {
 	int		fd_pipe[2];
+	t_exec	*tmp;
 
 	*fd_in = dup(ctx->def_in);// initiate infile
-	while (ctx->exec)
+	tmp = ctx->exec;
+	while (tmp)
 	{
 		*fd_out = dup(ctx->def_out);// initiate outfile
 		// create pipe first if needed
-		if (ctx->exec->next)
+		if (tmp->next)
 			exe_create_pipe(fd_out, fd_pipe);
 		// go through files and set input and output, stop whenever fd == -1
-		if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
+		if (exe_init_fdio(fd_in, fd_out, tmp, ctx->def_in))
 			exec_no--;
 		// check fdio and redirect to STDIN & OUT; if all good then exec child
-		if (!exe_redir_fdio(fd_in, fd_out, fd_pipe, ctx->exec))
-			exe_do_child(ctx, ctx->exec, *fd_in);
-		if (ctx->exec->here_doc == 1)
+		if (!exe_redir_fdio(fd_in, fd_out, fd_pipe, tmp))
+			exe_do_child(ctx, tmp, *fd_in);
+		if (tmp->here_doc == 1)
 			unlink("here_doc");
-		ctx->exec = ctx->exec->next;
+		tmp = tmp->next;
 	}
 	exe_wait_all(exec_no, &(ctx->exit_code));
 	return (0);
