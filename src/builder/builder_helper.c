@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:41:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:11:17 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 17:16:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_exec	*br_init(void)
 	new->args = NULL;
 	new->cmd = NULL;
 	new->here_doc = 0;
+	new->fd_in = STDIN_FILENO;
+	new->fd_out = STDOUT_FILENO;
 	new->redirs = NULL;
 	new->next = NULL;
 	return (new);
@@ -58,43 +60,43 @@ int	br_lstsize(t_exec *exec)
 	return (i);
 }
 
-// void	br_debug(t_exec *exec)
-// {
-// 	t_args		*args;
-// 	t_filenames	*filenames;
+void	br_debug(t_exec *exec)
+{
+	t_args		*args;
+	t_filenames	*filenames;
 
-// 	while (exec != NULL)
-// 	{
-// 		printf(MAGENTA_A "----------- EXEC ----------\n");
-// 		printf(BLUE_A);
-// 		args = exec->args;
-// 		filenames = exec->redirs;
-// 		printf("CMD: [%s]\n", exec->cmd);
-// 		printf("HEREDOC: [%d]\n", exec->here_doc);
-// 		printf("ARGS: [%p]\n", exec->args);
-// 		printf("FILENAMES: [%p]\n", exec->redirs);
-// 		if (args != NULL)
-// 			printf("#ARGS\n");
-// 		printf(C_RESET);
-// 		while (args != NULL)
-// 		{
-// 			printf("---->[%s]\n", args->value);
-// 			args = args->next;
-// 		}
-// 		printf(BLUE_A);
-// 		if (filenames != NULL)
-// 			printf("#REDIRS\n");
-// 		printf(C_RESET);
-// 		while (filenames != NULL)
-// 		{
-// 			printf("---->[%s]\n", filenames->path);
-// 			printf("---->[%d]\n", filenames->type);
-// 			filenames = filenames->next;
-// 		}
-// 		printf(BLUE_A);
-// 		printf("NEXT: [%p]\n", exec->next);
-// 		if (exec->next == NULL)
-// 			printf(MAGENTA_A "-------------------\n" C_RESET);
-// 		exec = exec->next;
-// 	}
-// }
+	while (exec != NULL)
+	{
+		printf(MAGENTA_A "----------- EXEC ----------\n");
+		printf(BLUE_A);
+		args = exec->args;
+		filenames = exec->redirs;
+		printf("CMD: [%s]\n", exec->cmd);
+		printf("HEREDOC: [%d]\n", exec->here_doc);
+		printf("ARGS: [%p]\n", exec->args);
+		printf("FILENAMES: [%p]\n", exec->redirs);
+		if (args != NULL)
+			printf("#ARGS\n");
+		printf(C_RESET);
+		while (args != NULL)
+		{
+			printf("---->[%s]\n", args->value);
+			args = args->next;
+		}
+		printf(BLUE_A);
+		if (filenames != NULL)
+			printf("#REDIRS\n");
+		printf(C_RESET);
+		while (filenames != NULL)
+		{
+			printf("---->[%s]\n", filenames->path);
+			printf("---->[%d]\n", filenames->type);
+			filenames = filenames->next;
+		}
+		printf(BLUE_A);
+		printf("NEXT: [%p]\n", exec->next);
+		if (exec->next == NULL)
+			printf(MAGENTA_A "-------------------\n" C_RESET);
+		exec = exec->next;
+	}
+}

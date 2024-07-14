@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:21:00 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 16:56:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,58 @@
 
 int	exec(t_ctx *ctx)
 {
-	int		fd_in;
-	int		fd_out;
 	int		exec_no;
 
 	exec_no = br_lstsize(ctx->exec);
 	if (!exec_no)
 		return (0);
 	exe_get_stdfds(ctx);
-	if (exec_no == 1)
-		exec_1(ctx, exec_no, &fd_in, &fd_out);
-	else
-		exec_2(ctx, exec_no, &fd_in, &fd_out);
+	exec_2(ctx);
 	exe_reset_stdfds(ctx);
 	return (0);
 }
 
-int	exec_1(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
-{
-	*fd_in = dup(ctx->def_in);
-	*fd_out = dup(ctx->def_out);
-	if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
-		exec_no--;
-	if (!exec_no)
-		return (1);
-	exe_dup2_close(*fd_in, STDIN_FILENO);
-	exe_dup2_close(*fd_out, STDOUT_FILENO);
-	if (bi_is_builtin(ctx->exec->cmd) == 1)
-	{
-		if (ctx->exec->here_doc == 1)
-			unlink("here_doc");
-		exec_no--;
-		ctx->exit_code = bi_do_builtin(ctx, ctx->exec->cmd,
-			ctx->exec->args);
-	}
-	else
-	{
-		exe_do_child(ctx, ctx->exec, *fd_in);
-		if (ctx->exec->here_doc == 1)
-			unlink("here_doc");
-	}
-	exe_wait_all(exec_no, &(ctx->exit_code));
-	return (0);
-}
+// int	exec_1(t_ctx *ctx, int exec_no)
+// {
+// 	*fd_in = dup(ctx->def_in);
+// 	*fd_out = dup(ctx->def_out);
+// 	if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
+// 		exec_no--;
+// 	if (!exec_no)
+// 		return (1);
+// 	exe_dup2_close(*fd_in, STDIN_FILENO);
+// 	exe_dup2_close(*fd_out, STDOUT_FILENO);
+// 	if (bi_is_builtin(ctx->exec->cmd) == 1)
+// 	{
+// 		if (ctx->exec->here_doc == 1)
+// 			unlink("here_doc");
+// 		exec_no--;
+// 		ctx->exit_code = bi_do_builtin(ctx, ctx->exec->cmd,
+// 			ctx->exec->args);
+// 	}
+// 	else
+// 	{
+// 		exe_do_child(ctx, ctx->exec, *fd_in);
+// 		if (ctx->exec->here_doc == 1)
+// 			unlink("here_doc");
+// 	}
+// 	exe_wait_all(exec_no, &(ctx->exit_code));
+// 	return (0);
+// }
 
-int	exec_2(t_ctx *ctx, int exec_no, int *fd_in, int *fd_out)
+int	exec_2(t_ctx *ctx)
 {
-	int		fd_pipe[2];
 	t_exec	*tmp;
 
-	*fd_in = dup(ctx->def_in);// initiate infile
 	tmp = ctx->exec;
 	while (tmp)
 	{
-		*fd_out = dup(ctx->def_out);// initiate outfile
-		// create pipe first if needed
-		if (tmp->next)
-			exe_create_pipe(fd_out, fd_pipe);
-		// go through files and set input and output, stop whenever fd == -1
-		if (exe_init_fdio(fd_in, fd_out, tmp, ctx->def_in))
-			exec_no--;
-		// check fdio and redirect to STDIN & OUT; if all good then exec child
-		if (!exe_redir_fdio(fd_in, fd_out, fd_pipe, tmp))
-			exe_do_child(ctx, tmp, *fd_in);
+		exe_do_child(ctx, tmp);
 		if (tmp->here_doc == 1)
 			unlink("here_doc");
 		tmp = tmp->next;
 	}
-	exe_wait_all(exec_no, &(ctx->exit_code));
+	exe_wait_all(ctx);
 	return (0);
 }
 
@@ -99,18 +83,20 @@ void	exe_reset_stdfds(t_ctx *ctx)
 	close(ctx->def_out);
 }
 
-void	exe_wait_all(int rep, unsigned char *exit_code)
+void	exe_wait_all(t_ctx *ctx)
 {
 	int		status;
+	int		i;
 
-	while (rep--)
+	i = ctx->exec_count;
+	while (i--)
 	{
 		if (wait(&status))
 		{
 			if (WIFEXITED(status))
-				*exit_code = WEXITSTATUS(status);
+				ctx->exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
-				*exit_code = WTERMSIG(status);
+				ctx->exit_code = WTERMSIG(status);
 		}
 	}
 }
