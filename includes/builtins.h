@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 08:56:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:33:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		bi_is_builtin(char *cmd);
 int		bi_echo(t_args *args);
 int		bi_cd(t_ctx *ctx, t_args *args);
 int		bi_pwd(t_args *args);
-int		bi_exit(t_args *args);
+int		bi_exit(t_ctx *ctx, t_args *args);
 int		bi_env(t_ctx *ctx, t_args *args);
 int		bi_export(t_ctx *ctx, t_args *args);
 int		bi_unset(t_ctx *ctx, t_args *args);

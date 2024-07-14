@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/14 09:22:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:33:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	bi_pwd(t_args *args)
 	return (0);
 }
 
-int	bi_exit(t_args *args)
+int	bi_exit(t_ctx *ctx, t_args *args)
 {
 	int		exit_code;
 	char	*tmp;
@@ -103,6 +103,7 @@ int	bi_exit(t_args *args)
 			}
 		}
 	}
+	ms_free_all(ctx);
 	exit(exit_code);
 }
 

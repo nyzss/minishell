@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 08:58:09 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/14 09:34:03 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	bi_do_builtin(t_ctx *ctx, char *cmd, t_args *args)
 	else if (!ft_strcmp(cmd, "env"))
 		return (bi_env(ctx, args));
 	else if (!ft_strcmp(cmd, "exit"))
-		return (bi_exit(args));
+		return (bi_exit(ctx, args));
 	else
 		return (0);
 }
