@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 22:28:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:56:27 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_exec
 	t_args			*args;
 	t_filenames		*redirs;
 	struct s_exec	*next;
-	int				here_doc;
 	int				fd_in;
 	int				fd_out;
 }	t_exec;

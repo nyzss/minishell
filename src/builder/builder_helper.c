@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:41:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 08:38:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:57:10 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_exec	*br_init(void)
 		return (NULL);
 	new->args = NULL;
 	new->cmd = NULL;
-	new->here_doc = 0;
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->redirs = NULL;
