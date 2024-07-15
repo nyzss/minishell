@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 13:35:56 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 15:04:53 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,5 @@ void	exe_err1_open(int err_no, char *file);
 void	exe_err2_pipe(int err_no);
 void	exe_err3_fork(int err_no);
 void	exe_err4_exec(char *path, int err_no);
-int		exe_check_fdio(int fd_in, int fd_out, char *file);
 
 #endif
