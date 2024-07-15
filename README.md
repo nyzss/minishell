@@ -1,6 +1,8 @@
 
 ## todo list
 
+- [signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.
+<!-- - [heredoc]  -->
 - [signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)
 - [prompt] if "cat" and use ^C, there will be two promts, but should be just one prompt
 - [exec] check leaks for ctrl-c heredoc
