@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 17:11:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:58:31 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ typedef struct s_exec
 
 /* exec main */
 int		exec(t_ctx *ctx);
-int		exec_1(t_ctx *ctx, int exec_no);
 int		exec_2(t_ctx *ctx);
 void	exe_get_stdfds(t_ctx *ctx);
 void	exe_reset_stdfds(t_ctx *ctx);
 void	exe_wait_all(t_ctx *ctx);
+void	exe_close_all(t_ctx *ctx, int pipe[]);
 
 /* fdio utils*/
 int		exe_init_fdio(t_exec *exec);

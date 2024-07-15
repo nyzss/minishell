@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 16:56:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:59:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ int	exec_2(t_ctx *ctx)
 	t_exec	*tmp;
 
 	tmp = ctx->exec;
+	if (ctx->exec_count == 1 && bi_is_builtin(tmp->cmd) == 1)
+	{
+		if (exe_init_fdio(tmp))
+			exe_close_all(ctx, NULL);
+		exe_close_all(ctx, NULL);
+		if (tmp->here_doc == 1)
+			unlink("here_doc");
+		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
+		return (0);
+	}
 	while (tmp)
 	{
 		exe_do_child(ctx, tmp);
