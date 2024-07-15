@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 08:40:51 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:36:29 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ char	*exe_get_path(char *file, t_env *env)
 {
 	char	**paths;
 	char	*exec;
+	t_env	*path_env;
 
 	if (!env || exe_is_abs_path(file) == 1)
 		return (ft_strdup(file));
-	paths = exe_get_allpaths(env);
+	path_env = ms_getenv("PATH", env);
+	if (!path_env)
+		return (ft_strdup(file));
+	paths = ft_split(path_env->value, ':');
 	if (!paths)
 		return (ft_strdup(file));
 	exec = exe_get_exec(paths, file);
@@ -77,20 +81,6 @@ char	*exe_get_exec(char **paths, char *file)
 	return (NULL);
 }
 
-char	**exe_get_allpaths(t_env *env)
-{
-	char	**paths;
-	t_env	*path_env;
-
-	path_env = ms_getenv("PATH", env);
-	if (!path_env)
-		return (NULL);
-	paths = ft_split(path_env->value, ':');
-	if (!paths)
-		return (NULL);
-	return (paths);
-}
-
 char	**exe_get_cmds(char *cmd, t_args *args)
 {
 	char	**cmds;
@@ -116,4 +106,25 @@ char	**exe_get_cmds(char *cmd, t_args *args)
 	}
 	cmds[i] = NULL;
 	return (cmds);
+}
+
+/* Only create a tab that holds the add of env->raw. No strdup on raw*/
+char	**exe_get_envs(t_env *env)
+{
+	char	**envs;
+	int		env_size;
+	int		i;
+
+	i = -1;
+	env_size = env_lstsize(env);
+	envs = (char **)malloc((env_size + 1) * sizeof(char *));
+	if (!envs)
+		return (NULL);
+	while (++i < env_size)
+	{
+		envs[i] = env->raw;
+		env = env->next;
+	}
+	envs[i] = NULL;
+	return (envs);
 }

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 11:59:47by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:47:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	exec(t_ctx *ctx)
 {
 	if (ctx->exec_count == 0)
 		return (0);
-	exe_get_stdfds(ctx);
+	exe_set_stdfds(ctx, 0);
 	exec_2(ctx);
-	exe_reset_stdfds(ctx);
+	exe_set_stdfds(ctx, 1);
 	return (0);
 }
 
@@ -48,18 +48,36 @@ int	exec_2(t_ctx *ctx)
 	return (0);
 }
 
-void	exe_get_stdfds(t_ctx *ctx)
+void	exe_set_stdfds(t_ctx *ctx, int mode)
 {
-	ctx->def_in = dup(STDIN_FILENO);
-	ctx->def_out = dup(STDOUT_FILENO);
+	if (!mode)
+	{
+		ctx->def_in = dup(STDIN_FILENO);
+		ctx->def_out = dup(STDOUT_FILENO);
+	}
+	else
+	{
+		exe_dup2_close(ctx->def_in, STDIN_FILENO);
+		exe_dup2_close(ctx->def_out, STDOUT_FILENO);
+	}
 }
 
-void	exe_reset_stdfds(t_ctx *ctx)
+void	exe_close_all(t_ctx *ctx, int pipe[])
 {
-	dup2(ctx->def_in, STDIN_FILENO);
-	dup2(ctx->def_out, STDOUT_FILENO);
-	close(ctx->def_in);
-	close(ctx->def_out);
+	if (ctx)
+	{
+		if (ctx->def_in != -1)
+			close(ctx->def_in);
+		if (ctx->def_out != -1)
+			close(ctx->def_out);
+	}
+	if (pipe)
+	{
+		if (pipe[0] != -1)
+			close(pipe[0]);
+		if (pipe[1] != -1)
+			close(pipe[1]);
+	}
 }
 
 void	exe_wait_all(t_ctx *ctx)
