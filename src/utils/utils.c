@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 15:55:20 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 17:14:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,19 @@ void	ms_generate_random(t_ctx *ctx)
 {
 	unsigned long	rand;
 	int				i;
-	int				fd;
 
 	if (!ctx->exec || !ctx->exec->cmd)
 		return ;
-	if (i < 0)
-		return ;
 	ft_memcpy(ctx->rand_heredoc, "hd_", 3);
-	i = 3;
-	rand = (unsigned long)ctx->exec->cmd * b;
+	i = 2;
+	rand = (unsigned long)ctx->exec->cmd;
 	while (i++ < 12)
 	{
-		rand *= b;
+		rand *= RND_OFFSET + RND_PRIME;
 		ctx->rand_heredoc[i] = 'a' + (rand % 26);
 	}
 	ctx->rand_heredoc[i] = '\0';
-	printf("");
+	printf("random name: %s\n", ctx->rand_heredoc);
 }
 
 void	ms_clear(t_ctx *ctx, t_token *token)
