@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 16:19:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 17:57:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		exec_2(t_ctx *ctx);
 void	exe_set_stdfds(t_ctx *ctx, int mode);
 void	exe_close_all(t_ctx *ctx, int pipe[]);
 void	exe_wait_all(t_ctx *ctx);
+void	exe_unlink_all(t_exec *exec);
 
 /* fdio utils*/
 int		exe_init_fdio(t_exec *exec);
