@@ -2,6 +2,7 @@
 ## todo list
 
 - [heredoc] check leaks for ctrl-c heredoc
+- [display] `< Makefile a | a2 | a3 | a4 | a5 | a6 > outfile` is printed in a disorderly manner
 
 - ~~[signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.~~
 - ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~
