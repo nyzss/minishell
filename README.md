@@ -7,7 +7,7 @@
 - [signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)
 - [exec] check leaks for ctrl-c heredoc
 - [builtin] the exit code of exit is always 13, but should be 2 or according to the number given.
-- [exec] fix open fd: `ls | jksdlf | cat Makefile | < ksdjfl cat`
+- [exec] command: `ls | cat | cat > out1 > out2 -e | cat | cat > out3` should behave like bash but doesnt (pipe issue)
 
 - ~~[exec] fix open fd: `ls | jksdlf | cat Makefile | < ksdjfl cat`~~
 - ~~[builtin] exit 5 and exit generally leaks~~
