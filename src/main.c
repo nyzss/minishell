@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 13:40:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 15:11:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	g_signal = 0;
 int	ms_setup_exec(t_ctx *ctx, t_token **token)
 {
 	ctx->exec = builder(*token);
+	tok_free(*token);
+	*token = NULL;
 	if (!ctx->exec)
 		return (1);
 	ctx->exec_count = br_lstsize(ctx->exec);
@@ -24,8 +26,7 @@ int	ms_setup_exec(t_ctx *ctx, t_token **token)
 	if (!ctx->pids)
 		return (1);
 	ctx->pid_count = 0;
-	tok_free(*token);
-	*token = NULL;
+	ms_generate_random(ctx);
 	return (0);
 }
 
