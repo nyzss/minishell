@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/14 08:54:07 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:30:45 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exe_do_exec(t_ctx *ctx, char *cmd, t_args *args)
 		return (0);
 	path = exe_get_path(cmd, ctx->envp);
 	if (!path)
-		return (-1);
+		return (exe_err4_exec(cmd, errno), -1);
 	envs = exe_get_envs(ctx->envp);
 	if (!envs)
 		return (free(path), -1);
