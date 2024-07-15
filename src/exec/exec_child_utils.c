@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 08:30:45 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:37:03 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ char	**exe_get_cmds(char *cmd, t_args *args)
 		if (!i)
 			cmds[i] = ft_strdup(cmd);
 		else
-			cmds[i] = ft_strdup(args->value);
-		if (!cmds[i])
 		{
-			ft_free_all(cmds);
-			return (NULL);
+			cmds[i] = ft_strdup(args->value);
+			args = args->next;
 		}
+		if (!cmds[i])
+			return (ft_free_all(cmds), NULL);
 	}
 	cmds[i] = NULL;
 	return (cmds);
