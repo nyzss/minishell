@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 17:19:17 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 18:04:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ps_handle_redir(t_token *token)
 {
+	if (token->type == PIPE)
+		return (1);
 	while (token != NULL)
 	{
 		if (token->type == APPEND || token->type == INFILE

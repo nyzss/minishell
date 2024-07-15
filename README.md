@@ -2,8 +2,8 @@
 ## todo list
 
 - [heredoc] check leaks for ctrl-c heredoc
-- [parser] handle the case where the user inputs: `| cat`
 
+- ~~[parser] handle the case where the user inputs: `| cat`~~
 - ~~[signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.~~
 - ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~
 - ~~[signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)~~
