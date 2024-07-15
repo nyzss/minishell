@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 18:16:22 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:28:48 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exec_2(t_ctx *ctx)
 	{
 		if (exe_init_fdio(tmp))
 			return (1);
-		exe_unlink_all(tmp);
+		exe_unlink_all(ctx);
 		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
 		return (0);
 	}
@@ -94,7 +94,7 @@ void	exe_wait_all(t_ctx *ctx)
 		}
 		i++;
 	}
-	exe_unlink_all(ctx->exec);
+	exe_unlink_all(ctx);
 }
 
 // int	exec_1(t_ctx *ctx, int exec_no)

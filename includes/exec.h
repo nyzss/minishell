@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 18:15:51 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:28:33 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	exe_err1_open(int err_no, char *file);
 void	exe_err2_pipe(int err_no);
 void	exe_err3_fork(int err_no);
 void	exe_err4_exec(char *path, int err_no);
-void	exe_unlink_all(t_exec *exec);
+void	exe_unlink_all(t_ctx *ctx);
 
 #endif
