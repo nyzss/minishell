@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:46:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 09:58:05 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 10:59:12 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,14 @@ void	sig_handle_heredoc(int status)
 // read(STDIN_FILENO, "\0", 1);
 // write(2, "\n", 1);
 // printf("CALLED HEREDOC: %d\n", status);
+
+void	sig_exec(int status)
+{
+	(void)status;
+	write(STDERR_FILENO, "\n", 1);
+}
+void	sig_before_gnl(int status)
+{
+	(void)status;
+	write(STDIN_FILENO, "\0", 1);
+}
