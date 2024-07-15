@@ -6,13 +6,13 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 18:01:40 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:34:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_signal = 0;
+t_signals	g_signals = {0};
 
 int	ms_setup_exec(t_ctx *ctx, t_token **token)
 {
@@ -32,17 +32,20 @@ int	ms_setup_exec(t_ctx *ctx, t_token **token)
 int	handle_pipeline(t_ctx *ctx, char *line)
 {
 	t_token	*token;
+	int		err;
 
 	token = lexer(ctx, line);
 	free(line);
 	if (token == NULL)
 		return (1);
-	if (parser(&token) != 0)
+	err = parser(&token);
+	if (err != 0)
 	{
 		tok_free(token);
+		if (err == 2)
+			return (0);
 		return (1);
 	}
-	// tok_debug(token);
 	if (ms_setup_exec(ctx, &token) != 0)
 		return (1);
 	exec(ctx);

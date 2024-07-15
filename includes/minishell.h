@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 17:31:19 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:20:03 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
 
-extern int	g_signal;
+typedef struct s_signals
+{
+	int	end_heredoc;
+	int	signal_code;
+}	t_signals;
 
 typedef struct s_env
 {
@@ -76,6 +80,8 @@ typedef struct s_ctx
 	t_exec			*exec;
 	t_env			*envp;
 }	t_ctx;
+
+extern t_signals	g_signals;
 
 /* main minishell functions */
 t_ctx	*ms_init_ctx(char **envp);

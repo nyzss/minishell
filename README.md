@@ -1,12 +1,14 @@
 
 ## todo list
 
-- [heredoc] check leaks for ctrl-c heredoc
+- [MAJOR] norme
+
 - [heredoc] make heredoc in the temporary folder '/tmp/'
 - [builtin] `exit -100` and `exit +100` should work
 - [builtin] fix error code when missing file is input in builtins
 - [exec] if permission is denied return exit code `126`
 
+- ~~[heredoc] check leaks for ctrl-c heredoc~~
 - ~~[parser] handle the case where the user inputs: `| cat`~~
 - ~~[signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.~~
 - ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~

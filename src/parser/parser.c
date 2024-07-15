@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 18:04:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:34:58 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ int	parser(t_token **token)
 	else if (ps_handle_cmd(*token) != 0)
 		err = 1;
 	else if (ps_handle_heredoc(*token) != 0)
-		err = 1;
+		err = 2;
 	return (err);
 }

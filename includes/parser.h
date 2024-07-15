@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:38 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 17:17:49 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:30:09 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*ps_strjoin(char *s1, char *s2);
 
 int		ps_expand_and_quotes(t_token *head);
 int		ps_handle_heredoc(t_token *token);
+int		ps_init_here_doc(int fd, char *eof);
 
 int		ps_expand_env(t_token *token);
 char	*ps_getenv_name(char *str);

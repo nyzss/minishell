@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 18:28:33 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:28:03 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	exe_wait_all(t_ctx *ctx);
 
 /* fdio utils*/
 int		exe_init_fdio(t_exec *exec);
-int		exe_is_here_doc(t_exec *exec);
-void	exe_init_here_doc(char *file, char *eof, int fd_stdin);
 int		exe_handle_files(t_exec *exec);
 void	exe_redir_files(t_exec *exec, t_filenames *file);
 

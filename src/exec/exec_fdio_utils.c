@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fdio_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 18:13:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 22:27:24 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,55 +17,6 @@ int	exe_init_fdio(t_exec *exec)
 	if (exe_handle_files(exec))
 		return (1);
 	return (0);
-}
-
-int	exe_is_here_doc(t_exec *exec)
-{
-	t_filenames	*tmp;
-	int			i;
-
-	i = 0;
-	tmp = exec->redirs;
-	while (tmp)
-	{
-		if (tmp->type == HEREDOC)
-		{
-			signal(SIGINT, sig_handle_heredoc);
-			exe_init_here_doc("here_doc", tmp->path, STDIN_FILENO);
-			free(tmp->path);
-			tmp->path = ft_strdup("here_doc");
-			tmp->type = INFILE;
-			i++;
-		}
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-void	exe_init_here_doc(char *file, char *eof, int fd_stdin)
-{
-	int		fd;
-	char	*limiter;
-	char	*line;
-
-	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-		return ;
-	limiter = ft_strjoin(eof, "\n");
-	line = get_next_line(fd_stdin);
-	while (line)
-	{
-		if (!ft_strcmp(line, limiter))
-		{
-			free(line);
-			break ;
-		}
-		write(fd, line, ft_strlen(line));
-		free(line);
-		line = get_next_line(fd_stdin);
-	}
-	free(limiter);
-	close(fd);
 }
 
 int	exe_handle_files(t_exec *exec)
