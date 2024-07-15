@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/14 17:18:44 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:51:36 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ void	exe_do_child(t_ctx *ctx, t_exec *exec)
 		exe_err3_fork(errno);
 	else if (!pid)
 	{
-		exe_init_fdio(exec);
+		if (exe_init_fdio(exec))
+		{
+			exe_close_all(ctx, fd_pipe);
+			exit(1);
+		}
 		if (exec->next != NULL)
 			dup2(fd_pipe[1], STDOUT_FILENO);
 		exe_close_all(ctx, fd_pipe);

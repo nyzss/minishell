@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 08:40:32 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:53:02 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,7 @@ void	exe_err4_exec(char *path, int err_no)
 
 int	exe_check_fdio(int fd_in, int fd_out, char *file)
 {
-	if (fd_in == -1)
-	{
-		exe_err1_open(errno, file);
-		return (1);
-	}
-	if (fd_out == -1)
+	if (fd_in == -1 || fd_out == -1)
 	{
 		exe_err1_open(errno, file);
 		return (1);
