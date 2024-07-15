@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 17:10:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 17:31:19 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_ctx
 	int				def_out;
 	unsigned char	exit_code;
 	int				exec_count;
-	char			rand_heredoc[16];
 	pid_t			*pids;
 	int				pid_count;
 	t_exec			*exec;
@@ -86,7 +85,7 @@ void	ms_clear(t_ctx *ctx, t_token *token);
 t_env	*ms_env_dup(char **envp);
 void	*ms_free_double(char **value);
 t_env	*ms_getenv(char *path, t_env *envp);
-void	ms_generate_random(t_ctx *ctx);
+char	*ms_generate_random(char *str);
 
 /* helper functions of t_env */
 t_env	*env_create(char *id, char *value, char *raw);

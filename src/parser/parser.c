@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/10 11:52:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 17:19:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,17 @@ int	parser(t_token **token)
 	int	err;
 
 	err = 0;
-	if (err == 0 && ps_handle_quotes(*token) != 0)
+	if (ps_handle_quotes(*token) != 0)
 		err = 1;
-	if (err == 0 && ps_expand_and_quotes(*token) != 0)
+	else if (ps_expand_and_quotes(*token) != 0)
 		err = 1;
-	if (err == 0 && ps_remove_null(token) != 0)
+	else if (ps_remove_null(token) != 0)
 		err = 1;
-	if (err == 0 && ps_handle_redir(*token) != 0)
+	else if (ps_handle_redir(*token) != 0)
 		err = 1;
-	if (err == 0 && ps_handle_cmd(*token) != 0)
+	else if (ps_handle_cmd(*token) != 0)
+		err = 1;
+	else if (ps_handle_heredoc(*token) != 0)
 		err = 1;
 	return (err);
 }
