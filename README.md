@@ -8,6 +8,7 @@
 - [prompt] if "cat" and use ^C, there will be two promts, but should be just one prompt
 - [exec] check leaks for ctrl-c heredoc
 - [builtin] the exit code of exit is always 13, but should be 2 or according to the number given.
+- [exec] command: `ls | cat | cat > out1 > out2 -e | cat | cat > out3` should behave like bash but doesnt (pipe issue)
 
 - ~~[exec] fix open fd: `ls | jksdlf | cat Makefile | < ksdjfl cat`~~
 - ~~[builtin] exit 5 and exit generally leaks~~
