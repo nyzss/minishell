@@ -25,13 +25,17 @@ int	exec(t_ctx *ctx)
 int	exec_2(t_ctx *ctx)
 {
 	t_exec	*tmp;
+	int		is_builtin;
 
 	tmp = ctx->exec;
-	if (ctx->exec_count == 1 && bi_is_builtin(tmp->cmd) == 1)
+	is_builtin = bi_is_builtin(tmp->cmd);
+	if (ctx->exec_count == 1 && is_builtin)
 	{
 		if (exe_init_fdio(tmp))
 			return (1);
 		exe_unlink_all(ctx);
+		if (is_builtin == 2)
+			printf("exit\n");
 		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
 		return (0);
 	}

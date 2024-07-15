@@ -44,7 +44,7 @@ void	exe_do_child2(t_ctx *ctx, t_exec *exec, int fd_pipe[])
 	if (exec->next && exec->fd_out == STDOUT_FILENO)
 		dup2(fd_pipe[1], STDOUT_FILENO);
 	exe_close_all(ctx, fd_pipe);
-	if (bi_is_builtin(exec->cmd) == 1)
+	if (bi_is_builtin(exec->cmd))
 	{
 		exe_unlink_all(ctx);
 		exit(bi_do_builtin(ctx, exec->cmd, exec->args));

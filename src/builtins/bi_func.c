@@ -29,7 +29,7 @@ int	bi_is_builtin(char *cmd)
 	else if (!ft_strcmp(cmd, "env"))
 		return (1);
 	else if (!ft_strcmp(cmd, "exit"))
-		return (1);
+		return (2);
 	else
 		return (0);
 }
