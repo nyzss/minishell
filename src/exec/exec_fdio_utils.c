@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 15:06:26 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:00:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	exe_init_fdio(t_exec *exec)
 {
-	if (exe_is_here_doc(exec))
-		exec->here_doc = 1;
+	// if (exe_is_here_doc(exec))
+	// 	exec->here_doc = 1;
 	if (exe_handle_files(exec))
 		return (1);
 	return (0);
