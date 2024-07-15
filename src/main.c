@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 17:31:46 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 18:01:40 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 		tok_free(token);
 		return (1);
 	}
+	// tok_debug(token);
 	if (ms_setup_exec(ctx, &token) != 0)
 		return (1);
 	exec(ctx);
