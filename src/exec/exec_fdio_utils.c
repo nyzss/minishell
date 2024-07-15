@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 13:24:22 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 10:47:49y tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,3 @@ void	exe_redir_files(t_exec *exec, t_filenames *file)
 		exe_dup2_close(exec->fd_out, STDOUT_FILENO);
 	}
 }
-
-

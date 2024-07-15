@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 13:47:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 14:04:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	exe_do_child2(t_ctx *ctx, t_exec *exec, int fd_pipe[])
 	if (exe_init_fdio(exec))
 	{
 		exe_close_all(ctx, fd_pipe);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	if (exec->next)
 		dup2(fd_pipe[1], STDOUT_FILENO);
@@ -51,7 +51,7 @@ void	exe_do_child2(t_ctx *ctx, t_exec *exec, int fd_pipe[])
 		exit(bi_do_builtin(ctx, exec->cmd, exec->args));
 	}
 	else if (exe_do_exec(ctx, exec->cmd, exec->args) < 0)
-		exit(1);
+		exit(COMMAND_NOT_FOUND);
 	exit(0);
 }
 
