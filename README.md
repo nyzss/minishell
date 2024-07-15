@@ -2,6 +2,7 @@
 ## todo list
 
 - [heredoc] check leaks for ctrl-c heredoc
+- [heredoc] make heredoc in the temporary folder '/tmp/'
 - [builtin] `exit -100` and `exit +100` should work
 - [builtin] fix error code when missing file is input in builtins
 - [exec] if permission is denied return exit code `126`
