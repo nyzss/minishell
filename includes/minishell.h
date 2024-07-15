@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 13:16:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 14:41:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define C_RESET "\033[0m"
 
 # define COMMAND_NOT_FOUND 127
+# define SIGINT_EXIT_CODE 130
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
 
