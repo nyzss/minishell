@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_func_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 13:33:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 23:20:58 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	bi_exit(t_ctx *ctx, t_args *args)
 	{
 		exit_code = ft_atoi(args->value);
 		tmp = args->value;
+		if (*tmp == '+' || *tmp == '-')
+			(*tmp)++;
 		while (*tmp)
 		{
 			if (!ft_isdigit(*tmp++))
