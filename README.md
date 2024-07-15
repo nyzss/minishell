@@ -2,7 +2,8 @@
 ## todo list
 
 - [heredoc] check leaks for ctrl-c heredoc
-- [display] `< Makefile a | a2 | a3 | a4 | a5 | a6 > outfile` is printed in a disorderly manner
+- [heredoc] currently the here_doc fails to unlink itself
+- [exec] Different behaviour of the following cmd: "< Makefile << here cat | wc -l << there > out3 | echo yo". No calls for second here_doc and the 3rd cmd is done first.
 
 - ~~[signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.~~
 - ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~
@@ -26,3 +27,4 @@
 - ~~[builtin] export "ZZC" if "ZZC=abc" already existed, it shall not replace the current value.~~
 - ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~
 - ~~[prompt] if "cat" and use ^C, there will be two promts, but should be just one prompt~~
+- ~~[display] `< Makefile a | a2 | a3 | a4 | a5 | a6 > outfile` is printed in a disorderly manner~~
