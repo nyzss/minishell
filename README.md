@@ -6,8 +6,10 @@
 <!-- - [heredoc]  -->
 - [signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)
 - [exec] check leaks for ctrl-c heredoc
+- [builtin] the exit code of exit is always 13, but should be 2 or according to the number given.
 - [exec] fix open fd: `ls | jksdlf | cat Makefile | < ksdjfl cat`
 
+- ~~[exec] fix open fd: `ls | jksdlf | cat Makefile | < ksdjfl cat`~~
 - ~~[builtin] exit 5 and exit generally leaks~~
 - ~~[exec] change exec file opening in child process~~
 - ~~[exec] print error on command not found~~

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 13:21:15 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 13:47:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	exec(t_ctx *ctx)
 {
-	int		exec_no;
-
-	exec_no = br_lstsize(ctx->exec);
-	if (!exec_no)
+	if (ctx->exec_count == 0)
 		return (0);
 	exe_set_stdfds(ctx, 0);
 	exec_2(ctx);
@@ -42,6 +39,7 @@ int	exec_2(t_ctx *ctx)
 	while (tmp)
 	{
 		exe_do_child(ctx, tmp);
+		ctx->pid_count++;
 		if (tmp->here_doc == 1)
 			unlink("here_doc");
 		tmp = tmp->next;
@@ -87,16 +85,17 @@ void	exe_wait_all(t_ctx *ctx)
 	int		status;
 	int		i;
 
-	i = ctx->exec_count;
-	while (i--)
+	i = 0;
+	while (i < ctx->pid_count)
 	{
-		if (wait(&status))
+		if (waitpid(ctx->pids[i], &(status), 0))
 		{
 			if (WIFEXITED(status))
 				ctx->exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				ctx->exit_code = WTERMSIG(status);
 		}
+		i++;
 	}
 }
 

@@ -6,13 +6,28 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 10:59:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:40:55 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_signal = 0;
+
+int	ms_setup_exec(t_ctx *ctx, t_token **token)
+{
+	ctx->exec = builder(*token);
+	if (!ctx->exec)
+		return (1);
+	ctx->exec_count = br_lstsize(ctx->exec);
+	ctx->pids = malloc(sizeof(pid_t) * (ctx->exec_count + 1));
+	if (!ctx->pids)
+		return (1);
+	ctx->pid_count = 0;
+	tok_free(*token);
+	*token = NULL;
+	return (0);
+}
 
 int	handle_pipeline(t_ctx *ctx, char *line)
 {
@@ -27,17 +42,12 @@ int	handle_pipeline(t_ctx *ctx, char *line)
 		tok_free(token);
 		return (1);
 	}
-	ctx->exec = builder(token);
-	ctx->exec_count = br_lstsize(ctx->exec);
-	tok_free(token);
-	token = NULL;
+	if (ms_setup_exec(ctx, &token) != 0)
+		return (1);
 	exec(ctx);
 	ms_clear(ctx, token);
-	ctx->exec_count = 0;
 	return (0);
 }
-// br_debug(ctx->exec);
-// tok_debug(token);
 
 int	handle_loop(t_ctx *ctx)
 {
