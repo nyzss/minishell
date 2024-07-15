@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:46:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 11:48:02 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:39:05 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sig_int_handler(int status)
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	// printf("g_signal: %d\n", g_signal);
 }
+// printf("g_signal: %d\n", g_signal);
 
 void	sig_quit_handler(int status)
 {

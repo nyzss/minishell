@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/14 17:10:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:40:58 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,23 @@ int	exe_handle_files(t_exec *exec)
 	return (0);
 }
 
-int	exe_check_fdio(int fd_in, int fd_out, char *file)
+/* Only create a tab that holds the add of env->raw. No strdup on raw*/
+char	**exe_get_envs(t_env *env)
 {
-	if (fd_in == -1)
+	char	**envs;
+	int		env_size;
+	int		i;
+
+	i = -1;
+	env_size = env_lstsize(env);
+	envs = (char **)malloc((env_size + 1) * sizeof(char *));
+	if (!envs)
+		return (NULL);
+	while (++i < env_size)
 	{
-		exe_err1_open(errno, file);
-		return (1);
+		envs[i] = env->raw;
+		env = env->next;
 	}
-	if (fd_out == -1)
-	{
-		exe_err1_open(errno, file);
-		return (1);
-	}
-	return (0);
+	envs[i] = NULL;
+	return (envs);
 }

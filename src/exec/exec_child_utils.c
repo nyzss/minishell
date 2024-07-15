@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 08:37:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 08:40:51 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,24 +116,4 @@ char	**exe_get_cmds(char *cmd, t_args *args)
 	}
 	cmds[i] = NULL;
 	return (cmds);
-}
-/* Only create a tab that holds the add of env->raw. No strdup on raw*/
-char	**exe_get_envs(t_env *env)
-{
-	char	**envs;
-	int		env_size;
-	int		i;
-
-	i = -1;
-	env_size = env_lstsize(env);
-	envs = (char **)malloc((env_size + 1) * sizeof(char *));
-	if (!envs)
-		return (NULL);
-	while (++i < env_size)
-	{
-		envs[i] = env->raw;
-		env = env->next;
-	}
-	envs[i] = NULL;
-	return (envs);
 }

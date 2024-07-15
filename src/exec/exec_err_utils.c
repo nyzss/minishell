@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_err_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:53:39 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 08:40:32 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,19 @@ void	exe_err4_exec(char *path, int err_no)
 	else
 		ft_printf("%s: %s: command not found\n", P_NAME, path);
 	exe_dup2_close(fd_tmp, STDOUT_FILENO);
+}
+
+int	exe_check_fdio(int fd_in, int fd_out, char *file)
+{
+	if (fd_in == -1)
+	{
+		exe_err1_open(errno, file);
+		return (1);
+	}
+	if (fd_out == -1)
+	{
+		exe_err1_open(errno, file);
+		return (1);
+	}
+	return (0);
 }
