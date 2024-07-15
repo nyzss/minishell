@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 15:05:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 17:10:35 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@
 
 # define COMMAND_NOT_FOUND 127
 # define SIGINT_EXIT_CODE 130
+
+# define RND_OFFSET 14695981039346656037UL
+# define RND_PRIME 1099511628211UL
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
 
