@@ -4,9 +4,8 @@
 - [MAJOR] norme
 
 - [heredoc] make heredoc in the temporary folder '/tmp/'
-- [builtin] `exit -100` and `exit +100` should work
 - [builtin] fix error code when missing file is input in builtins
-- [exec] if permission is denied return exit code `126`
+- [exec] if permission is denied return exit code `126` (I checked in my bash-5.2, the permission denied has the exit code of 1. Let's check again in the cluster environment)
 
 - ~~[heredoc] check leaks for ctrl-c heredoc~~
 - ~~[parser] handle the case where the user inputs: `| cat`~~
@@ -36,3 +35,4 @@
 - ~~[exec] Different behaviour of the following cmd: "< Makefile << here cat | wc -l << there > out3 | echo yo". No calls for second here_doc and the 3rd cmd is done first.~~
 - ~~[heredoc] Refactor and initiate heredoc before exec~~
 - ~~[heredoc] currently the here_doc fails to unlink itself~~
+- ~~[builtin] `exit -100` and `exit +100` should work~~
