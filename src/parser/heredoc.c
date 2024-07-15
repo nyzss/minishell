@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:16:07 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 22:39:46 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 23:07:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	ps_handle_heredoc(t_token *token)
 	{
 		while (tok != NULL)
 		{
-			if (tok->type == HEREDOC && ft_strncmp(tok->next->value, "hd_", 3) == 0)
+			if (tok->type == HEREDOC
+				&& ft_strncmp(tok->next->value, "hd_", 3) == 0)
 				unlink(tok->next->value);
 			tok = tok->next;
 		}
