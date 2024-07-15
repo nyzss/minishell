@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 11:00:47 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 13:24:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,23 +110,4 @@ void	exe_redir_files(t_exec *exec, t_filenames *file)
 	}
 }
 
-/* Only create a tab that holds the add of env->raw. No strdup on raw*/
-char	**exe_get_envs(t_env *env)
-{
-	char	**envs;
-	int		env_size;
-	int		i;
 
-	i = -1;
-	env_size = env_lstsize(env);
-	envs = (char **)malloc((env_size + 1) * sizeof(char *));
-	if (!envs)
-		return (NULL);
-	while (++i < env_size)
-	{
-		envs[i] = env->raw;
-		env = env->next;
-	}
-	envs[i] = NULL;
-	return (envs);
-}
