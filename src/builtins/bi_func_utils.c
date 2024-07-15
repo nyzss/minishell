@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/14 09:33:35 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:33:55 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	bi_exit(t_ctx *ctx, t_args *args)
 			}
 		}
 	}
+	exe_close_all(ctx, NULL);
 	ms_free_all(ctx);
 	exit(exit_code);
 }
