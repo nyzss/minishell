@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:46:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 22:41:06 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 23:07:06 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	sig_exec(int status)
 void	sig_heredoc(int status)
 {
 	(void)status;
-	// write(STDIN_FILENO, "\n", 1);
 	rl_replace_line("", 0);
 	rl_redisplay();
 	rl_done = 1;
