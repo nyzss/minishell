@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 13:59:49 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 15:04:48 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,6 @@ void	exe_err4_exec(char *path, int err_no)
 	if (exe_is_abs_path(path) == 1)
 		ft_printf("%s: %s: %s\n", P_NAME, path, strerror(err_no));
 	else
-		ft_printf("%s: %s: command not found\n", P_NAME, path);
+		printf("%s: %s: command not found\n", P_NAME, path);
 	exe_dup2_close(fd_tmp, STDOUT_FILENO);
-}
-
-int	exe_check_fdio(int fd_in, int fd_out, char *file)
-{
-	if (fd_in == -1 || fd_out == -1)
-	{
-		exe_err1_open(errno, file);
-		return (1);
-	}
-	return (0);
 }

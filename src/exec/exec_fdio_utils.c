@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 10:47:49y tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 15:06:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	exe_handle_files(t_exec *exec)
 	while (tmp)
 	{
 		exe_redir_files(exec, tmp);
-		if (exe_check_fdio(exec->fd_in, exec->fd_out, tmp->path))
+		if (exec->fd_in == -1 || exec-> fd_out == -1)
 			return (1);
 		tmp = tmp->next;
 	}
@@ -92,20 +92,21 @@ void	exe_redir_files(t_exec *exec, t_filenames *file)
 		if (exec->fd_in != STDIN_FILENO)
 			close (exec->fd_in);
 		exec->fd_in = open(file->path, O_RDONLY);
+		if (exec->fd_in == -1)
+			exe_err1_open(errno, file->path);
 		exe_dup2_close(exec->fd_in, STDIN_FILENO);
 	}
-	else if (file->type == OUTFILE)
+	else
 	{
 		if (exec->fd_out != STDOUT_FILENO)
 			close(exec->fd_out);
-		exec->fd_out = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		exe_dup2_close(exec->fd_out, STDOUT_FILENO);
-	}
-	else if (file->type == APPEND)
-	{
-		if (exec->fd_out != STDOUT_FILENO)
-			close(exec->fd_out);
-		exec->fd_out = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (file->type == OUTFILE)
+			exec->fd_out = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (file->type == APPEND)
+			exec->fd_out
+				= open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (exec->fd_out == -1)
+			exe_err1_open(errno, file->path);
 		exe_dup2_close(exec->fd_out, STDOUT_FILENO);
 	}
 }
