@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 13:21:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 10:59:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	handle_loop(t_ctx *ctx)
 	char	*line;
 
 	line = NULL;
-	sig_init_signals();
 	while (1)
 	{
+		sig_init_signals();
 		line = readline(PROMPT);
 		if (line == NULL)
 			break ;
