@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fdio_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 08:40:58 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 11:00:47 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,32 +77,37 @@ int	exe_handle_files(t_exec *exec)
 	tmp = exec->redirs;
 	while (tmp)
 	{
-		if (tmp->type == INFILE)
-		{
-			if (exec->fd_in != STDIN_FILENO)
-				close(exec->fd_in);
-			exec->fd_in = open(tmp->path, O_RDONLY);
-			exe_dup2_close(exec->fd_in, STDIN_FILENO);
-		}
-		else if (tmp->type == OUTFILE)
-		{
-			if (exec->fd_out != STDOUT_FILENO)
-				close(exec->fd_out);
-			exec->fd_out = open(tmp->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			exe_dup2_close(exec->fd_out, STDOUT_FILENO);
-		}
-		else if (tmp->type == APPEND)
-		{
-			if (exec->fd_out != STDOUT_FILENO)
-				close(exec->fd_out);
-			exec->fd_out = open(tmp->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-			exe_dup2_close(exec->fd_out, STDOUT_FILENO);
-		}
+		exe_redir_files(exec, tmp);
 		if (exe_check_fdio(exec->fd_in, exec->fd_out, tmp->path))
 			return (1);
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+void	exe_redir_files(t_exec *exec, t_filenames *file)
+{
+	if (file->type == INFILE)
+	{
+		if (exec->fd_in != STDIN_FILENO)
+			close (exec->fd_in);
+		exec->fd_in = open(file->path, O_RDONLY);
+		exe_dup2_close(exec->fd_in, STDIN_FILENO);
+	}
+	else if (file->type == OUTFILE)
+	{
+		if (exec->fd_out != STDOUT_FILENO)
+			close(exec->fd_out);
+		exec->fd_out = open(file->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		exe_dup2_close(exec->fd_out, STDOUT_FILENO);
+	}
+	else if (file->type == APPEND)
+	{
+		if (exec->fd_out != STDOUT_FILENO)
+			close(exec->fd_out);
+		exec->fd_out = open(file->path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		exe_dup2_close(exec->fd_out, STDOUT_FILENO);
+	}
 }
 
 /* Only create a tab that holds the add of env->raw. No strdup on raw*/

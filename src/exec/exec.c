@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 08:59:26 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 11:04:21 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,6 @@ int	exec(t_ctx *ctx)
 	exe_reset_stdfds(ctx);
 	return (0);
 }
-
-// int	exec_1(t_ctx *ctx, int exec_no)
-// {
-// 	*fd_in = dup(ctx->def_in);
-// 	*fd_out = dup(ctx->def_out);
-// 	if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
-// 		exec_no--;
-// 	if (!exec_no)
-// 		return (1);
-// 	exe_dup2_close(*fd_in, STDIN_FILENO);
-// 	exe_dup2_close(*fd_out, STDOUT_FILENO);
-// 	if (bi_is_builtin(ctx->exec->cmd) == 1)
-// 	{
-// 		if (ctx->exec->here_doc == 1)
-// 			unlink("here_doc");
-// 		exec_no--;
-// 		ctx->exit_code = bi_do_builtin(ctx, ctx->exec->cmd,
-// 			ctx->exec->args);
-// 	}
-// 	else
-// 	{
-// 		exe_do_child(ctx, ctx->exec, *fd_in);
-// 		if (ctx->exec->here_doc == 1)
-// 			unlink("here_doc");
-// 	}
-// 	exe_wait_all(exec_no, &(ctx->exit_code));
-// 	return (0);
-// }
 
 int	exec_2(t_ctx *ctx)
 {
@@ -110,6 +82,34 @@ void	exe_wait_all(t_ctx *ctx)
 		}
 	}
 }
+
+// int	exec_1(t_ctx *ctx, int exec_no)
+// {
+// 	*fd_in = dup(ctx->def_in);
+// 	*fd_out = dup(ctx->def_out);
+// 	if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
+// 		exec_no--;
+// 	if (!exec_no)
+// 		return (1);
+// 	exe_dup2_close(*fd_in, STDIN_FILENO);
+// 	exe_dup2_close(*fd_out, STDOUT_FILENO);
+// 	if (bi_is_builtin(ctx->exec->cmd) == 1)
+// 	{
+// 		if (ctx->exec->here_doc == 1)
+// 			unlink("here_doc");
+// 		exec_no--;
+// 		ctx->exit_code = bi_do_builtin(ctx, ctx->exec->cmd,
+// 			ctx->exec->args);
+// 	}
+// 	else
+// 	{
+// 		exe_do_child(ctx, ctx->exec, *fd_in);
+// 		if (ctx->exec->here_doc == 1)
+// 			unlink("here_doc");
+// 	}
+// 	exe_wait_all(exec_no, &(ctx->exit_code));
+// 	return (0);
+// }
 
 /* Previous exec main */
 // int	exec(t_ctx *ctx)
