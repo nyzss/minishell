@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 09:46:40 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 08:39:05 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 09:58:05 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sig_init_signals(void)
 {
 	signal(SIGINT, sig_int_handler);
-	signal(SIGQUIT, sig_quit_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	sig_int_handler(int status)
