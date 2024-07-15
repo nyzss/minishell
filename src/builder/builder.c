@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:37:42 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 11:25:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 22:56:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ static int	br_handle_redirs(t_exec *exec, t_token *token)
 	t_filenames	*tmp;
 
 	if (token->next && token->next->value != NULL
-		&& (token->type == APPEND || token->type == HEREDOC
+		&& (token->type == APPEND || token->type == N_HEREDOC
 			|| token->type == INFILE || token->type == OUTFILE))
 	{
-		if (token->type == HEREDOC)
-			exec->here_doc = 1;
 		tmp = fn_create(token->next->value, token->type);
 		if (!tmp)
 			return (-1);

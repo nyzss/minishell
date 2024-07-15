@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:16:07 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 22:39:46 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 23:02:20 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,43 +39,40 @@ int	ps_init_here_doc(int fd, char *eof)
 	return (0);
 }
 
+void	ps_unlink_err(t_token *token)
+{
+	while (token)
+	{
+		if (token->type == N_HEREDOC)
+			unlink(token->next->value);
+		token = token->next;
+	}
+}
+
+// printf("filename: %s\n", filename);
 int	ps_handle_heredoc(t_token *token)
 {
 	char	*filename;
-	char	*eof;
 	int		fd;
 	int		end;
-	t_token	*tok;
 
 	end = 0;
-	tok = token;
 	while (token != NULL && end == 0)
 	{
 		if (token->type == HEREDOC)
 		{
 			filename = ms_generate_random(token->next->value);
-			eof = token->next->value;
-			printf("filename: %s\n", filename);
 			fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (!fd)
 				return (1);
-			if (ps_init_here_doc(fd, eof) != 0)
+			if (ps_init_here_doc(fd, token->next->value) != 0)
 				end = 1;
 			close(fd);
+			free(token->next->value);
 			token->next->value = filename;
-			free(eof);
+			token->type = N_HEREDOC;
 		}
 		token = token->next;
 	}
-	if (end)
-	{
-		while (tok != NULL)
-		{
-			if (tok->type == HEREDOC && ft_strncmp(tok->next->value, "hd_", 3) == 0)
-				unlink(tok->next->value);
-			tok = tok->next;
-		}
-		return (1);
-	}
-	return (0);
+	return (end);
 }

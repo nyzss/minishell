@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 22:27:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:55:14 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	exe_handle_files(t_exec *exec)
 
 void	exe_redir_files(t_exec *exec, t_filenames *file)
 {
-	if (file->type == INFILE || file->type == HEREDOC)
+	if (file->type == INFILE || file->type == N_HEREDOC)
 	{
 		if (exec->fd_in != STDIN_FILENO)
 			close (exec->fd_in);
