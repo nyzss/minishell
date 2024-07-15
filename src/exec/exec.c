@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 13:47:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 16:08:49 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	exec_2(t_ctx *ctx)
 	{
 		exe_do_child(ctx, tmp);
 		ctx->pid_count++;
-		if (tmp->here_doc == 1)
-			unlink("here_doc");
 		tmp = tmp->next;
 	}
 	exe_wait_all(ctx);
@@ -94,6 +92,8 @@ void	exe_wait_all(t_ctx *ctx)
 				ctx->exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				ctx->exit_code = WTERMSIG(status);
+			if (ctx->exec->here_doc == 1)
+				unlink("here_doc");
 		}
 		i++;
 	}
