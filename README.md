@@ -5,9 +5,7 @@
 - [signal] the exit code of "cat ^C" is 2 but should be 130. The signal exit code is not written in the ctx->exit_code.
 <!-- - [heredoc]  -->
 - [signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)
-- [prompt] if "cat" and use ^C, there will be two promts, but should be just one prompt
 - [exec] check leaks for ctrl-c heredoc
-- [builtin] the exit code of exit is always 13, but should be 2 or according to the number given.
 - [exec] fix open fd: `ls | jksdlf | cat Makefile | < ksdjfl cat`
 
 - ~~[builtin] exit 5 and exit generally leaks~~
@@ -25,3 +23,5 @@
 - ~~[builtin] unset "ZZC=" should not remove the env variable of "ZZC=asdf". Should reference the whole string not the id parsed from string.~~
 - ~~[builtin] export "" should be error, but currently it will add "" as id to env.~~
 - ~~[builtin] export "ZZC" if "ZZC=abc" already existed, it shall not replace the current value.~~
+- ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~
+- ~~[prompt] if "cat" and use ^C, there will be two promts, but should be just one prompt~~
