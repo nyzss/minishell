@@ -4,9 +4,9 @@
 - [heredoc] check leaks for ctrl-c heredoc
 - [heredoc] currently the here_doc fails to unlink itself
 - [exec] Different behaviour of the following cmd: "< Makefile << here cat | wc -l << there > out3 | echo yo". No calls for second here_doc and the 3rd cmd is done first.
-- [parser] handle the case where the user inputs: `| cat`
 - [heredoc] Refactor and initiate heredoc before exec
 
+- ~~[parser] handle the case where the user inputs: `| cat`~~
 - ~~[signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.~~
 - ~~[builtin] the exit code of exit is always 13, but should be 2 or according to the number given.~~
 - ~~[signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)~~
