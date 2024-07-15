@@ -2,11 +2,12 @@
 ## todo list
 
 - [signal] cat: change the signals just after the fork (to only print '\n' to stderr) and after the child has exit, we change them back to the default state.
+- [signal] the exit code of "cat ^C" is 2 but should be 130. The signal exit code is not written in the ctx->exit_code.
 <!-- - [heredoc]  -->
 - [signal] signal handling (ctrl-\ | ctrl-c | ctrl-d)
 - [prompt] if "cat" and use ^C, there will be two promts, but should be just one prompt
 - [exec] check leaks for ctrl-c heredoc
-- [exec] the exit code of ls | exit "asdf" is 0, but should be 2.
+- [builtin] the exit code of exit is always 13, but should be 2 or according to the number given.
 
 - ~~[exec] change exec file opening in child process~~
 - ~~[exec] print error on command not found~~

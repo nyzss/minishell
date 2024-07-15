@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 11:04:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 11:45:38 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	exec_2(t_ctx *ctx)
 	if (ctx->exec_count == 1 && bi_is_builtin(tmp->cmd) == 1)
 	{
 		if (exe_init_fdio(tmp))
-			exe_close_all(ctx, NULL);
-		exe_close_all(ctx, NULL);
+			return (1);
 		if (tmp->here_doc == 1)
 			unlink("here_doc");
 		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
