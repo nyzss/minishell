@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:00:41 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 16:23:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:54:31 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_token_type
 	INFILE,
 	OUTFILE,
 	HEREDOC,
+	N_HEREDOC,
 	APPEND,
 	PIPE,
 	STRING,

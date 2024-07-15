@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 18:28:11 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 22:55:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	exe_unlink_all(t_ctx *ctx)
 		tmp = exec->redirs;
 		while (tmp)
 		{
-			if (tmp->type == HEREDOC)
+			if (tmp->type == N_HEREDOC)
 				unlink(tmp->path);
 			tmp = tmp->next;
 		}
