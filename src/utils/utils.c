@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 13:17:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 15:09:17 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ t_ctx	*ms_init_ctx(char **envp)
 	if (!ctx)
 		return (NULL);
 	ctx->envp = ms_env_dup(envp);
-	ctx->env = envp;
-	if (!ctx->env)
+	if (!ctx->envp)
 	{
 		free(ctx);
 		return (NULL);
