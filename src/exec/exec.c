@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 17:52:08 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:16:22 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@ int	exec(t_ctx *ctx)
 	return (0);
 }
 
-void	exe_unlink_all(t_exec *exec)
-{
-	t_filenames	*tmp;
-
-	tmp = exec->redirs;
-	while (tmp)
-	{
-		if (tmp->type == HEREDOC)
-			unlink(tmp->path);
-		tmp = tmp->next;
-	}
-}
-
 int	exec_2(t_ctx *ctx)
 {
 	t_exec	*tmp;
@@ -45,8 +32,6 @@ int	exec_2(t_ctx *ctx)
 		if (exe_init_fdio(tmp))
 			return (1);
 		exe_unlink_all(tmp);
-		// if (tmp->here_doc == 1)
-		// 	unlink("here_doc");
 		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
 		return (0);
 	}
@@ -106,12 +91,10 @@ void	exe_wait_all(t_ctx *ctx)
 				ctx->exit_code = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				ctx->exit_code = WTERMSIG(status);
-			exe_unlink_all(ctx->exec);
-			// if (ctx->exec->here_doc == 1)
-			// 	unlink("here_doc");
 		}
 		i++;
 	}
+	exe_unlink_all(ctx->exec);
 }
 
 // int	exec_1(t_ctx *ctx, int exec_no)

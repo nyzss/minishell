@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 18:00:45 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:13:08 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	exe_init_fdio(t_exec *exec)
 {
-	// if (exe_is_here_doc(exec))
-	// 	exec->here_doc = 1;
 	if (exe_handle_files(exec))
 		return (1);
 	return (0);
@@ -87,7 +85,7 @@ int	exe_handle_files(t_exec *exec)
 
 void	exe_redir_files(t_exec *exec, t_filenames *file)
 {
-	if (file->type == INFILE)
+	if (file->type == INFILE || file->type == HEREDOC)
 	{
 		if (exec->fd_in != STDIN_FILENO)
 			close (exec->fd_in);

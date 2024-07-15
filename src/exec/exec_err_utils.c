@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:26:50 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 15:11:11 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:15:30 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,17 @@ void	exe_err4_exec(char *path, int err_no)
 	else
 		printf("%s: %s: command not found\n", P_NAME, path);
 	exe_dup2_close(fd_tmp, STDOUT_FILENO);
+}
+
+void	exe_unlink_all(t_exec *exec)
+{
+	t_filenames	*tmp;
+
+	tmp = exec->redirs;
+	while (tmp)
+	{
+		if (tmp->type == HEREDOC)
+			unlink(tmp->path);
+		tmp = tmp->next;
+	}
 }
