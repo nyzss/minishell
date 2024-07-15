@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 11:11:57 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:16:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define ESC_S "\002"
 # define C_RESET "\033[0m"
 
+# define COMMAND_NOT_FOUND 127
+
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
 
 extern int	g_signal;
@@ -65,6 +67,8 @@ typedef struct s_ctx
 	int				def_out;
 	unsigned char	exit_code;
 	int				exec_count;
+	pid_t			*pids;
+	int				pid_count;
 	char			**env;
 	t_exec			*exec;
 	t_env			*envp;

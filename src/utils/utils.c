@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:12:49 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:17:03 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ t_ctx	*ms_init_ctx(char **envp)
 	ctx->def_in = STDIN_FILENO;
 	ctx->def_in = STDOUT_FILENO;
 	ctx->exec = NULL;
+	ctx->pids = NULL;
 	ctx->exec_count = 0;
+	ctx->pid_count = 0;
 	ctx->exit_code = 0;
 	return (ctx);
 }
@@ -38,10 +40,18 @@ void	ms_clear(t_ctx *ctx, t_token *token)
 {
 	if (token)
 		tok_free(token);
-	if (ctx && ctx->exec)
+	if (ctx)
 	{
-		br_free(ctx->exec);
-		ctx->exec = NULL;
+		if (ctx->exec)
+		{
+			br_free(ctx->exec);
+			ctx->exec = NULL;
+		}
+		if (ctx->pids)
+		{
+			free(ctx->pids);
+			ctx->pids = NULL;
+		}
 	}
 }
 
@@ -53,6 +63,8 @@ void	ms_free_all(t_ctx *ctx)
 			br_free(ctx->exec);
 		if (ctx->envp)
 			env_free(ctx->envp);
+		if (ctx->pids)
+			free(ctx->pids);
 		free(ctx);
 	}
 	rl_clear_history();
