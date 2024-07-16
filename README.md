@@ -5,8 +5,8 @@
 
 - [heredoc] make heredoc in the temporary folder '/tmp/'
 - [builtin] fix error code when missing file is input in builtins
-- [exec] if permission is denied return exit code `126` (I checked in my bash-5.2, the permission denied has the exit code of 1. Let's check again in the cluster environment)
 
+- ~~[exec] if permission is denied return exit code `126` (I checked in my bash-5.2, the permission denied has the exit code of 1. Let's check again in the cluster environment) -> it does have an exit code of 1, my bad~~
 - ~~[exec] fix problem where if you CTRL-C from a command then the next commands echo $? value is still going to be the ctrl-c (130) code.~~
 - ~~[heredoc] check leaks for ctrl-c heredoc~~
 - ~~[parser] handle the case where the user inputs: `| cat`~~
