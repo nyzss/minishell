@@ -2,6 +2,8 @@
 ## todo list
 
 - [MAJOR] norme
+- [builtin] pwd/cd should update env (OLDPWD and PWD)
+- []
 
 - ~~[heredoc] make heredoc in the temporary folder '/tmp/'~~
 - ~~[builtin] fix error code when missing file is input in builtins~~
