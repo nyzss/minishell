@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 11:08:30 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/11 18:46:21 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/16 08:39:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
 static void	ft_swap_pointer(char **a1, char **a2)
 {
@@ -21,7 +21,8 @@ static void	ft_swap_pointer(char **a1, char **a2)
 	*a2 = temp;
 }
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(const char *, const char *))
+void	ft_advanced_sort_string_tab(char **tab,
+	int (*cmp)(const char *, const char *))
 {
 	int	i;
 	int	j;
@@ -56,7 +57,7 @@ int	main(void)
 	arr_len = ft_arr_len(tab);
 	printf("==> Before sort string <==\n");
 	for (int i = 0; i < arr_len; i++)
-		printf("Split str %d is: %s\n", i, tab[i]); 
+		printf("Split str %d is: %s\n", i, tab[i]);
 	ft_advanced_sort_string_tab(tab, &ft_desc);
 	printf("==> After sort string <==\n");
 	for (int j = 0; j < arr_len; j++)
