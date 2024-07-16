@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 18:28:48 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/16 08:53:39 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	exe_close_all(t_ctx *ctx, int pipe[])
 	}
 }
 
+// printf("SIGNALLED: %d\n", WIFSIGNALED(status));
 void	exe_wait_all(t_ctx *ctx)
 {
 	int		status;
@@ -92,9 +93,15 @@ void	exe_wait_all(t_ctx *ctx)
 		if (waitpid(ctx->pids[i], &(status), 0))
 		{
 			if (WIFEXITED(status))
+			{
+				g_signals.signal_code = EXIT_SUCCESS;
 				ctx->exit_code = WEXITSTATUS(status);
+			}
 			else if (WIFSIGNALED(status))
+			{
+				g_signals.signal_code = SIGINT_EXIT_CODE;
 				ctx->exit_code = WTERMSIG(status);
+			}
 		}
 		i++;
 	}
