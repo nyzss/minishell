@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 22:20:03 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:51:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define RND_PRIME 1099511628211UL
 
 # define PROMPT "\001\033[1;36m\002minishell >$ \001\033[0m\002"
+# define DEF_ENV "SHELL=minishell"
 
 typedef struct s_signals
 {
@@ -95,6 +96,7 @@ char	*ms_generate_random(char *str);
 
 /* helper functions of t_env */
 t_env	*env_create(char *id, char *value, char *raw);
+t_env	*env_default_env(void);
 void	env_del_one(t_env *env);
 void	env_free(t_env *env);
 int		env_add_back(t_env **head, t_env *new);

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:20:28 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:15:16 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/16 10:48:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_env	*ms_env_dup(char **envp)
 	t_env	*tmp;
 
 	i = 0;
-	if (!envp)
-		return (NULL);
 	new_env = NULL;
+	if (!envp || (envp && *envp == NULL))
+		return (env_default_env());
 	while (envp[i])
 	{
 		id = env_get_id(envp[i]);
