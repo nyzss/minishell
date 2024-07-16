@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/16 09:18:52 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/16 09:27:56 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	exec_2(t_ctx *ctx)
 			ctx->exit_code = 1;
 			return (1);
 		}
-		exe_unlink_all(ctx);
 		if (bi_is_builtin(tmp->cmd) == 2)
-			printf("exit\n");
+			ft_putstr_fd("exit\n", STDERR_FILENO);
+		exe_unlink_all(ctx);
 		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
 		return (0);
 	}
