@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_func_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 08:39:24 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/16 18:04:59 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ int	bi_add_var(char *value, t_env **env)
 		env_add_back(env, tmp);
 	}
 	else
+	{
+		free(arg_id);
 		bi_update_var(tmp, arg_raw);
+	}
 	return (0);
 }
 
