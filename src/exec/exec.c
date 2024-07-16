@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/16 08:53:39 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/16 09:18:52 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ int	exec(t_ctx *ctx)
 int	exec_2(t_ctx *ctx)
 {
 	t_exec	*tmp;
-	int		is_builtin;
 
 	tmp = ctx->exec;
-	is_builtin = bi_is_builtin(tmp->cmd);
-	if (ctx->exec_count == 1 && is_builtin)
+	if (ctx->exec_count == 1 && bi_is_builtin(tmp->cmd))
 	{
 		if (exe_init_fdio(tmp))
+		{
+			ctx->exit_code = 1;
 			return (1);
+		}
 		exe_unlink_all(ctx);
-		if (is_builtin == 2)
+		if (bi_is_builtin(tmp->cmd) == 2)
 			printf("exit\n");
 		ctx->exit_code = bi_do_builtin(ctx, tmp->cmd, tmp->args);
 		return (0);
