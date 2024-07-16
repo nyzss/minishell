@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:41:15 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 23:26:47 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/16 09:56:16 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*ms_generate_random(char *str)
 	if (!new)
 		return (NULL);
 	rand = (unsigned long)str;
-	ft_strlcpy(new, "hd_", 4);
-	i = 3;
+	ft_strlcpy(new, "/tmp/hd_", 9);
+	i = 8;
 	while (i < 16)
 	{
 		rand *= RND_OFFSET + RND_PRIME;

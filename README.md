@@ -3,8 +3,7 @@
 
 - [MAJOR] norme
 
-- [heredoc] make heredoc in the temporary folder '/tmp/'
-
+- ~~[heredoc] make heredoc in the temporary folder '/tmp/'~~
 - ~~[builtin] fix error code when missing file is input in builtins~~
 - ~~[builtin] exit > out1 should print exit in the terminal and shouldnt redirect~~
 - ~~[exec] if permission is denied return exit code `126` (I checked in my bash-5.2, the permission denied has the exit code of 1. Let's check again in the cluster environment) -> it does have an exit code of 1, my bad~~
