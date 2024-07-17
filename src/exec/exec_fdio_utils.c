@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fdio_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 12:55:08 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 22:55:14 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 11:46:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	exe_redir_files(t_exec *exec, t_filenames *file)
 		exec->fd_in = open(file->path, O_RDONLY);
 		if (exec->fd_in == -1)
 			exe_err1_open(errno, file->path);
+		// when printing here doesnt leak
 		exe_dup2_close(exec->fd_in, STDIN_FILENO);
 	}
 	else
