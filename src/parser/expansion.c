@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/13 00:22:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 17:30:29 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,27 @@ int	ps_expand_env(t_token *token)
 	}
 	return (0);
 }
+
+t_token	*ps_split_tokens(t_token *token, char *str)
+{
+	t_token	*tmp;
+	t_token	*local;
+	char	**words;
+	int		i;
+
+	i = 0;
+	local = NULL;
+	words = ft_split2(str, " \t\n");
+	if (words == NULL)
+		return (local);
+	while (words[i])
+	{
+		tmp = tok_create(words[i], ft_strlen(words[i]), STRING, token->ctx);
+		tok_add_back(&(local), tmp);
+		free(words[i]);
+		i++;
+	}
+	free(words);
+	return (local);
+}
+// export TEST="ls -l -R -a"

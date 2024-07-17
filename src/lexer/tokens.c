@@ -6,11 +6,18 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 16:19:00 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 15:59:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	tok_free_one(t_token *token)
+{
+	if (token->value)
+		free(token->value);
+	free(token);
+}
 
 void	tok_free(t_token *token)
 {
@@ -19,13 +26,8 @@ void	tok_free(t_token *token)
 	while (token != NULL)
 	{
 		tmp = token;
-		if (token->value)
-		{
-			free(token->value);
-			token->value = NULL;
-		}
 		token = token->next;
-		free(tmp);
+		tok_free_one(tmp);
 	}
 }
 
@@ -74,13 +76,6 @@ int	tok_add_back(t_token **head, t_token *new)
 		tok_last(*head)->next = new;
 	return (0);
 }
-
-// t_token	*tok_remove_null(t_token **token)
-// {
-
-// 	while (token != NULL)
-// 	return (token);
-// }
 
 void	tok_debug(t_token *token)
 {
