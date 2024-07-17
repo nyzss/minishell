@@ -40,29 +40,24 @@ int	bi_cd(t_ctx *ctx, t_args *args)
 	char	*cwd;
 	t_env	*home;
 
+	size_args = arg_lstsize(args);
+	if (size_args > 1)
+		return (ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO), 1);
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		perror("chdir: error retrieving current directory: getcwd: cannot access parent directories");
-	size_args = arg_lstsize(args);
 	home = ms_getenv("HOME", ctx->envp);
 	if (!size_args && home != NULL && home->value != NULL)
 		chdir(home->value);
 	else if ((!size_args && home && !home->value) || (!size_args && !home))
 		return (bi_err_cd(errno, "HOME"), free(cwd), 1);
-	else if (size_args > 1)
+	else if (chdir(args->value) < 0)
 	{
-		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
+		bi_err_cd(errno, args->value);
 		return (free(cwd), 1);
 	}
-	else
-	{
-		if (chdir(args->value) < 0)
-		{
-			bi_err_cd(errno, args->value);
-			return (free(cwd), 1);
-		}
-	}
-	bi_update_oldpwd(ctx, cwd);
+	if (bi_update_pwd(ctx, cwd))
+		return (free(cwd), 1);
 	return (free(cwd), 0);
 }
 

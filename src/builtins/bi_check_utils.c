@@ -58,7 +58,7 @@ int	bi_check_exitcode(char *value)
 	return (free(tmp2), ft_atoi(value));
 }
 
-int	bi_update_oldpwd(t_ctx *ctx, char *value)
+int	bi_update_pwd(t_ctx *ctx, char *value)
 {
 	t_env	*old_pwd;
 	t_env	*pwd;
@@ -72,17 +72,15 @@ int	bi_update_oldpwd(t_ctx *ctx, char *value)
 	if (pwd && cwd_new)
 	{
 		raw2 = ft_strjoin("PWD=", cwd_new);
-		if (!raw2)
+		if (!raw2 || bi_add_var(raw2, &ctx->envp))
 			return (free(cwd_new), 1);
-		bi_add_var(raw2, &ctx->envp);
 		free(raw2);
 	}
 	if (old_pwd && value)
 	{
 		raw = ft_strjoin("OLDPWD=", value);
-		if (!raw)
+		if (!raw || bi_add_var(raw, &ctx->envp))
 			return (free(cwd_new), 1);
-		bi_add_var(raw, &ctx->envp);
 		free(raw);
 	}
 	free(cwd_new);

@@ -33,8 +33,8 @@ int		bi_print_export(t_env *env);
 int		bi_add_var(char *value, t_env **env);
 int		bi_del_var(char *value, t_env **env);
 int		bi_check_id(char *id);
-int     bi_check_exitcode(char *value);
-int     bi_update_oldpwd(t_ctx *ctx, char *value);
+int		bi_check_exitcode(char *value);
+int		bi_update_pwd(t_ctx *ctx, char *value);
 
 /* error utils */
 void	bi_err_cd(int err_no, char *file);
