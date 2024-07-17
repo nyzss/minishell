@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/16 10:51:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:51:09 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define C_RESET "\033[0m"
 
 # define COMMAND_NOT_FOUND 127
-# define SIGINT_EXIT_CODE 130
+# define SIGNAL_OFFSET 128
 
 # define RND_OFFSET 14695981039346656037UL
 # define RND_PRIME 1099511628211UL

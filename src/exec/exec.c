@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 09:33:28 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:51:11 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,14 @@ void	exe_wait_all(t_ctx *ctx)
 		{
 			if (WIFEXITED(status))
 			{
-				g_signals.signal_code = EXIT_SUCCESS;
+				g_signals.signal_code = 0;
 				ctx->exit_code = WEXITSTATUS(status);
 			}
 			else if (WIFSIGNALED(status))
 			{
-				g_signals.signal_code = SIGINT_EXIT_CODE;
-				ctx->exit_code = WTERMSIG(status);
+				if (WTERMSIG(status) == SIGQUIT)
+					exe_err_coredump(ctx->pids[i]);
+				g_signals.signal_code = SIGNAL_OFFSET + WTERMSIG(status);
 			}
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:12:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 22:21:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:45:00 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,17 @@ char	*ps_get_env_var(char *found, t_ctx *ctx)
 {
 	char	*path;
 	t_env	*env_var;
+	int		code;
 
 	path = ps_getenv_name(found);
 	if (path && ft_strcmp(path, "?") == 0)
 	{
 		free(path);
-		if (g_signals.signal_code == 130)
+		if (g_signals.signal_code != 0)
 		{
+			code = g_signals.signal_code;
 			g_signals.signal_code = 0;
-			return (ft_itoa(130));
+			return (ft_itoa(code));
 		}
 		return (ft_itoa(ctx->exit_code));
 	}
