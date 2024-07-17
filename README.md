@@ -4,7 +4,6 @@
 ### Issues after 1st evaluations
 - [MAJOR] Check everything with the valgring flag --show-leak-kinds=all
 - [MAJOR] fix leaks whenever the child in exec early exits, should free all with ms_free_all (ctx)
-- [MAJOR] dont create pipes if its the last exec command!
 - [builtin] pwd/cd should update env (OLDPWD and PWD)
 - [builtin] "exit +" and "exit 465465465432132132132132135468798795654" should be error
 - [signal] when doing an exec the CTL+\ should do core dump with exit code of 131.
@@ -12,12 +11,13 @@
 - [builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
 - [Makefile] Added dependency to headers in each file during compilation
-- [exec] `echo yo | << t cat > out1 | << T cat > out2` -> is leaking
-- [LEAK] pwd | env | echo - leaks memory when called as the first command (ex: `env | << t cat`)
-- [LEAK] pwd | < Makefile echo leaks, but pwd | echo doesnt leak -> when a builtin prints something leaks something
 
 ### complete issues after 1st evaluations
 - ~~[builtin] leaks in bi_add_var, need to free arg_id if it is just updating value.~~
+- ~~[exec] `echo yo | << t cat > out1 | << T cat > out2` -> is leaking~~
+- ~~[LEAK] pwd | env | echo - leaks memory when called as the first command (ex: `env | << t cat`)~~
+- ~~[LEAK] pwd | < Makefile echo leaks, but pwd | echo doesnt leak -> when a builtin prints something leaks something~~
+- ~~[MAJOR] dont create pipes if its the last exec command!~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~

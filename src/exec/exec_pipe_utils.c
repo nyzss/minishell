@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/17 11:53:27 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:05:23 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	exe_do_child(t_ctx *ctx, t_exec *exec)
 {
 	int		fd_pipe[2];
 
-	exe_create_pipe(fd_pipe);
+	fd_pipe[0] = -1;
+	fd_pipe[1] = -1;
+	if (exec->next != NULL)
+		exe_create_pipe(fd_pipe);
 	signal(SIGINT, sig_exec);
 	ctx->pids[ctx->pid_count] = fork();
 	if (ctx->pids[ctx->pid_count] == -1)
