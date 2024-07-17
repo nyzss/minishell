@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 22:42:10 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 16:15:46 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/17 19:11:12 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,35 @@ int	bi_check_exitcode(char *value)
 		return (free(tmp2), 2);
 	}
 	return (free(tmp2), ft_atoi(value));
+}
+
+int	bi_update_oldpwd(t_ctx *ctx, char *value)
+{
+	t_env	*old_pwd;
+	t_env	*pwd;
+	char	*cwd_new;
+	char	*raw;
+	char	*raw2;
+
+	cwd_new = getcwd(NULL, 0);
+	old_pwd = ms_getenv("OLDPWD", ctx->envp);
+	pwd = ms_getenv("PWD", ctx->envp);
+	if (pwd && cwd_new)
+	{
+		raw2 = ft_strjoin("PWD=", cwd_new);
+		if (!raw2)
+			return (free(cwd_new), 1);
+		bi_add_var(raw2, &ctx->envp);
+		free(raw2);
+	}
+	if (old_pwd && value)
+	{
+		raw = ft_strjoin("OLDPWD=", value);
+		if (!raw)
+			return (free(cwd_new), 1);
+		bi_add_var(raw, &ctx->envp);
+		free(raw);
+	}
+	free(cwd_new);
+	return (0);
 }

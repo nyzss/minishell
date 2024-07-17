@@ -2,7 +2,7 @@
 ## todo list
 
 ### Issues after 1st evaluations
-- [builtin] pwd/cd should update env (OLDPWD and PWD)
+- ~~[builtin] pwd/cd should update env (OLDPWD and PWD)~~
 - [builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)
 - [parsing] echo $"USER" should only print "USER" without "$"
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
@@ -56,3 +56,9 @@
 - ~~[heredoc] Refactor and initiate heredoc before exec~~
 - ~~[heredoc] currently the here_doc fails to unlink itself~~
 - ~~[builtin] `exit -100` and `exit +100` should work~~
+
+
+#### Noes for cd and pwd
+
+1. everytime you cd somewhere, it always replace the env OLDPWD with the current PWD. and replace PWD with the new directory locatioin.
+2. missing err message of ```chdir: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory``` if cd from a dir that is removed.

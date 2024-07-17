@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/17 14:25:41 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/17 19:15:10 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,33 @@ int	bi_echo(t_args *args)
 int	bi_cd(t_ctx *ctx, t_args *args)
 {
 	int		size_args;
+	char	*cwd;
 	t_env	*home;
 
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		perror("chdir: error retrieving current directory: getcwd: cannot access parent directories");
 	size_args = arg_lstsize(args);
 	home = ms_getenv("HOME", ctx->envp);
 	if (!size_args && home != NULL && home->value != NULL)
 		chdir(home->value);
 	else if ((!size_args && home && !home->value) || (!size_args && !home))
-		return (bi_err_cd(errno, "HOME"), 1);
+		return (bi_err_cd(errno, "HOME"), free(cwd), 1);
 	else if (size_args > 1)
 	{
-		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 35);
-		return (1);
+		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
+		return (free(cwd), 1);
 	}
 	else
 	{
 		if (chdir(args->value) < 0)
 		{
 			bi_err_cd(errno, args->value);
-			return (1);
+			return (free(cwd), 1);
 		}
 	}
-	return (0);
+	bi_update_oldpwd(ctx, cwd);
+	return (free(cwd), 0);
 }
 
 int	bi_pwd(t_args *args)
@@ -74,7 +79,7 @@ int	bi_pwd(t_args *args)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("pwd");
+		perror("pwd: error retrieving current directory: getcwd: cannot access parent directories");
 		return (1);
 	}
 	printf("%s\n", cwd);
