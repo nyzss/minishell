@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 22:16:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 22:23:54 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,16 @@ int	ps_replace_current(t_token *current, t_token *new)
 */
 int	ps_expand_env(t_token *token)
 {
+	t_token	*new;
+
 	while (token != NULL)
 	{
 		if (token->type == STRING || token->type == DOUBLEQUOTE)
-			ps_handle_env(token);
+		{
+			new = ps_handle_env(token);
+			tok_debug(new);
+			tok_free(new);
+		}
 		token = token->next;
 	}
 	return (0);
