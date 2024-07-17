@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/16 09:27:56 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 09:33:28 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_2(t_ctx *ctx)
 	t_exec	*tmp;
 
 	tmp = ctx->exec;
-	if (ctx->exec_count == 1 && bi_is_builtin(tmp->cmd))
+	if (tmp->next == NULL && bi_is_builtin(tmp->cmd))
 	{
 		if (exe_init_fdio(tmp))
 		{
