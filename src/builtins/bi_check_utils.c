@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_check_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 22:42:10 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/12 22:46:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 14:21:04 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,29 @@ int	bi_check_id(char *id)
 		i++;
 	}
 	return (1);
+}
+
+int	bi_check_exitcode(char *value)
+{
+	int		code;
+	char	*tmp;
+
+	code = ft_atoi(value);
+	tmp = value;
+	if ((*tmp == '+' || *tmp == '-') && *(tmp + 1))
+		tmp++;
+	if (ft_strlen(tmp) > 19 || ft_strcmp(tmp, "9223372036854775807") > 0)
+	{
+		bi_err_exit(value);
+		return (2);
+	}
+	while (*tmp)
+	{
+		if (!ft_isdigit(*tmp++))
+		{
+			bi_err_exit(value);
+			return (2);
+		}
+	}
+	return (code);
 }

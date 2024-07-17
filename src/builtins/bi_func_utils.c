@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 23:20:58 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/17 14:25:41 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,10 @@ int	bi_pwd(t_args *args)
 int	bi_exit(t_ctx *ctx, t_args *args)
 {
 	int		exit_code;
-	char	*tmp;
 
 	exit_code = 0;
 	if (args)
-	{
-		exit_code = ft_atoi(args->value);
-		tmp = args->value;
-		if (*tmp == '+' || *tmp == '-')
-			tmp++;
-		while (*tmp)
-		{
-			if (!ft_isdigit(*tmp++))
-			{
-				bi_err_exit(args->value);
-				exit_code = 2;
-				break ;
-			}
-		}
-	}
+		exit_code = bi_check_exitcode(args->value);
 	exe_close_all(ctx, NULL);
 	ms_free_all(ctx);
 	exit(exit_code);
