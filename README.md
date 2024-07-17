@@ -60,7 +60,12 @@
 - ~~[builtin] `exit -100` and `exit +100` should work~~
 
 
-#### Noes for cd and pwd
+#### Notes for cd and pwd
 
 1. everytime you cd somewhere, it always replace the env OLDPWD with the current PWD. and replace PWD with the new directory locatioin.
 2. missing err message of ```chdir: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory``` if cd from a dir that is removed.
+
+#### Notes for env expansion
+
+1. try out with random '$' like: "lol$PATH $$ $ $USER"
+- single '$' followed by other '$' env variables might not work currently
