@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:38 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 23:01:40 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 17:23:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		ps_handle_heredoc(t_token *token);
 int		ps_init_here_doc(int fd, char *eof);
 void	ps_unlink_err(t_token *token);
 
+t_token	*ps_split_tokens(t_token *token, char *str);
 int		ps_expand_env(t_token *token);
 char	*ps_getenv_name(char *str);
 char	*ps_get_before_env(char *str, char *found);
