@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/17 13:05:23 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:39:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	exe_do_child2(t_ctx *ctx, t_exec *exec, int fd_pipe[])
 	int	exit_code;
 
 	exit_code = 0;
+	signal(SIGQUIT, SIG_DFL);
 	if (exec->next && exec->fd_out == STDOUT_FILENO)
 		dup2(fd_pipe[1], STDOUT_FILENO);
 	if (exe_init_fdio(exec))

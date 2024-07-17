@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/16 10:50:59 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/17 13:39:19 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS_M		= main.c
 
 SRCS_BT		= bi_func.c bi_func_utils.c bi_func_utils2.c bi_err_utils.c bi_check_utils.c
 
-SRCS_EX 	= exec.c exec_fdio_utils.c exec_pipe_utils.c exec_child_utils.c exec_err_utils.c
+SRCS_EX 	= exec.c exec_fdio_utils.c exec_pipe_utils.c exec_child_utils.c exec_err_utils.c exec_helper.c
 
 SRCS_LEX 	= lexer.c tokens.c lex_helper.c
 

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 09:33:28 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/17 13:54:38 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	exe_close_all(t_ctx *ctx, int pipe[])
 	}
 }
 
-// printf("SIGNALLED: %d\n", WIFSIGNALED(status));
 void	exe_wait_all(t_ctx *ctx)
 {
 	int		status;
@@ -95,81 +94,17 @@ void	exe_wait_all(t_ctx *ctx)
 		{
 			if (WIFEXITED(status))
 			{
-				g_signals.signal_code = EXIT_SUCCESS;
+				g_signals.signal_code = 0;
 				ctx->exit_code = WEXITSTATUS(status);
 			}
 			else if (WIFSIGNALED(status))
 			{
-				g_signals.signal_code = SIGINT_EXIT_CODE;
-				ctx->exit_code = WTERMSIG(status);
+				if (WTERMSIG(status) == SIGQUIT)
+					exe_err_coredump(ctx->pids[i]);
+				g_signals.signal_code = SIGNAL_OFFSET + WTERMSIG(status);
 			}
 		}
 		i++;
 	}
 	exe_unlink_all(ctx);
 }
-
-// int	exec_1(t_ctx *ctx, int exec_no)
-// {
-// 	*fd_in = dup(ctx->def_in);
-// 	*fd_out = dup(ctx->def_out);
-// 	if (exe_init_fdio(fd_in, fd_out, ctx->exec, ctx->def_in))
-// 		exec_no--;
-// 	if (!exec_no)
-// 		return (1);
-// 	exe_dup2_close(*fd_in, STDIN_FILENO);
-// 	exe_dup2_close(*fd_out, STDOUT_FILENO);
-// 	if (bi_is_builtin(ctx->exec->cmd) == 1)
-// 	{
-// 		if (ctx->exec->here_doc == 1)
-// 			unlink("here_doc");
-// 		exec_no--;
-// 		ctx->exit_code = bi_do_builtin(ctx, ctx->exec->cmd,
-// 			ctx->exec->args);
-// 	}
-// 	else
-// 	{
-// 		exe_do_child(ctx, ctx->exec, *fd_in);
-// 		if (ctx->exec->here_doc == 1)
-// 			unlink("here_doc");
-// 	}
-// 	exe_wait_all(exec_no, &(ctx->exit_code));
-// 	return (0);
-// }
-
-/* Previous exec main */
-// int	exec(t_ctx *ctx)
-// {
-// 	int		fd_in; //fd_in for each exec
-// 	int		fd_out; //fd_out for each exec
-// 	int		fd_pipe[2];
-// 	int		exec_no;
-
-// 	// create tmp i/o for iterations
-// 	get_stdfds(ctx);
-// 	fd_in = dup(ctx->def_in); // initiate infile
-// 	fd_out = dup(ctx->def_out); // initiate outfile
-// 	// cast to void pointer just for compilation
-// 	exec_no = br_lstsize(ctx->exec);
-// 	// iterate through executables
-// 	while (ctx->exec)
-// 	{
-// 		// set initial input
-// 		set_init_input(&fd_in, ctx->exec->redirs, ctx->def_in);
-// 		// redirect input
-// 		ft_dup2_close(fd_in, STDIN_FILENO);
-// 		//set output
-// 		if (ctx->exec->next)
-// 			create_pipe(&fd_in, &fd_out, fd_pipe, ctx->exec);
-// 		set_init_output(&fd_out, ctx->exec->redirs);
-// 		// redirect output
-// 		ft_dup2_close(fd_out, STDOUT_FILENO);
-// 		do_child(ctx->exec, ctx->env, &ctx->exit_code);
-// 		ctx->exec = ctx->exec->next;
-// 	}
-// 	// wait all child process
-// 	wait_all(exec_no);
-// 	// restore fdin and fdout to default
-// 	reset_stdfds(ctx);
-// 	return (0);
-// }
