@@ -2,8 +2,6 @@
 ## todo list
 
 ### Issues after 1st evaluations
-- [MAJOR] Check everything with the valgring flag --show-leak-kinds=all
-- [MAJOR] fix leaks whenever the child in exec early exits, should free all with ms_free_all (ctx)
 - [builtin] pwd/cd should update env (OLDPWD and PWD)
 - [builtin] "exit +" and "exit 465465465432132132132132135468798795654" should be error
 - [builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)
@@ -19,6 +17,8 @@
 - ~~[MAJOR] dont create pipes if its the last exec command!~~
 - ~~[signal] when doing an exec the CTL+\ should do core dump with exit code of 131.~~
 - ~~[parsing] change exit code to 2 when a parsing error happens~~
+- ~~[MAJOR] fix leaks whenever the child in exec early exits, should free all with ms_free_all (ctx)~~
+- ~~[MAJOR] Check everything with the valgring flag --show-leak-kinds=all~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~
