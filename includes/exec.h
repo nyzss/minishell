@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:24 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 13:38:51 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 20:35:59 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		exec(t_ctx *ctx);
 int		exec_2(t_ctx *ctx);
 void	exe_set_stdfds(t_ctx *ctx, int mode);
 void	exe_close_all(t_ctx *ctx, int pipe[]);
+void	exe_close(int *fd);
 void	exe_wait_all(t_ctx *ctx);
 
 /* fdio utils*/
