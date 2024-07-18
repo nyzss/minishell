@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 18:12:01 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 19:09:26 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,20 @@ int	bi_pwd(t_args *args)
 int	bi_exit(t_ctx *ctx, t_args *args)
 {
 	int		exit_code;
+	int		siz;
 
+	siz = arg_lstsize(args);
+	if (siz > 1 && !bi_check_exitcode(args->value))
+		return (ft_putstr_fd("minishell: exit: too many arguments\n",
+				STDERR_FILENO), 1);
 	exit_code = 0;
-	if (args)
-		exit_code = bi_check_exitcode(args->value);
+	if (args && !bi_check_exitcode(args->value))
+		exit_code = ft_atoi(args->value);
+	else if (args && bi_check_exitcode(args->value))
+	{
+		bi_err_exit(args->value);
+		exit_code = 2;
+	}
 	exe_close_all(ctx, NULL);
 	ms_free_all(ctx);
 	exit(exit_code);

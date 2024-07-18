@@ -5,9 +5,9 @@
 
 ### Notes
 - [builtin] `cd -` isn't required to do as the subject says: "cd with only a relative or absolute path" and the `-` is an operand.
-- [builtin] `exit 56 4575` should not exit and show error message `too many arguments`. the exit code should be 1
 
 ### complete issues after 1st evaluations
+- ~~[builtin] `exit 56 4575` should not exit and show error message `too many arguments`. the exit code should be 1. If there are multiple arguments and the first on is valid number, it shall be too many arguments error.~~
 - ~~[buitin] handle `cd --` commands~~
 - ~~[parsing] if ```export c='ls -la'``` ```$c``` should exec the same as ```ls -a```~~ We decided not to handle this and keep it as the same as zsh
 - ~~[expansion] $ only should print it~~

@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 22:42:10 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 13:40:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 19:06:37 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	bi_check_exitcode(char *value)
 	while (*tmp)
 	{
 		if (!ft_isdigit(*tmp++))
-		{
-			bi_err_exit(value);
-			return (2);
-		}
+			return (1);
 	}
 	tmp = value;
 	if (*tmp == '+')
@@ -52,10 +49,11 @@ int	bi_check_exitcode(char *value)
 	tmp2 = ft_ltoa(ft_atol(tmp));
 	if (ft_strcmp(tmp, tmp2))
 	{
-		bi_err_exit(value);
-		return (free(tmp2), 2);
+		free(tmp2);
+		return (1);
 	}
-	return (free(tmp2), ft_atoi(value));
+	free(tmp2);
+	return (0);
 }
 
 int	bi_update_pwd(t_ctx *ctx, char *value)
