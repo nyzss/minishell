@@ -6,7 +6,6 @@
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
 - [Makefile] Added dependency to headers in each file during compilation
 - [expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])
-- [Token] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found
 - [expansion] $ only should print it
 - [Token] intput "/" or "/////" or "/.." or "/." the error message should be "Is a directory" and exit code should be 126. Now is "command not found" with exit code 127.
 - [Token] intput "&", "&&" should give exit code of 2, but now is 127. "&" should also be considered as meta character
@@ -31,6 +30,7 @@
 - ~~[MAJOR] Check everything with the valgring flag --show-leak-kinds=all~~
 - ~~[expansion] $sdfsdf shouldnt print anything~~
 - ~~[parsing] echo $"USER" should only print "USER" without "$"~~
+- ~~[Token] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~

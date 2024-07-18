@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:32 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/11 16:20:07 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 12:42:08 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_token	*lexer(t_ctx *ctx, char *line)
 	token = NULL;
 	while (line[i])
 	{
-		if (line[i] != ' ')
+		if (line[i] != ' ' && line[i] != '\t')
 		{
 			tmp = lex_strtok(&(line[i]), ctx);
 			if (tmp == NULL)
