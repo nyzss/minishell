@@ -31,6 +31,7 @@
 - ~~[expansion] $sdfsdf shouldnt print anything~~
 - ~~[parsing] echo $"USER" should only print "USER" without "$"~~
 - ~~[Token] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found~~
+- ~~[Token] `echo "hello"				world` should print: "hello world" so just like a space~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~
