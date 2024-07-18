@@ -5,6 +5,7 @@
 
 ### Notes
 - [builtin] `cd -` isn't required to do as the subject says: "cd with only a relative or absolute path" and the `-` is an operand.
+- [builtin] `exit 56 4575` should not exit and show error message `too many arguments`. the exit code should be 1
 
 ### complete issues after 1st evaluations
 - ~~[buitin] handle `cd --` commands~~
