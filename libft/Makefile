@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/15 10:05:55 by tsuchen           #+#    #+#              #
-#    Updated: 2024/07/17 17:31:50 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/18 15:31:05 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ SRCS_PRINTF	= ft_print_char.c ft_print_digit.c ft_printf.c ft_print_mem.c \
 
 SRCS_GNL	= get_next_line_bonus.c get_next_line_utils_bonus.c
 
+HEADERS = ft_printf.h get_next_line_bonus.h libft.h
+
 LIBC_PATH	= srcs/libc/
 ARRAY_PATH	= srcs/array/
 LIST_PATH	= srcs/list/
@@ -55,6 +57,8 @@ OBJS		= $(SRCS:.c=.o)
 
 HEAD		= includes/
 
+HDRS_DEPS	= $(addprefix $(HEAD), $(HEADERS))
+
 CFLAGS		= -Wall -Wextra -Werror
 
 ARC		= ar rcs
@@ -63,7 +67,7 @@ CC		= cc
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HDRS_DEPS)
 	@$(ARC) $(NAME) $(OBJS)
 
 bonus: $(NAME)

@@ -6,7 +6,7 @@
 #    By: okoca <okoca@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/08 11:20:19 by okoca             #+#    #+#              #
-#    Updated: 2024/07/17 13:39:19 by okoca            ###   ########.fr        #
+#    Updated: 2024/07/18 15:35:14 by okoca            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,7 @@ SRCS		= $(addprefix $(SRC), $(SRCS_M)) \
 		  $(addprefix $(BUILDER_PATH), $(SRCS_BLD)) \
 		  $(addprefix $(SIGNAL_PATH), $(SRCS_SIG)) \
 
-# F_PATH		= src/
-
-# SRCS		= $(addprefix $(F_PATH), $(SRCS_F))
+HEADERS		= builder.h builtins.h exec.h lexer.h minishell.h parser.h signals.h
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -58,6 +56,8 @@ HEAD		= includes/
 CFLAGS		= -Wall -Wextra -Werror -g
 
 CC		= cc
+
+H_DEPS	= $(addprefix $(HEAD), $(HEADERS))
 
 LIBFT_PATH	= libft/
 LIBFT_H_PATH	= libft/includes/
@@ -68,7 +68,7 @@ all: $(NAME)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS) $(H_DEPS)
 	$(CC) $(CFLAGS) $(OBJS) -lreadline $(LIBFT) -o $(NAME)
 
 %.o: %.c

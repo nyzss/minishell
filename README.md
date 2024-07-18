@@ -3,7 +3,6 @@
 
 ### Issues after 1st evaluations
 - [parsing] echo $"USER" should only print "USER" without "$"
-- [Makefile] Added dependency to headers in each file during compilation
 
 ### complete issues after 1st evaluations
 - ~~[parsing] if ```export c='ls -la'``` ```$c``` should exec the same as ```ls -a```~~ We decided not to handle this and keep it as the same as zsh
@@ -35,6 +34,7 @@
 - ~~[MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null~~
 - ~~[LEAK] there is raw string not freed in bi_add_var if the value is just the id (ie. doesn't update anything).~~
 - ~~[CRASH] if ```export a='$a'``` and ```echo $a```, it will be in an infinite loop~~
+- ~~[Makefile] Added dependency to headers in each file during compilation~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~
