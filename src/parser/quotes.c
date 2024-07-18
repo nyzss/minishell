@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 13:20:28 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 17:23:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,24 +92,49 @@ char	*ps_combine_tokens(t_token *token)
 	return (value);
 }
 
+int	ps_combine(t_token *token, t_token *new_list)
+{
+	t_token	*new_tmp;
+
+	if (!new_list || !(new_list->value))
+		return (0);
+	new_tmp = new_list;
+	new_list = new_list->next;
+	if (token->value)
+		free(token->value);
+	token->value = new_tmp->value;
+	free(new_tmp);
+	if (!new_list)
+		return (0);
+	tok_last(new_list)->next = token->next;
+	token->next = new_list;
+	return (0);
+}
+
 // tok_debug(str);
 // printf("----------\n");
 int	ps_expand_and_quotes(t_token *token)
 {
 	t_token	*str;
+	t_token	*new_list;
+	t_token	*tmp;
 
 	while (token != NULL)
 	{
+		tmp = token->next;
 		if (token->type == STRING)
 		{
 			str = ps_parse_quotes(token->value, token->ctx);
-			ps_expand_env(str);
+			new_list = ps_expand_env(str);
 			if (token->value)
 				free(token->value);
 			token->value = ps_combine_tokens(str);
+			printf("token->value: %s\n", token->value);
+			if (new_list)
+				ps_combine(token, new_list);
 			tok_free(str);
 		}
-		token = token->next;
+		token = tmp;
 	}
 	return (0);
 }

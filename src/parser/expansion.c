@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 14:45:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 16:32:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,21 @@ int	ft_count_exp(char *str)
 	return (count);
 }
 
-int	ps_handle_env(t_token *token)
+t_token	*ps_test(char *str, t_token *token)
+{
+	t_token	*new;
+
+	new = ps_split_tokens(token, str);
+	return (new);
+}
+
+t_token	*ps_handle_env(t_token *token)
 {
 	char	*tmp;
 	char	*found;
 	char	*new;
 	int		nb;
+	t_token	*new_tok;
 
 	nb = ft_count_exp(token->value);
 	while (token->value != NULL)
@@ -90,47 +99,56 @@ int	ps_handle_env(t_token *token)
 		free(tmp);
 		nb--;
 	}
-	return (0);
+	new_tok = ps_test(new, token);
+	return (new_tok);
 }
 
 /*
 * token->value could be NULL!!
 */
-int	ps_expand_env(t_token *token)
+t_token	*ps_expand_env(t_token *token)
 {
+	t_token	*tmp;
+	t_token	*new_list;
+
+	new_list = NULL;
 	while (token != NULL)
 	{
+		tmp = token->next;
 		if (token->type == STRING || token->type == DOUBLEQUOTE)
-			ps_handle_env(token);
-		token = token->next;
+		{
+			if (token->value && ft_strchr(token->value, '$') != NULL)
+				tok_add_back(&(new_list), ps_handle_env(token));
+		}
+		token = tmp;
 	}
-	return (0);
+	return (new_list);
 }
 
-// t_token	*ps_split_tokens(t_token *token, char *str)
-// {
-// 	t_token	*tmp;
-// 	t_token	*local;
-// 	char	**words;
-// 	int		i;
+t_token	*ps_split_tokens(t_token *token, char *str)
+{
+	t_token	*tmp;
+	t_token	*local;
+	char	**words;
+	int		i;
 
-// 	i = 0;
-// 	local = NULL;
-// 	if (str == NULL)
-// 		return (NULL);
-// 	words = ft_split2(str, " \t\n");
-// 	if (words == NULL)
-// 		return (local);
-// 	while (words[i])
-// 	{
-// 		tmp = tok_create(words[i], ft_strlen(words[i]), STRING, token->ctx);
-// 		tok_add_back(&(local), tmp);
-// 		free(words[i]);
-// 		i++;
-// 	}
-// 	free(words);
-// 	return (local);
-// }
+	i = 0;
+	local = NULL;
+	if (str == NULL)
+		return (NULL);
+	words = ft_split2(str, " \t\n");
+	if (words == NULL)
+		return (local);
+	while (words[i])
+	{
+		tmp = tok_create(words[i], ft_strlen(words[i]), STRING, token->ctx);
+		tok_add_back(&(local), tmp);
+		free(words[i]);
+		i++;
+	}
+	free(words);
+	return (local);
+}
 
 // int	ps_replace_current(t_token *current, t_token *new)
 // {
