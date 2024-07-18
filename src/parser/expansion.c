@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 10:36:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 13:20:42 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,21 @@ t_token	*ps_handle_env(t_token *token)
 {
 	char	*tmp;
 	char	*found;
+	char	*new;
 
-	// printf("token->value: [%s]\n", token->value);
-	// if (token->value && ft_strcmp(token->value, "$") == 0)
-	// 	return (NULL);
 	while (token->value != NULL)
 	{
 		found = ft_strchr(token->value, '$');
 		if (found == NULL)
 			break ;
 		tmp = token->value;
-		token->value = ps_convert_to_env(token->value, found, token->ctx);
+		new = ps_convert_to_env(token->value, found, token->ctx);
+		if (new && new[0] == '\0')
+		{
+			free(new);
+			new = NULL;
+		}
+		token->value = new;
 		free(tmp);
 	}
 	return (ps_split_tokens(token, token->value));
@@ -125,6 +129,8 @@ t_token	*ps_split_tokens(t_token *token, char *str)
 
 	i = 0;
 	local = NULL;
+	if (str == NULL)
+		return (NULL);
 	words = ft_split2(str, " \t\n");
 	if (words == NULL)
 		return (local);

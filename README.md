@@ -5,10 +5,8 @@
 - [parsing] echo $"USER" should only print "USER" without "$"
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
 - [Makefile] Added dependency to headers in each file during compilation
-- [expansion] $ only should print it
+- [expansion] $ only should print it or `echo $`
 - [builtin] echo -n -nnn hola -nnnn shold only output "hola -nnnn". It should ignore multiple -n or -nnnnnnnn flags in the arguments.
-- [expansion] ```echo $``` and ```echo "$"``` should output a $
-- [MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null
 
 
 ### complete issues after 1st evaluations
@@ -32,6 +30,7 @@
 - ~~[expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])~~ -> deciced to not handle it
 - ~~[parsing] intput "\" is not handled. (ex. echo \n yo should output "n yo", but now is "\n yo")~~ -> not required by subject
 - ~~[Token] intput "&", "&&" should give exit code of 2, but now is 127. "&" should also be considered as meta character~~ -> not required by subject / not handled knowingly
+- ~~[MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~
