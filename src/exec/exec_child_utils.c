@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/15 13:36:29 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 11:21:18 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	exe_do_exec(t_ctx *ctx, char *cmd, t_args *args)
 	{
 		exe_err4_exec(path, errno);
 		ft_free_all(cmds);
-		return (free(path), free(envs), -1);
+		return (free(path), free(envs), -2);
 	}
 	ft_free_all(cmds);
 	return (free(path), free(envs), 0);
@@ -74,6 +74,7 @@ char	*exe_get_exec(char **paths, char *file)
 		free(path);
 		if (!exec)
 			return (NULL);
+
 		if (!access(exec, X_OK | F_OK))
 			return (exec);
 		free(exec);

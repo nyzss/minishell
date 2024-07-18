@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/17 13:39:21 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:52:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ void	exe_do_child2(t_ctx *ctx, t_exec *exec, int fd_pipe[])
 		ms_free_all(ctx);
 		exit(exit_code);
 	}
-	else if (exe_do_exec(ctx, exec->cmd, exec->args) < 0)
-	{
-		ms_free_all(ctx);
-		exit(COMMAND_NOT_FOUND);
-	}
-	exit(0);
+	exit_code = exe_do_exec(ctx, exec->cmd, exec->args);
+	ms_free_all(ctx);
+	if (exit_code == -2)
+		exit(IS_A_DIRECTORY);
+	exit(COMMAND_NOT_FOUND);
 }
 
 void	exe_dup2_close(int fd1, int fd2)

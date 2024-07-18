@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 13:51:09 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 11:38:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <ncurses.h>
 # include <termios.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <signal.h>
 # include <fcntl.h>
@@ -47,6 +48,7 @@
 # define ESC_S "\002"
 # define C_RESET "\033[0m"
 
+# define IS_A_DIRECTORY 126
 # define COMMAND_NOT_FOUND 127
 # define SIGNAL_OFFSET 128
 
