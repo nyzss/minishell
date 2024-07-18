@@ -2,14 +2,16 @@
 ## todo list
 
 ### Issues after 1st evaluations
-- ~~[builtin] pwd/cd should update env (OLDPWD and PWD)~~
-- [builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)
+- ~~[builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)~~
 - [parsing] echo $"USER" should only print "USER" without "$"
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
 - [Makefile] Added dependency to headers in each file during compilation
 - [expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])
+- [parsing] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found
+
 
 ### complete issues after 1st evaluations
+- ~~[builtin] pwd/cd should update env (OLDPWD and PWD)~~
 - ~~[builtin] "exit +" and "exit 465465465432132132132132135468798795654" should be error~~
 - ~~[builtin] leaks in bi_add_var, need to free arg_id if it is just updating value.~~
 - ~~[exec] `echo yo | << t cat > out1 | << T cat > out2` -> is leaking~~
