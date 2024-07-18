@@ -8,7 +8,6 @@
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
 - [Makefile] Added dependency to headers in each file during compilation
 - [expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])
-- [expansion] $sdfsdf shouldnt print anything
 
 ### complete issues after 1st evaluations
 - ~~[builtin] "exit +" and "exit 465465465432132132132132135468798795654" should be error~~
@@ -21,6 +20,7 @@
 - ~~[parsing] change exit code to 2 when a parsing error happens~~
 - ~~[MAJOR] fix leaks whenever the child in exec early exits, should free all with ms_free_all (ctx)~~
 - ~~[MAJOR] Check everything with the valgring flag --show-leak-kinds=all~~
+- ~~[expansion] $sdfsdf shouldnt print anything~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~

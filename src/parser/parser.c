@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:35:56 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 23:02:10 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 09:11:22 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ps_handle_redir(t_token *token)
 {
-	if (token->type == PIPE)
+	if (token && token->type == PIPE)
 		return (1);
 	while (token != NULL)
 	{
@@ -116,6 +116,8 @@ int	parser(t_token **token)
 		err = 1;
 	else if (ps_remove_null(token) != 0)
 		err = 1;
+	else if (ps_check_all_null(*token) != 0)
+		err = 2;
 	else if (ps_handle_redir(*token) != 0)
 		err = 1;
 	else if (ps_handle_cmd(*token) != 0)

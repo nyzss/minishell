@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:01:38 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 22:16:20 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 09:11:46 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ps_getenv_name(char *str);
 char	*ps_get_before_env(char *str, char *found);
 char	*ps_get_env_var(char *found, t_ctx *ctx);
 char	*ps_get_after_env(char *found);
+int		ps_check_all_null(t_token *token);
 
 #endif
