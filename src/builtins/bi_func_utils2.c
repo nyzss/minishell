@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:02:54 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/16 18:04:59 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 12:59:06 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ static void	bi_update_var(t_env *node, char *arg_raw)
 
 	arg_value = env_get_value(arg_raw);
 	if (!arg_value)
+	{
+		free(arg_raw);
 		return ;
+	}
 	if (node->value)
 		free(node->value);
 	if (node->raw)

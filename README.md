@@ -7,6 +7,7 @@
 - [Makefile] Added dependency to headers in each file during compilation
 - [expansion] $ only should print it or `echo $`
 - [builtin] echo -n -nnn hola -nnnn shold only output "hola -nnnn". It should ignore multiple -n or -nnnnnnnn flags in the arguments.
+- ~~[LEAK] there is raw string not freed in bi_add_var if the value is just the id (ie. doesn't update anything).~~
 
 
 ### complete issues after 1st evaluations
