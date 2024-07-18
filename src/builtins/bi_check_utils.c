@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 22:42:10 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 19:11:12 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 13:40:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,19 @@ int	bi_update_pwd(t_ctx *ctx, char *value)
 		free(raw);
 	}
 	free(cwd_new);
+	return (0);
+}
+
+int	bi_is_nflag(char *flag)
+{
+	if (!ft_strncmp(flag, "-n", 2))
+		flag += 2;
+	else
+		return (1);
+	while (*flag)
+	{
+		if (*flag++ != 'n')
+			return (1);
+	}
 	return (0);
 }

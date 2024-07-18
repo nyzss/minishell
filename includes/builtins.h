@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:02:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 18:21:57 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 13:57:18 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		bi_del_var(char *value, t_env **env);
 int		bi_check_id(char *id);
 int		bi_check_exitcode(char *value);
 int		bi_update_pwd(t_ctx *ctx, char *value);
+int		bi_is_nflag(char *flag);
 
 /* error utils */
 void	bi_err_cd(int err_no, char *file);
