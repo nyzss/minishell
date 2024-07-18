@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 13:44:56 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 18:12:01 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ int	bi_echo(t_args *args)
 
 int	bi_cd(t_ctx *ctx, t_args *args)
 {
-	int		size_args;
+	int		siz;
 	char	*cwd;
 	t_env	*home;
 
-	size_args = arg_lstsize(args);
-	if (size_args > 1)
+	siz = arg_lstsize(args);
+	if (siz > 1)
 		return (ft_putstr_fd("minishell: cd: too many arguments\n",
 				STDERR_FILENO), 1);
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		perror("minishell: cd: error retrieving current directory");
 	home = ms_getenv("HOME", ctx->envp);
-	if (!size_args && home != NULL && home->value != NULL)
+	if ((!siz || !ft_strcmp(args->value, "--")) && home && home->value)
 		chdir(home->value);
-	else if ((!size_args && home && !home->value) || (!size_args && !home))
+	else if ((!siz || !ft_strcmp(args->value, "--")) && (!home || !home->value))
 		return (bi_err_cd(errno, "HOME"), free(cwd), 1);
 	else if (chdir(args->value) < 0)
 	{
