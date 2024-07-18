@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:34:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 13:54:38 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 20:12:26 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,28 @@ void	exe_close_all(t_ctx *ctx, int pipe[])
 	if (ctx)
 	{
 		if (ctx->def_in != -1)
+		{
 			close(ctx->def_in);
+			ctx->def_in = -1;
+		}
 		if (ctx->def_out != -1)
+		{
 			close(ctx->def_out);
+			ctx->def_out = -1;
+		}
 	}
 	if (pipe)
 	{
 		if (pipe[0] != -1)
+		{
 			close(pipe[0]);
+			pipe[0] = -1;
+		}
 		if (pipe[1] != -1)
+		{
 			close(pipe[1]);
+			pipe[1] = -1;
+		}
 	}
 }
 
