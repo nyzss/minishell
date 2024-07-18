@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 11:23:11 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 13:49:13 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 09:54:47 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int	main(int ac, char **av, char **envp)
 		return (EXIT_FAILURE);
 	handle_loop(ctx);
 	ms_free_all(ctx);
+	ft_putstr_fd("exit\n", 2);
 	return (EXIT_SUCCESS);
 }
