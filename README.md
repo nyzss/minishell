@@ -34,6 +34,8 @@
 - ~~[expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])~~ -> deciced to not handle it
 - ~~[parsing] intput "\" is not handled. (ex. echo \n yo should output "n yo", but now is "\n yo")~~ -> not required by subject
 - ~~[Token] intput "&", "&&" should give exit code of 2, but now is 127. "&" should also be considered as meta character~~ -> not required by subject / not handled knowingly
+- ~~[MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null~~
+- ~~[LEAK] there is raw string not freed in bi_add_var if the value is just the id (ie. doesn't update anything).~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~

@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 09:12:25 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 13:20:28 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,6 @@ int	ps_expand_and_quotes(t_token *token)
 			if (token->value)
 				free(token->value);
 			token->value = ps_combine_tokens(str);
-			if (token->value && token->value[0] == '\0')
-			{
-				free(token->value);
-				token->value = NULL;
-			}
 			tok_free(str);
 		}
 		token = token->next;
