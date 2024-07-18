@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 13:30:53 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 20:05:55 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*exe_get_path(char *file, t_env *env)
 	char	*exec;
 	t_env	*path_env;
 
+	if (file && file[0] == '\0')
+		return (NULL);
 	if (!env || exe_is_abs_path(file) == 1)
 		return (ft_strdup(file));
 	path_env = ms_getenv("PATH", env);
