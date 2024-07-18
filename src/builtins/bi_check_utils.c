@@ -33,7 +33,7 @@ int	bi_check_id(char *id)
 int	bi_check_exitcode(char *value)
 {
 	char	*tmp;
-	char	*tmp2;
+	long	num;
 
 	tmp = value;
 	if ((*tmp == '+' || *tmp == '-') && *(tmp + 1))
@@ -43,20 +43,11 @@ int	bi_check_exitcode(char *value)
 		if (!ft_isdigit(*tmp++))
 			return (1);
 	}
-	tmp = value;
-	if (*tmp == '+')
-		tmp++;
-	while (*tmp == '0')
-		tmp++;
-	if (*tmp == '\0')
-		return (0);
-	tmp2 = ft_ltoa(ft_atol(tmp));
-	if (ft_strcmp(tmp, tmp2))
-	{
-		free(tmp2);
+	num = ft_atol(value);
+	if ((num > 0 && (LONG_MAX / num < 1))
+		|| (num < 0 && (LONG_MIN / ft_atol(value) < 1)))
 		return (1);
-	}
-	return (free(tmp2), 0);
+	return (0);
 }
 
 int	bi_update_pwd(t_ctx *ctx, char *value)
