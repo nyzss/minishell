@@ -3,13 +3,13 @@
 
 ### Issues after 1st evaluations
 - [parsing] echo $"USER" should only print "USER" without "$"
-- [parsing] if ```export c='ls -la'``` ```$c``` should exec the same as ```ls -a```
-- [expansion] $ only should print it
-- [expansion] ```echo $``` and ```echo "$"``` should output a $
 - [Makefile] Added dependency to headers in each file during compilation
 - [CRASH] if ```export a='$a'``` and ```echo $a```, it will be in an infinite loop
 
 ### complete issues after 1st evaluations
+- ~~[parsing] if ```export c='ls -la'``` ```$c``` should exec the same as ```ls -a```~~ We decided not to handle this and keep it as the same as zsh
+- ~~[expansion] $ only should print it~~
+- ~~[expansion] ```echo $``` and ```echo "$"``` should output a $~~
 - ~~[builtin] echo -n -nnn hola -nnnn shold only output "hola -nnnn". It should ignore multiple -n or -nnnnnnnn flags in the arguments.~~
 - ~~[LEAK] there is raw string not freed in bi_add_var if the value is just the id (ie. doesn't update anything).~~
 - ~~[parsing] if ```export a='ls'``` and then ```export b='-a'```, then ```$a $b``` should exec the same as ```ls -a```~~
