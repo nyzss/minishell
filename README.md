@@ -2,12 +2,9 @@
 ## todo list
 
 ### Issues after 1st evaluations
-- [builtin] ```exit 00042``` should work, but now has error
-
-### Notes
-- [builtin] `cd -` isn't required to do as the subject says: "cd with only a relative or absolute path" and the `-` is an operand.
 
 ### complete issues after 1st evaluations
+- ~~[builtin] ```exit 00042``` should work, but now has error~~
 - ~~[MAJOR] in my computer the command: "echo | exit 2384" has file descriptor problems~~
 - ~~[parsing] the result of ```''''""""``` should be ```: command not found```, but now is ```/home/tsuchen/.local/funcheck/host/: Is a directory```~~
 - ~~[builtin] `exit 56 4575` should not exit and show error message `too many arguments`. the exit code should be 1. If there are multiple arguments and the first on is valid number, it shall be too many arguments error.~~
@@ -91,3 +88,6 @@
 
 1. try out with random '$' like: "lol$PATH $$ $ $USER"
 - single '$' followed by other '$' env variables might not work currently
+
+### Notes
+- [builtin] `cd -` isn't required to do as the subject says: "cd with only a relative or absolute path" and the `-` is an operand.

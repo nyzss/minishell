@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_check_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 22:42:10 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 19:06:37 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 20:24:50 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@ int	bi_check_exitcode(char *value)
 	tmp = value;
 	if (*tmp == '+')
 		tmp++;
+	while (*tmp == '0')
+		tmp++;
+	if (*tmp == '\0')
+		return (0);
 	tmp2 = ft_ltoa(ft_atol(tmp));
 	if (ft_strcmp(tmp, tmp2))
 	{
 		free(tmp2);
 		return (1);
 	}
-	free(tmp2);
-	return (0);
+	return (free(tmp2), 0);
 }
 
 int	bi_update_pwd(t_ctx *ctx, char *value)
