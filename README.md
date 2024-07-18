@@ -6,11 +6,11 @@
 - [parsing] if ```export c='ls -la'``` ```$c``` should exec the same as ```ls -a```
 - [expansion] $ only should print it
 - [expansion] ```echo $``` and ```echo "$"``` should output a $
-- [MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null
 - [Makefile] Added dependency to headers in each file during compilation
 
 
 ### complete issues after 1st evaluations
+- ~~[MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null~~
 - ~~[builtin] echo -n -nnn hola -nnnn shold only output "hola -nnnn". It should ignore multiple -n or -nnnnnnnn flags in the arguments.~~
 - ~~[LEAK] there is raw string not freed in bi_add_var if the value is just the id (ie. doesn't update anything).~~
 - ~~[parsing] if ```export a='ls'``` and then ```export b='-a'```, then ```$a $b``` should exec the same as ```ls -a```~~
