@@ -13,7 +13,7 @@
 - [parsing] intput "\" is not handled. (ex. echo \n yo should output "n yo", but now is "\n yo")
 - [builtin] echo -n -nnn hola -nnnn shold only output "hola -nnnn". It should ignore multiple -n or -nnnnnnnn flags in the arguments.
 - [expansion] ```echo $``` and ```echo "$"``` should output a $
-- [builtin] export "" should be error invalid identifier but now there is no error message
+- [MAJOR] parsing export "" should be error invalid identifier but now there is no error message. now the argument "" is not an empty string but null
 
 
 ### complete issues after 1st evaluations
