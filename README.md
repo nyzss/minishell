@@ -2,15 +2,22 @@
 ## todo list
 
 ### Issues after 1st evaluations
-- ~~[builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)~~
+- [parsing] echo $"USER" should only print "USER" without "$"
 - [parsing] if export a='ls' and then export b='-a', then $a$b should exec the same as "ls -a"
 - [Makefile] Added dependency to headers in each file during compilation
 - [expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])
-- [parsing] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found
+- [Token] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found
 - [expansion] $ only should print it
+- [Token] intput "/" or "/////" or "/.." or "/." the error message should be "Is a directory" and exit code should be 126. Now is "command not found" with exit code 127.
+- [Token] intput "&", "&&" should give exit code of 2, but now is 127. "&" should also be considered as meta character
+- [parsing] intput "\" is not handled. (ex. echo \n yo should output "n yo", but now is "\n yo")
+- [builtin] echo -n -nnn hola -nnnn shold only output "hola -nnnn". It should ignore multiple -n or -nnnnnnnn flags in the arguments.
+- [expansion] ```echo $``` and ```echo "$"``` should output a $
+- [builtin] export "" should be error invalid identifier but now there is no error message
 
 
 ### complete issues after 1st evaluations
+- ~~[builtin] cd should check the return value of chdir and print err message if the dir is no longer available (ex. deleted)~~
 - ~~[builtin] pwd/cd should update env (OLDPWD and PWD)~~
 - ~~[builtin] "exit +" and "exit 465465465432132132132132135468798795654" should be error~~
 - ~~[builtin] leaks in bi_add_var, need to free arg_id if it is just updating value.~~
