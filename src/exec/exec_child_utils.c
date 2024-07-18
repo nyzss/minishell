@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 11:21:18 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 13:30:53 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	*exe_get_exec(char **paths, char *file)
 		free(path);
 		if (!exec)
 			return (NULL);
-
 		if (!access(exec, X_OK | F_OK))
 			return (exec);
 		free(exec);

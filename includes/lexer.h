@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:00:41 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 16:00:34 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 13:25:19 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ void			tok_free_one(t_token *token);
 t_token			*tok_create(char *value, int n, t_token_type type, t_ctx *ctx);
 t_token			*tok_last(t_token *token);
 int				tok_add_back(t_token **head, t_token *new);
-
 
 #endif
