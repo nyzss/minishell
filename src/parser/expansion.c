@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 10:32:41 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:36:04 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ t_token	*ps_handle_env(t_token *token)
 	char	*tmp;
 	char	*found;
 
-	if (token->value && ft_strcmp(token->value, "$") == 0)
-		return (NULL);
+	// printf("token->value: [%s]\n", token->value);
+	// if (token->value && ft_strcmp(token->value, "$") == 0)
+	// 	return (NULL);
 	while (token->value != NULL)
 	{
 		found = ft_strchr(token->value, '$');

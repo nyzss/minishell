@@ -7,6 +7,7 @@
 - [Makefile] Added dependency to headers in each file during compilation
 - [expansion] env expansion is separated by spaces. so `export TEST2='"so is this the first arg" wow third arg'` becomes: `["so] [is] [this] [the] [first] [arg"] [wow] [third] [arg]` ||| splits arguments by bash's current IFS (to see them `printf '%q\n' "$IFS"` so most likely -> [ \t\n])
 - [parsing] input tab (ctl + v + tab), ":", and "!" should do nothing, but currently shows command not found
+- [expansion] $ only should print it
 - [Exit_code] intput "/" or "/////" or "/.." or "/." the error message should be "Is a directory" and exit code should be 126. Now is "command not found" with exit code 127.
 
 
@@ -25,6 +26,7 @@
 - ~~[MAJOR] fix leaks whenever the child in exec early exits, should free all with ms_free_all (ctx)~~
 - ~~[MAJOR] Check everything with the valgring flag --show-leak-kinds=all~~
 - ~~[expansion] $sdfsdf shouldnt print anything~~
+- ~~[parsing] echo $"USER" should only print "USER" without "$"~~
 
 ### old finished issues
 - ~~[MAJOR] norme~~
