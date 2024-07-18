@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/17 19:15:10 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 13:40:24 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	bi_echo(t_args *args)
 	int	n_flag;
 
 	n_flag = 0;
-	if (args && !ft_strcmp(args->value, "-n"))
+	while (args && !bi_is_nflag(args->value))
 	{
 		n_flag = 1;
 		args = args->next;
