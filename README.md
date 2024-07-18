@@ -3,6 +3,9 @@
 
 ### Issues after 1st evaluations
 
+### Notes
+- [builtin] `cd -` isn't required to do as the subject says: "cd with only a relative or absolute path" and the `-` is an operand.
+
 ### complete issues after 1st evaluations
 - ~~[parsing] if ```export c='ls -la'``` ```$c``` should exec the same as ```ls -a```~~ We decided not to handle this and keep it as the same as zsh
 - ~~[expansion] $ only should print it~~
