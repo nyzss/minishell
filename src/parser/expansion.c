@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 14:07:59 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 14:45:21 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,35 @@ char	*ps_convert_to_env(char *str, char *found, t_ctx *ctx)
 * if it does exist: transform it with getenv
 * ft_strjoin before the env var, put env, and strjoin after the env var
 */
+
+int	ft_count_exp(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int	ps_handle_env(t_token *token)
 {
 	char	*tmp;
 	char	*found;
 	char	*new;
+	int		nb;
 
+	nb = ft_count_exp(token->value);
 	while (token->value != NULL)
 	{
 		found = ft_strchr(token->value, '$');
-		if (found == NULL)
+		if (found == NULL || nb == 0)
 			break ;
 		if (ft_strcmp(found, "$") == 0)
 			break ;
@@ -69,6 +88,7 @@ int	ps_handle_env(t_token *token)
 		}
 		token->value = new;
 		free(tmp);
+		nb--;
 	}
 	return (0);
 }
