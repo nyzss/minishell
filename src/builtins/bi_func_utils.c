@@ -6,7 +6,7 @@
 /*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:09:45 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 13:40:24 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/18 13:44:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ int	bi_cd(t_ctx *ctx, t_args *args)
 
 	size_args = arg_lstsize(args);
 	if (size_args > 1)
-		return (ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO), 1);
+		return (ft_putstr_fd("minishell: cd: too many arguments\n",
+				STDERR_FILENO), 1);
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		perror("chdir: error retrieving current directory: getcwd: cannot access parent directories");
+		perror("minishell: cd: error retrieving current directory");
 	home = ms_getenv("HOME", ctx->envp);
 	if (!size_args && home != NULL && home->value != NULL)
 		chdir(home->value);
@@ -74,7 +75,7 @@ int	bi_pwd(t_args *args)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("pwd: error retrieving current directory: getcwd: cannot access parent directories");
+		perror("minishell: pwd: error retrieving current directory");
 		return (1);
 	}
 	printf("%s\n", cwd);

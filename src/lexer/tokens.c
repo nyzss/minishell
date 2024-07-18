@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:34:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 15:59:47 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 13:31:05 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,24 @@ int	tok_add_back(t_token **head, t_token *new)
 	return (0);
 }
 
-void	tok_debug(t_token *token)
-{
-	char	token_str[12][30];
+// void	tok_debug(t_token *token)
+// {
+// 	char	token_str[12][30];
 
-	ft_strlcpy(token_str[INFILE], "INFILE", 30);
-	ft_strlcpy(token_str[OUTFILE], "OUTFILE", 30);
-	ft_strlcpy(token_str[HEREDOC], "HEREDOC", 30);
-	ft_strlcpy(token_str[APPEND], "APPEND", 30);
-	ft_strlcpy(token_str[PIPE], "PIPE", 30);
-	ft_strlcpy(token_str[STRING], "STRING", 30);
-	ft_strlcpy(token_str[SINGLEQUOTE], "SINGLEQUOTE", 30);
-	ft_strlcpy(token_str[DOUBLEQUOTE], "DOUBLEQUOTE", 30);
-	ft_strlcpy(token_str[COMMAND], "COMMAND", 30);
-	ft_strlcpy(token_str[FILENAME], "FILENAME", 30);
-	ft_strlcpy(token_str[ARGUMENT], "ARGUMENT", 30);
-	while (token != NULL)
-	{
-		printf("(%s) [%s]\n", token_str[token->type], token->value);
-		token = token->next;
-	}
-}
+// 	ft_strlcpy(token_str[INFILE], "INFILE", 30);
+// 	ft_strlcpy(token_str[OUTFILE], "OUTFILE", 30);
+// 	ft_strlcpy(token_str[HEREDOC], "HEREDOC", 30);
+// 	ft_strlcpy(token_str[APPEND], "APPEND", 30);
+// 	ft_strlcpy(token_str[PIPE], "PIPE", 30);
+// 	ft_strlcpy(token_str[STRING], "STRING", 30);
+// 	ft_strlcpy(token_str[SINGLEQUOTE], "SINGLEQUOTE", 30);
+// 	ft_strlcpy(token_str[DOUBLEQUOTE], "DOUBLEQUOTE", 30);
+// 	ft_strlcpy(token_str[COMMAND], "COMMAND", 30);
+// 	ft_strlcpy(token_str[FILENAME], "FILENAME", 30);
+// 	ft_strlcpy(token_str[ARGUMENT], "ARGUMENT", 30);
+// 	while (token != NULL)
+// 	{
+// 		printf("(%s) [%s]\n", token_str[token->type], token->value);
+// 		token = token->next;
+// 	}
+// }

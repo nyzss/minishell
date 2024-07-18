@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 13:20:42 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 13:33:25 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ps_convert_to_env(char *str, char *found, t_ctx *ctx)
 * if it does exist: transform it with getenv
 * ft_strjoin before the env var, put env, and strjoin after the env var
 */
-t_token	*ps_handle_env(t_token *token)
+int	ps_handle_env(t_token *token)
 {
 	char	*tmp;
 	char	*found;
@@ -68,35 +68,6 @@ t_token	*ps_handle_env(t_token *token)
 		token->value = new;
 		free(tmp);
 	}
-	return (ps_split_tokens(token, token->value));
-}
-
-int	ps_replace_current(t_token *current, t_token *new)
-{
-	t_token	*current_next;
-	t_token	*new_tmp;
-	char	*current_value;
-
-	if (!current || !new)
-		return (0);
-	// temps
-	current_value = current->value;
-	current_next = current->next;
-
-
-	//assignation
-	tok_last(new)->next = current_next;
-	current->value = new->value;
-	current->next = new->next;
-
-	new_tmp = new;
-	new_tmp->value = NULL;
-	new_tmp->next = NULL;
-
-
-	// very end
-	tok_free_one(new_tmp);
-	free(current_value);
 	return (0);
 }
 
@@ -105,16 +76,10 @@ int	ps_replace_current(t_token *current, t_token *new)
 */
 int	ps_expand_env(t_token *token)
 {
-	t_token	*new;
-
 	while (token != NULL)
 	{
 		if (token->type == STRING || token->type == DOUBLEQUOTE)
-		{
-			new = ps_handle_env(token);
-			// tok_debug(new);
-			tok_free(new);
-		}
+			ps_handle_env(token);
 		token = token->next;
 	}
 	return (0);
@@ -145,3 +110,30 @@ t_token	*ps_split_tokens(t_token *token, char *str)
 	return (local);
 }
 // export TEST="ls -l -R -a"
+
+// int	ps_replace_current(t_token *current, t_token *new)
+// {
+// 	t_token	*current_next;
+// 	t_token	*new_tmp;
+// 	char	*current_value;
+
+// 	if (!current || !new)
+// 		return (0);
+// 	// temps
+// 	current_value = current->value;
+// 	current_next = current->next;
+
+// 	//assignation
+// 	tok_last(new)->next = current_next;
+// 	current->value = new->value;
+// 	current->next = new->next;
+
+// 	new_tmp = new;
+// 	new_tmp->value = NULL;
+// 	new_tmp->next = NULL;
+
+// 	// very end
+// 	tok_free_one(new_tmp);
+// 	free(current_value);
+// 	return (0);
+// }
