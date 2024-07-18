@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 21:33:35 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 22:23:54 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:32:41 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ t_token	*ps_handle_env(t_token *token)
 	char	*tmp;
 	char	*found;
 
+	if (token->value && ft_strcmp(token->value, "$") == 0)
+		return (NULL);
 	while (token->value != NULL)
 	{
 		found = ft_strchr(token->value, '$');
 		if (found == NULL)
-			break ;
-		if (ft_strlen(found) == 1)
 			break ;
 		tmp = token->value;
 		token->value = ps_convert_to_env(token->value, found, token->ctx);
@@ -107,7 +107,7 @@ int	ps_expand_env(t_token *token)
 		if (token->type == STRING || token->type == DOUBLEQUOTE)
 		{
 			new = ps_handle_env(token);
-			tok_debug(new);
+			// tok_debug(new);
 			tok_free(new);
 		}
 		token = token->next;

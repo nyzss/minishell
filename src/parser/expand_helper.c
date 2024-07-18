@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:12:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/17 13:45:00 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/18 10:33:15 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ps_count_name(char *found)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(found[i]) == 1 || found[i] == '?')
+	if (ft_isdigit(found[i]) == 1 || found[i] == '?' || found[i] == '$')
 		return (1);
 	while (found[i])
 	{
@@ -68,6 +68,8 @@ char	*ps_get_env_var(char *found, t_ctx *ctx)
 		}
 		return (ft_itoa(ctx->exit_code));
 	}
+	else if (path && ft_strcmp(path, "$") == 0)
+		return (free(path), ft_strdup("program_pid"));
 	env_var = ms_getenv(path, ctx->envp);
 	if (path)
 		free(path);
