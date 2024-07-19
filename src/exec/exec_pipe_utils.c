@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:01:00 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 11:52:04 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:49:45 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	exe_do_child(t_ctx *ctx, t_exec *exec)
 	exe_close_all(NULL, fd_pipe);
 }
 
-// this is going to unlink all in case of a builtin?
 void	exe_do_child2(t_ctx *ctx, t_exec *exec, int fd_pipe[])
 {
 	int	exit_code;

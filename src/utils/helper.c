@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 11:31:33 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/14 10:13:57 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:52:14 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,3 @@ int	env_lstsize(t_env *env)
 	}
 	return (i);
 }
-
-// ABC=hello_world
-// ABCD=
-// =abc

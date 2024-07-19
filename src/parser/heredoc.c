@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:16:07 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/19 09:41:29 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:51:56 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ps_unlink_err(t_token *token)
 	}
 }
 
-// printf("filename: %s\n", filename);
 int	ps_handle_heredoc(t_token *token)
 {
 	char	*filename;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:12:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 10:33:15 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:51:31 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ char	*ps_getenv_name(char *found)
 	return (name);
 }
 
-// $hello
-// wow$path
 char	*ps_get_before_env(char *str, char *found)
 {
 	int		len;

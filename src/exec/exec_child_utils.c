@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:54:57 by tsuchen           #+#    #+#             */
-/*   Updated: 2024/07/18 20:05:55 by okoca            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:50:16 by tsuchen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ char	**exe_get_cmds(char *cmd, t_args *args)
 	return (cmds);
 }
 
-/* Only create a tab that holds the add of env->raw. No strdup on raw*/
 char	**exe_get_envs(t_env *env)
 {
 	char	**envs;
