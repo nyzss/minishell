@@ -4,6 +4,7 @@
 ### Issues after 1st evaluations
 
 ### complete issues after 1st evaluations
+- ~~[heredoc] ctrl-d from heredoc should print log message~~
 - ~~[builtin] ```exit 00042``` should work, but now has error~~
 - ~~[MAJOR] in my computer the command: "echo | exit 2384" has file descriptor problems~~
 - ~~[parsing] the result of ```''''""""``` should be ```: command not found```, but now is ```/home/tsuchen/.local/funcheck/host/: Is a directory```~~

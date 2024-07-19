@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:16:07 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/15 23:10:35 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/07/19 09:41:29 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ps_handle_return(void)
+{
+	if (g_signals.end_heredoc == 1)
+	{
+		g_signals.end_heredoc = 0;
+		return (1);
+	}
+	return (0);
+}
 
 int	ps_init_here_doc(int fd, char *eof)
 {
@@ -21,7 +31,11 @@ int	ps_init_here_doc(int fd, char *eof)
 	{
 		line = readline("heredoc>");
 		if (!line)
+		{
+			ft_putstr_fd("minishell: here_doc: called end-of-line (ctrl-d)\n",
+				2);
 			break ;
+		}
 		if (!ft_strcmp(line, eof) || g_signals.end_heredoc == 1)
 		{
 			free(line);
@@ -31,12 +45,7 @@ int	ps_init_here_doc(int fd, char *eof)
 		write(fd, "\n", 1);
 		free(line);
 	}
-	if (g_signals.end_heredoc == 1)
-	{
-		g_signals.end_heredoc = 0;
-		return (1);
-	}
-	return (0);
+	return (ps_handle_return());
 }
 
 void	ps_unlink_err(t_token *token)
