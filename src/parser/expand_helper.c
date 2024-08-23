@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsuchen <tsuchen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:12:48 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/19 10:51:31 by tsuchen          ###   ########.fr       */
+/*   Updated: 2024/08/23 08:14:13 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ps_get_env_var(char *found, t_ctx *ctx)
 	env_var = ms_getenv(path, ctx->envp);
 	if (path)
 		free(path);
-	if (!env_var)
+	if (!env_var || !env_var->value)
 		return (NULL);
 	return (ft_strdup(env_var->value));
 }
