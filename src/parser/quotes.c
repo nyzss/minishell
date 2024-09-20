@@ -6,7 +6,7 @@
 /*   By: okoca <okoca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:10:09 by okoca             #+#    #+#             */
-/*   Updated: 2024/07/18 13:20:28 by okoca            ###   ########.fr       */
+/*   Updated: 2024/09/20 15:29:57 by okoca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*ps_combine_tokens(t_token *token)
 {
 	char	*value;
 
-	value = NULL;
+	value = ft_strdup("");
 	while (token != NULL)
 	{
 		if (token->value != NULL)
